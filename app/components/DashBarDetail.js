@@ -6,8 +6,8 @@ const DashBarDetail = (props) => {
         <View>
             <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
                 <Text>
-                    <Text style={{fontFamily: "Nunito-Bold", color: "#03048e"}}>{props.label}</Text>
-                    <Text style={{fontFamily: "Nunito-Regular", color: "#03048e"}}>{props.amountRemaining}</Text>
+                    <Text style={{fontFamily: "Nunito-Bold", color: "#03045e"}}>{props.label}</Text>
+                    <Text style={{fontFamily: "Nunito-Regular", color: "#03045e"}}>{props.amountRemaining}</Text>
                 </Text>
             </View>
             <View style={styles.container}>
@@ -19,8 +19,8 @@ const DashBarDetail = (props) => {
                 </View>
                 <View >
                     <Text>
-                        <Text style={{fontFamily: "Nunito-Bold", color: "#03048e"}}>SPENT: </Text>
-                        <Text style={{fontFamily: "Nunito-Regular", color: "#03048e"}}>{props.amountSpent}</Text>
+                        <Text style={{fontFamily: "Nunito-Bold", color: "#03045e"}}>SPENT: </Text>
+                        <Text style={{fontFamily: "Nunito-Regular", color: "#03045e"}}>{props.amountSpent}</Text>
                     </Text>
                 </View>
             </View>

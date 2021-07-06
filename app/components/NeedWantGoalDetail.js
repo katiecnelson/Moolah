@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: "Nunito-Bold",
         fontSize: 14,
-        color: "#03048e"
+        color: "#03045e"
     },
 
     icon: {

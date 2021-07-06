@@ -79,7 +79,7 @@ const Dashboard = () => {
                     />
                 </View>
                 <View style={{paddingTop: 30, alignSelf: "stretch"}}>
-                    <Icon name="history" style={{fontSize: 28, color: "#03048e", position: "absolute", right: 7}}/>
+                    <Icon name="history" style={{fontSize: 28, color: "#03045e", position: "absolute", right: 7}}/>
                 </View>
                 <View style={{borderBottomColor: "#48cae4", borderBottomWidth: 1, marginBottom: 10}}>
                     <Text style={styles.title}>TRANSACTIONS</Text>
@@ -146,19 +146,19 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: "Nunito-Regular",
         fontSize: 24,
-        color: "#03048e"
+        color: "#03045e"
     },
 
     smallTitle: {
         fontFamily: "Nunito-Bold",
         paddingTop: 20,
         fontSize: 14,
-        color: "#03048e"
+        color: "#03045e"
     },
     income: {
         fontFamily: "Nunito-Bold",
         fontSize: 24,
-        color: "#03048e"
+        color: "#03045e"
     },
 
 })
