@@ -14,7 +14,10 @@ const TabNavigator = () => {
         tabBarOptions={{
             showLabel: false,
             activeTintColor: "#48cae4",
-            inactiveTintColor: "#b7b7b7"
+            inactiveTintColor: "#b7b7b7",
+            style: {
+                backgroundColor: "#fcfcfc"
+            }
         }}
     >
         <Tab.Screen
@@ -22,7 +25,7 @@ const TabNavigator = () => {
             component={Dashboard}
             options={{
                 tabBarIcon: ({ color, size }) => (
-                    <Icon name="dashboard" color={color} size={size} />
+                    <Icon name="dashboard" color={color} size={32} />
                 ),
             }}
         />
@@ -31,7 +34,7 @@ const TabNavigator = () => {
             component={Needs}
             options={{
                 tabBarIcon: ({ color, size }) => (
-                    <Icon name="needs" color={color} size={size} />
+                    <Icon name="needs" color={color} size={32} />
                 ),
             }}
         />
@@ -40,7 +43,7 @@ const TabNavigator = () => {
             component={Wants}
             options={{
                 tabBarIcon: ({ color, size }) => (
-                    <Icon name="wants" color={color} size={size} />
+                    <Icon name="wants" color={color} size={32} />
                 ),
             }}
         />
@@ -49,7 +52,7 @@ const TabNavigator = () => {
             component={Goals}
             options={{
                 tabBarIcon: ({ color, size }) => (
-                    <Icon name="goals" color={color} size={size} />
+                    <Icon name="goals" color={color} size={32} />
                 ),
             }}
         />
@@ -58,7 +61,7 @@ const TabNavigator = () => {
             component={NewTransaction}
             options={{
                 tabBarIcon: ({ color, size }) => (
-                    <Icon name="new" color={color} size={size} />
+                    <Icon name="new" color={color} size={32} />
                 ),
             }}
         />
