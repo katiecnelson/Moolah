@@ -22,14 +22,20 @@ const TransactionListDetail = (props) => {
                     </View>
                 </View>
             </View>
+            <View style={{width: "94%"}} >
+                <View style={{flexDirection: "row"}}>
+
+                </View>
+
+            </View>
         </View>
     )
 };
 
 const styles = StyleSheet.create({
     text: {
-        fontFamily: "Nunito-Regular",
-        color: "#03048e",
+        fontFamily: "Nunito-Bold",
+        color: "#03045e",
     },
 });
 
