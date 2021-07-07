@@ -4,6 +4,7 @@ import Icon from "../components/Icon";
 import NeedWantGoalDetail from "./NeedWantGoalDetail";
 import DashBarDetail from "./DashBarDetail";
 import TransactionListDetail from "./TransactionListDetail";
+import NeedWantGoalIcons from "./NeedWantGoalIcons";
 
 const Dashboard = () => {
 
@@ -31,26 +32,9 @@ const Dashboard = () => {
                 <Text style={styles.smallTitle}>INCOME:</Text>
                 <Text style={styles.income}>£1,300.00</Text>
                 <Icon name="edit" style={{fontSize: 28, color: "#48cae4"}} />
-                <View style={styles.needsWantsGoals}>
-                    <NeedWantGoalDetail
-                        title="NEEDS"
-                        iconName="needs"
-                        color="#9ce0ff"
-                        amount="£650.00"
-                    />
-                    <NeedWantGoalDetail
-                        title="WANTS"
-                        iconName="wants"
-                        color="#1489cc"
-                        amount="£390.00"
-                    />
-                    <NeedWantGoalDetail
-                        title="GOALS"
-                        iconName="goals"
-                        color="#024f86"
-                        amount="£260.00"
-                    />
-                </View>
+
+                <NeedWantGoalIcons/>
+
                 <View style={{width: "94%"}}>
                     <DashBarDetail
                         label="NEEDS REMAINING: "
@@ -131,16 +115,6 @@ const styles = StyleSheet.create({
         // flex: 1,
         // alignItems: "center",
         backgroundColor: "#ffffff"
-    },
-
-    needsWantsGoals: {
-        paddingHorizontal: 15,
-        paddingTop: 15,
-        paddingBottom: 20,
-        alignSelf: "stretch",
-        flexDirection: "row",
-        justifyContent: "space-around",
-        marginHorizontal: "auto"
     },
 
     title: {
