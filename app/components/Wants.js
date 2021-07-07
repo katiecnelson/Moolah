@@ -7,10 +7,10 @@ import Icon from "./Icon";
 const Wants = () => {
 
     const [transactions, setTransactions] = useState([
-        { key: "1", date: "12/06", description: "Scottish P...", amount: "£63.25", tag: "Utilities" },
-        { key: "2", date: "10/06", description: "Glasgow", amount: "£65.75", tag: "Utilities" },
-        { key: "3", date: "04/06", description: "Tesco", amount: "£21.50", tag: "Food" },
-        { key: "4", date: "02/06", description: "Sainsbury’s", amount: "£12.00", tag: "Food" },
+        { key: "1", date: "11/06", description: "Uber Eats", amount: "£63.25", tag: "Takea..." },
+        { key: "2", date: "07/06", description: "No descrip...", amount: "£15.75", tag: "Takea..." },
+        { key: "3", date: "06/06", description: "John Lewis", amount: "£58.25", tag: "Shopp..." },
+        { key: "4", date: "01/06", description: "Gym", amount: "£45.00", tag: "Hobbies" },
     ]);
 
     return (
