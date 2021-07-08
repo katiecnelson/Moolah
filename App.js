@@ -4,8 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import TabNavigator from "./app/navigation/TabNavigator"
 import {useFonts} from "expo-font";
 
+
 export default function App() {
-  
+
   const [loaded] = useFonts({
     "Nunito-Black": require("./assets/fonts/Nunito-Black.ttf"),
     "Nunito-Bold": require("./assets/fonts/Nunito-Bold.ttf"),

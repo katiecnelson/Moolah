@@ -2,11 +2,11 @@ import { styleSheets } from "min-document";
 import React from "react";
 import {StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
-export default function CustomButton({ text, onPress }) {
+export default function CustomButton(props) {
     return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={props.onPress}>
             <View style={styles.button}>
-                <Text style={styles.buttonText}>{ text }</Text>
+                <Text style={styles.buttonText}>{props.text}</Text>
             </View>
         </TouchableOpacity>
     )

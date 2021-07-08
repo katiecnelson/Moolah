@@ -1,12 +1,11 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Dashboard from "../components/Dashboard";
 import Needs from "../components/Needs";
 import Wants from "../components/Wants";
 import Goals from "../components/Goals";
 import NewTransaction from "../components/NewTransaction";
 import Icon from "../components/Icon";
-
+import DashStack from "./DashStack";
 
 const Tab = createBottomTabNavigator()
 const TabNavigator = () => {
@@ -22,7 +21,7 @@ const TabNavigator = () => {
     >
         <Tab.Screen
             name="Dash"
-            component={Dashboard}
+            component={DashStack}
             options={{
                 tabBarIcon: ({ color, size }) => (
                     <Icon name="dashboard" color={color} size={32} />
