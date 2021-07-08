@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TextInput } from "react-native";
 import Icon from "./Icon";
 import NeedWantGoalTruncated from "./NeedWantGoalTruncated";
 import { Picker } from "@react-native-picker/picker";
+import CustomButton from "./CustomButton";
 
 const NewTransaction = () => {
 
@@ -67,9 +68,7 @@ const NewTransaction = () => {
                 <Picker.Item label="Transportation" value="transportion" />
                 <Picker.Item label="Utilities" value="utilities" />
             </Picker> 
-            <View style={{backgroundColor: "#48cae4", borderRadius: 10, marginTop: 10}}>
-                <Text style={{paddingVertical: 10, paddingHorizontal: 20, fontFamily: "Nunito-Bold", color: "white", fontSize: 18}}>ADD</Text>
-            </View>
+            <CustomButton text="add" onPress={() => console.log("pressed")}/>
         </View>
     )
 }
