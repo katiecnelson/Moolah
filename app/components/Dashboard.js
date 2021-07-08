@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, ScrollView, FlatList, SafeAreaView } from "react-native";
+import { View, StyleSheet, Text, ScrollView, FlatList, SafeAreaView, TouchableOpacity } from "react-native";
 import Icon from "../components/Icon";
 import NeedWantGoalDetail from "./NeedWantGoalDetail";
 import DashBarDetail from "./DashBarDetail";
 import TransactionListDetail from "./TransactionListDetail";
 import NeedWantGoalIcons from "./NeedWantGoalIcons";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
 
     const [transactions, setTransactions] = useState([
         { key: "1", date: "12/06/21", description: "RBS Savings", amount: "£63.25", category: "GOAL", tag: "Italy savings" },
@@ -24,11 +24,6 @@ const Dashboard = () => {
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={{width: "100%", alignItems: "center"}}>
-                <Icon name="bell" style={{fontSize: 28, color: "#b7b7b7", position: "absolute", left: 7, top: 25}} />
-                <Icon name="gear" style={{fontSize: 28, color: "#b7b7b7", position: "absolute", right: 7, top: 25}} />
-                <View style={{borderBottomColor: "#48cae4", borderBottomWidth: 1}}>
-                    <Text style={{...styles.title, paddingTop: 25}}>DASHBOARD</Text>
-                </View>
                 <Text style={styles.smallTitle}>INCOME:</Text>
                 <Text style={styles.income}>£1,300.00</Text>
                 <Icon name="edit" style={{fontSize: 28, color: "#48cae4"}} />
@@ -53,7 +48,7 @@ const Dashboard = () => {
                         percentSpent="35.9%"
                     />
                 </View>
-                <View style={{width: "94%", paddingBottom: 20}}>
+                <View style={{width: "94%", paddingBottom: 15}}>
                     <DashBarDetail
                         label="GOALS REMAINING: "
                         amountRemaining="£165.00"
@@ -125,7 +120,7 @@ const styles = StyleSheet.create({
 
     smallTitle: {
         fontFamily: "Nunito-Bold",
-        paddingTop: 20,
+        paddingTop: 15,
         fontSize: 14,
         color: "#03045e"
     },
