@@ -3,6 +3,7 @@ import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from "@react-navigation/native";
 import TabNavigator from "./app/navigation/TabNavigator"
 import {useFonts} from "expo-font";
+import * as SQLite from "expo-sqlite";
 
 
 export default function App() {
