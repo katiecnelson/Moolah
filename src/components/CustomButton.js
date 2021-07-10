@@ -1,4 +1,3 @@
-import { styleSheets } from "min-document";
 import React from "react";
 import {StyleSheet, TouchableOpacity, Text, View} from "react-native";
 

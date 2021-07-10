@@ -1,10 +1,10 @@
 import React from "react";
 import { createStackNavigator } from '@react-navigation/stack';
-import Settings from "../components/Settings";
-import Dashboard from "../components/Dashboard";
+import Settings from "../screens/Settings";
+import Dashboard from "../screens/Dashboard";
 import { TouchableOpacity } from "react-native";
 import Icon from "../components/Icon";
-import Reminders from "../components/Reminders";
+import Reminders from "../screens/Reminders";
 
 const Stack = createStackNavigator()
 

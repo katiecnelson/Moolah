@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Icon from "./Icon";
 
-const NeedWantGoalScreen = (props) => {
+const NeedWantGoalHeader = (props) => {
     return (
         <View style={{alignItems: "center"}}>
             <View style={{paddingTop: 25, borderBottomColor: "#48cae4", borderBottomWidth: 1}}>
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default NeedWantGoalScreen;
+export default NeedWantGoalHeader;
