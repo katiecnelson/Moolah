@@ -1,9 +1,9 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Needs from "../components/Needs";
-import Wants from "../components/Wants";
-import Goals from "../components/Goals";
-import NewTransaction from "../components/NewTransaction";
+import Needs from "../screens/Needs";
+import Wants from "../screens/Wants";
+import Goals from "../screens/Goals";
+import NewTransaction from "../screens/NewTransaction";
 import Icon from "../components/Icon";
 import DashStack from "./DashStack";
 

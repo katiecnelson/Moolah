@@ -1,7 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Text, TextInput, FlatList } from "react-native";
-import Icon from "./Icon";
-import CustomButton from "./CustomButton";
+import Icon from "../components/Icon";
+import CustomButton from "../components/CustomButton";
+import GlobalStyle from "../components/GlobalStyle";
 
 const Settings = () => {
     return (
@@ -54,7 +55,7 @@ const Settings = () => {
                             textAlign={"center"}
                             style={{fontFamily: "Nunito-Bold", marginHorizontal: 5, paddingVertical: 10, paddingHorizontal: 20, backgroundColor: "#efefef", borderRadius: 10, fontSize: 18, color: "#03045e"}}
                         />
-                        <Text style={{fontFamily: "Nunito-Regular", color: "#03045e", fontSize: 20, lineHeight: 42}}>%</Text>
+                        <Text style={[GlobalStyle.BlueRegular, styles.percent]}>%</Text>
                     </View>
                     <View style={{flex: 1, flexDirection: "row", justifyContent: "center"}}>
                         <TextInput
@@ -64,7 +65,7 @@ const Settings = () => {
                             textAlign={"center"}
                             style={{fontFamily: "Nunito-Bold", marginHorizontal: 5, paddingVertical: 10, paddingHorizontal: 20, backgroundColor: "#efefef", borderRadius: 10, fontSize: 18, color: "#03045e"}}
                         />
-                        <Text style={{fontFamily: "Nunito-Regular", color: "#03045e", fontSize: 20, lineHeight: 42}}>%</Text>
+                        <Text style={[GlobalStyle.BlueRegular, styles.percent]}>%</Text>
                     </View>
                     <View style={{flex: 1, flexDirection: "row", justifyContent: "center"}}>
                         <TextInput
@@ -74,13 +75,13 @@ const Settings = () => {
                             textAlign={"center"}
                             style={{fontFamily: "Nunito-Bold", marginHorizontal: 5, paddingVertical: 10, paddingHorizontal: 20, backgroundColor: "#efefef", borderRadius: 10, fontSize: 18, color: "#03045e"}}
                         />
-                        <Text style={{fontFamily: "Nunito-Regular", color: "#03045e", fontSize: 20, lineHeight: 42}}>%</Text>
+                        <Text style={[GlobalStyle.BlueRegular, styles.percent]}>%</Text>
                     </View>
                 </View>
                 <View style={{flexDirection: "row", alignItems: "center", paddingBottom: 20}}>
-                    <Text style={{flex: 1, fontFamily: "Nunito-Bold", fontSize: 18, color: "#03045e", textAlign: "center"}}>£650.00</Text>
-                    <Text style={{flex: 1, fontFamily: "Nunito-Bold", fontSize: 18, color: "#03045e", textAlign: "center"}}>£390.00</Text>
-                    <Text style={{flex: 1, fontFamily: "Nunito-Bold", fontSize: 18, color: "#03045e", textAlign: "center"}}>£260.00</Text>
+                    <Text style={[GlobalStyle.BlueBold, styles.amountText]}>£650.00</Text>
+                    <Text style={[GlobalStyle.BlueBold, styles.amountText]}>£390.00</Text>
+                    <Text style={[GlobalStyle.BlueBold, styles.amountText]}>£260.00</Text>
                 </View>
             </View>
                 <CustomButton text="save" onPress={() => console.log("updates saved")}/>
@@ -97,6 +98,15 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: "Nunito-Bold",
         color: "#03045e"
+    },
+    amountText: {
+        flex: 1,
+        fontSize: 18,
+        textAlign: "center"
+    },
+    percent: {
+        fontSize: 20,
+        lineHeight: 42
     }
 })
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text, TextInput, FlatList } from "react-native";
-import Icon from "./Icon";
+import Icon from "../components/Icon";
 
 const Reminders = () => {
     return (

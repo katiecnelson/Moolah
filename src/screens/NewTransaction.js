@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, TextInput } from "react-native";
-import Icon from "./Icon";
-import NeedWantGoalTruncated from "./NeedWantGoalTruncated";
+import Icon from "../components/Icon";
+import NeedWantGoalTruncated from "../components/NeedWantGoalTruncated";
 import { Picker } from "@react-native-picker/picker";
-import CustomButton from "./CustomButton";
+import CustomButton from "../components/CustomButton";
 
 const NewTransaction = () => {
 
