@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, StyleSheet, Text, ScrollView, FlatList, SafeAreaView, TouchableOpacity } from "react-native";
 import Icon from "./Icon";
 import DashBarDetail from "./DashBarDetail";
 import NeedWantGoalIcons from "./NeedWantGoalIcons";
-import GlobalStyle from "./GlobalStyle";
+import { Context as IncomeContext } from "../context/IncomeContext";
+import { formatAmountString } from "../utilities/helper";
 
-const DashboardHeader = (props) => {
+const DashboardHeader = () => {
+    const { state, getIncome } = useContext(IncomeContext)
+
+    useEffect(() => {
+        console.log("Use effect from dashboard header ran okay!")
+        getIncome();
+      }, []);
+
 
     return (
         <SafeAreaView style={{alignItems: "center"}}>
             <Text style={styles.smallTitle}>INCOME:</Text>
-            <Text style={styles.income}>£1,300.00</Text>
+            <Text style={styles.income}>{formatAmountString(state.amount)}</Text>
             <Icon name="edit" style={{fontSize: 28, color: "#48cae4"}} />
             <NeedWantGoalIcons/>
             <View style={{width: "94%"}}>

@@ -1,41 +1,40 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text, ScrollView, FlatList, SafeAreaView, TouchableOpacity } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { View, StyleSheet, FlatList, SafeAreaView, TouchableOpacity } from "react-native";
 import TransactionListDetail from "../components/TransactionListDetail";
-import NeedWantGoalIcons from "../components/NeedWantGoalIcons";
 import DashboardHeader from "../components/DashboardHeader";
+import { Context as TransactionContext } from "../context/TransactionContext";
+import { Context as IncomeContext } from "../context/IncomeContext";
+import { formatAmountString, formatFullDate } from "../utilities/helper";
 
 const Dashboard = (props) => {
 
-    const [transactions, setTransactions] = useState([
-        { key: "1", date: "12/06/21", description: "RBS Savings", amount: "£63.25", category: "GOAL", tag: "Italy savings" },
-        { key: "2", date: "12/06/21", description: "Scottish Power", amount: "£63.25", category: "NEED", tag: "Utilities" },
-        { key: "3", date: "11/06/21", description: "Uber Eats", amount: "£63.25", category: "WANT", tag: "Takeaway" },
-        { key: "4", date: "10/06/21", description: "Glasgow City", amount: "£65.75", category: "NEED", tag: "Utilities" },
-        { key: "5", date: "07/06/21", description: "No description", amount: "£15.75", category: "WANT", tag: "Takeaway" },
-        { key: "6", date: "06/06/21", description: "John Lewis", amount: "£58.25", category: "WANT", tag: "Shopping" },
-        { key: "7", date: "04/06/21", description: "Tesco", amount: "£21.50", category: "NEED", tag: "Food" },
-        { key: "8", date: "03/06/21", description: "Vanguard", amount: "£65.75", category: "GOAL", tag: "Retirement" },
-        { key: "9", date: "02/06/21", description: "Sainsbury’s", amount: "£12.00", category: "NEED", tag: "Food" },
-        { key: "10", date: "01/06/21", description: "Gym", amount: "£45.00", category: "WANT", tag: "Hobbies" },
-    ]);
+    const { state, getTransactions } = useContext(TransactionContext)
+    const { incomeState, getIncome } = useContext(IncomeContext)
+
+    useEffect(() => {
+        console.log("Use effect dash ran okay!")
+        getTransactions();
+        getIncome();
+      }, []);
 
     return (
         <SafeAreaView style={{backgroundColor: "white", flex: 1, alignItems: "center"}} >
             <View style={{backgroundColor: "white", width: "94%"}}>
                 <FlatList
-                    data={transactions}
+                    data={state}
                     ListHeaderComponent={DashboardHeader}
-                    keyExtrator={( item, index ) => item.key}
+                    keyExtractor={(item, index) => item.ID}
                     renderItem={({ item, index }) => {
                         if (index % 2 === 0) {
                             return (
                             <View style={{backgroundColor: "#efefef", borderRadius: 5}}>
                                 <TransactionListDetail
-                                    date={item.date}
-                                    description={item.description}
-                                    amount={item.amount}
-                                    category={item.category}
-                                    tag={item.tag}
+                                    key={item["ID"]}
+                                    date={item["Date"].substring(2).replaceAll("-", "/")}
+                                    description={item["Description"]}
+                                    amount={"£" + (item["Amount"] / 100).toFixed(2)}
+                                    category={item["Category"]}
+                                    tag={item["Tag"]}
                                 />
                             </View>
                             );
@@ -43,11 +42,12 @@ const Dashboard = (props) => {
                             return (
                             <View style={{borderRadius: 5}}>
                                 <TransactionListDetail
-                                    date={item.date}
-                                    description={item.description}
-                                    amount={item.amount}
-                                    category={item.category}
-                                    tag={item.tag}
+                                    key={item["ID"]}
+                                    date={item["Date"].substring(2).replaceAll("-", "/")}
+                                    description={item["Description"]}
+                                    amount={"£" + (item["Amount"] / 100).toFixed(2)}
+                                    category={item["Category"]}
+                                    tag={item["Tag"]}
                                 />
                             </View>
                             )
@@ -87,3 +87,16 @@ const styles = StyleSheet.create({
 })
 
 export default Dashboard;
+
+    // const [transactions, setTransactions] = useState([
+    //     { key: "1", date: "12/06/21", description: "RBS Savings", amount: "£63.25", category: "GOAL", tag: "Italy savings" },
+    //     { key: "2", date: "12/06/21", description: "Scottish Power", amount: "£63.25", category: "NEED", tag: "Utilities" },
+    //     { key: "3", date: "11/06/21", description: "Uber Eats", amount: "£63.25", category: "WANT", tag: "Takeaway" },
+    //     { key: "4", date: "10/06/21", description: "Glasgow City", amount: "£65.75", category: "NEED", tag: "Utilities" },
+    //     { key: "5", date: "07/06/21", description: "No description", amount: "£15.75", category: "WANT", tag: "Takeaway" },
+    //     { key: "6", date: "06/06/21", description: "John Lewis", amount: "£58.25", category: "WANT", tag: "Shopping" },
+    //     { key: "7", date: "04/06/21", description: "Tesco", amount: "£21.50", category: "NEED", tag: "Food" },
+    //     { key: "8", date: "03/06/21", description: "Vanguard", amount: "£65.75", category: "GOAL", tag: "Retirement" },
+    //     { key: "9", date: "02/06/21", description: "Sainsbury’s", amount: "£12.00", category: "NEED", tag: "Food" },
+    //     { key: "10", date: "01/06/21", description: "Gym", amount: "£45.00", category: "WANT", tag: "Hobbies" },
+    // ]);

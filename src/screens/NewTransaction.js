@@ -21,14 +21,12 @@ const NewTransaction = () => {
             <View style={{flexDirection: "row", justifyContent: "space-between", width: "94%"}}>
                 <TextInput
                     placeholder="£00.00" 
-                    clearTextOnFocus={true}
                     placeholderTextColor="#b7b7b7"
                     textAlign={"center"}
                     style={{padding: 10, backgroundColor: "#efefef", borderRadius: 10, fontSize: 28, color: "#03045e", width: "48%"}}
                 />
                 <TextInput
                     placeholder="29/06/21" 
-                    clearTextOnFocus={true}
                     placeholderTextColor="#03045e"
                     textAlign={"center"}
                     style={{padding: 15, backgroundColor: "#efefef", borderRadius: 10, fontSize: 28, color: "#03045e", width: "48%"}}
@@ -42,7 +40,6 @@ const NewTransaction = () => {
             </View>
             <TextInput
                 placeholder="DESCRIPTION (OPTIONAL) ..." 
-                clearTextOnFocus={true}
                 placeholderTextColor="#b7b7b7"
                 style={{marginTop: 10, padding: 15, backgroundColor: "#efefef", borderRadius: 10, fontSize: 18, color: "#03045e", width: "94%", fontFamily: "Nunito-Regular"}}
             />
