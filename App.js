@@ -3,7 +3,10 @@ import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from "@react-navigation/native";
 import TabNavigator from "./src/navigation/TabNavigator"
 import {useFonts} from "expo-font";
-import * as SQLite from "expo-sqlite";
+import {Provider as ReminderProvider} from "./src/context/ReminderContext";
+import {Provider as TransactionProvider} from "./src/context/TransactionContext";
+import {Provider as IncomeProvider} from "./src/context/IncomeContext";
+import useDatabase from './src/hooks/useDatabase';
 
 
 export default function App() {
@@ -15,13 +18,23 @@ export default function App() {
     "Moolah-Icons": require("./assets/fonts/icomoon.ttf"),
   });
 
-  if (!loaded) {
+  const isDBLoaded = useDatabase();
+
+  if (!loaded || !isDBLoaded) {
     return <AppLoading />;
+  } else {
+      return (
+        <IncomeProvider>
+          <TransactionProvider>
+            <ReminderProvider>
+              <NavigationContainer>
+                <TabNavigator />
+              </NavigationContainer>
+            </ReminderProvider>
+          </TransactionProvider>
+        </IncomeProvider>
+    );
   }
 
-  return (
-    <NavigationContainer>
-      <TabNavigator />
-    </NavigationContainer>
-  );
+
 }
