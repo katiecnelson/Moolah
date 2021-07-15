@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import GlobalStyle from "./GlobalStyle";
 
 const DashBarDetail = (props) => {
+
+    useEffect(() => {
+        console.log("Use effect from DashBarDetail fired!")
+      }, []);
     
     return (
         <View>
@@ -29,6 +33,16 @@ const DashBarDetail = (props) => {
         </View>
     )
 };
+
+DashBarDetail.defaultProps = {
+    initialValues: {
+      label: "",
+      amountRemaining: "",
+      percentSpent: 5,
+      backgroundColor: "white",
+      amountSpent: ""
+    }
+  };
 
 const styles = StyleSheet.create({
     container: {

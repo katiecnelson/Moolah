@@ -9,12 +9,10 @@ import { formatAmountString, formatFullDate } from "../utilities/helper";
 const Dashboard = (props) => {
 
     const { state, getTransactions } = useContext(TransactionContext)
-    const { incomeState, getIncome } = useContext(IncomeContext)
 
     useEffect(() => {
-        console.log("Use effect dash ran okay!")
+        console.log("Use effect dashboard ran okay!")
         getTransactions();
-        getIncome();
       }, []);
 
     return (
