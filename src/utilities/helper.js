@@ -1,18 +1,19 @@
 export const formatAmountString = (amountInt) => {
-    return "£" + (amountInt / 100).toFixed(2).toString();
+    let result = "£"
+    result += Number(parseFloat(amountInt / 100).toFixed(2)).toLocaleString('en', {
+        minimumFractionDigits: 2
+    });
+    return result
 }
 
 export const formatAmountNum = (amountInt) => {
-    return (amountInt / 100).toFixed(2)
+    return amountInt / 100;
 }
 
 export const formatFullDate = (dateString) => {
     let result = ""
-    for (let i = dateString.length - 1; i >= 2; i--) {
-        if (dateString[i] === "-") {
-            result += "/";
-        } 
-        else result += dateString[i];
-    }
+    result += dateString.substring(8) + "/"
+    result += dateString.substring(5,7) + "/"
+    result += dateString.substring(2, 4)
     return result
 }

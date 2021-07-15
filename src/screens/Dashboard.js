@@ -30,9 +30,9 @@ const Dashboard = (props) => {
                             <View style={{backgroundColor: "#efefef", borderRadius: 5}}>
                                 <TransactionListDetail
                                     key={item["ID"]}
-                                    date={item["Date"].substring(2).replaceAll("-", "/")}
+                                    date={formatFullDate(item["Date"])}
                                     description={item["Description"]}
-                                    amount={"£" + (item["Amount"] / 100).toFixed(2)}
+                                    amount={formatAmountString(item["Amount"])}
                                     category={item["Category"]}
                                     tag={item["Tag"]}
                                 />
@@ -43,9 +43,9 @@ const Dashboard = (props) => {
                             <View style={{borderRadius: 5}}>
                                 <TransactionListDetail
                                     key={item["ID"]}
-                                    date={item["Date"].substring(2).replaceAll("-", "/")}
+                                    date={formatFullDate(item["Date"])}
                                     description={item["Description"]}
-                                    amount={"£" + (item["Amount"] / 100).toFixed(2)}
+                                    amount={formatAmountString(item["Amount"])}
                                     category={item["Category"]}
                                     tag={item["Tag"]}
                                 />
