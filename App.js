@@ -6,6 +6,7 @@ import {useFonts} from "expo-font";
 import {Provider as ReminderProvider} from "./src/context/ReminderContext";
 import {Provider as TransactionProvider} from "./src/context/TransactionContext";
 import {Provider as IncomeProvider} from "./src/context/IncomeContext";
+import {Provider as CategoryProvider} from "./src/context/CategoryContext";
 import useDatabase from './src/hooks/useDatabase';
 
 
@@ -24,17 +25,17 @@ export default function App() {
     return <AppLoading />;
   } else {
       return (
-        <IncomeProvider>
-          <TransactionProvider>
-            <ReminderProvider>
-              <NavigationContainer>
-                <TabNavigator />
-              </NavigationContainer>
-            </ReminderProvider>
-          </TransactionProvider>
-        </IncomeProvider>
+        <CategoryProvider>
+          <IncomeProvider>
+            <TransactionProvider>
+              <ReminderProvider>
+                <NavigationContainer>
+                  <TabNavigator />
+                </NavigationContainer>
+              </ReminderProvider>
+            </TransactionProvider>
+          </IncomeProvider>
+        </CategoryProvider>
     );
   }
-
-
 }

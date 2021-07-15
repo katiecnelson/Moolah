@@ -2,50 +2,72 @@ import React, { useState, useContext, useEffect } from "react";
 import { View, StyleSheet, Text, ScrollView, FlatList, SafeAreaView, TouchableOpacity } from "react-native";
 import Icon from "./Icon";
 import DashBarDetail from "./DashBarDetail";
-import NeedWantGoalIcons from "./NeedWantGoalIcons";
+import NeedWantGoalDetail from "../components/NeedWantGoalDetail"
 import { Context as IncomeContext } from "../context/IncomeContext";
+import { Context as CategoryContext } from "../context/CategoryContext";
 import { formatAmountString } from "../utilities/helper";
 
 const DashboardHeader = () => {
-    const { state, getIncome } = useContext(IncomeContext)
+    const category = useContext(CategoryContext)
+    const income = useContext(IncomeContext)
 
     useEffect(() => {
-        console.log("Use effect from dashboard header ran okay!")
-        getIncome();
+        console.log("Use effect from dashboard HEADER ran okay!")
+        income.getIncome();
+        category.getCategories();
       }, []);
 
-
     return (
+        
         <SafeAreaView style={{alignItems: "center"}}>
             <Text style={styles.smallTitle}>INCOME:</Text>
-            <Text style={styles.income}>{formatAmountString(state.amount)}</Text>
+            <Text style={styles.income}>{formatAmountString(income.state.amount)}</Text>
             <Icon name="edit" style={{fontSize: 28, color: "#48cae4"}} />
-            <NeedWantGoalIcons/>
+            <View style={styles.needWantGoalIcons}>
+                <NeedWantGoalDetail
+                    title={category.state.nameOne}
+                    iconName="needs"
+                    color="#9ce0ff"
+                    amount={category.state.toSpendOne}
+                />
+                <NeedWantGoalDetail
+                    title={category.state.nameTwo}
+                    iconName="wants"
+                    color="#1489cc"
+                    amount={category.state.toSpendTwo}
+                />
+                <NeedWantGoalDetail
+                    title={category.state.nameThree}
+                    iconName="goals"
+                    color="#024f86"
+                    amount={category.state.toSpendThree}
+                /> 
+            </View>
             <View style={{width: "94%"}}>
                 <DashBarDetail
-                    label="NEEDS REMAINING: "
-                    amountRemaining="£487.50"
-                    amountSpent="£162.50"
+                    label={category.state.nameOne + " REMAINING: "}
+                    amountRemaining={category.state.remainingOne}
+                    amountSpent={category.state.spentOne}
                     color="#9ce0ff"
-                    percentSpent="25%"
+                    percentSpent={category.state.percentSpentOne}
                 />
             </View>
             <View style={{width: "94%"}}>
                 <DashBarDetail
-                    label="WANTS REMAINING: "
-                    amountRemaining="£250.00"
-                    amountSpent="£140.00"
+                    label={category.state.nameTwo + " REMAINING: "}
+                    amountRemaining={category.state.remainingTwo}
+                    amountSpent={category.state.spentTwo}
                     color="#1489cc"
-                    percentSpent="35.9%"
+                    percentSpent={category.state.percentSpentTwo}
                 />
             </View>
             <View style={{width: "94%", paddingBottom: 15}}>
                 <DashBarDetail
-                    label="GOALS REMAINING: "
-                    amountRemaining="£165.00"
-                    amountSpent="£95.00"
+                    label={category.state.nameThree + " REMAINING: "}
+                    amountRemaining={category.state.remainingThree}
+                    amountSpent={category.state.spentThree}
                     color="#024f86"
-                    percentSpent="36.5%"
+                    percentSpent={category.state.percentSpentThree}
                 />
             </View>
             <View style={{paddingTop: 30, alignSelf: "stretch"}}>
@@ -60,6 +82,7 @@ const DashboardHeader = () => {
             </View>
         </SafeAreaView>
     )
+      
 }
 
 const styles = StyleSheet.create({
@@ -83,6 +106,13 @@ const styles = StyleSheet.create({
         fontFamily: "Nunito-Bold",
         fontSize: 24,
         color: "#03045e"
+    },
+    needWantGoalIcons: {
+        paddingTop: 15,
+        paddingBottom: 20,
+        flexDirection: "row",
+        width: "100%",
+        justifyContent: "space-around"
     },
 
 })

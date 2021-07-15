@@ -19,3 +19,17 @@ test("returns dates from SQL in UK format string", () => {
     expect(helper.formatFullDate("2021-07-01")).toBe("01/07/21");
     expect(helper.formatFullDate("2020-12-21")).toBe("21/12/20");
 });
+
+test("returns the amount to spend in each category", () => {
+    expect(helper.getToSpend(130000, 50)).toBe(65000);
+});
+
+test("returns the amount left to spend in each category", () => {
+    expect(helper.calculateRemaining(65000, 16250)).toBe(48750);
+});
+
+test("returns the amount left to spend in each category", () => {
+    expect(helper.percentSpent(65000, 16250)).toBe("25%");
+    expect(helper.percentSpent(65000, 16250)).toBe("25%");
+    expect(helper.percentSpent(65000, 16250)).toBe("25%");
+});

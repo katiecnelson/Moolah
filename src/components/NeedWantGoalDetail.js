@@ -1,8 +1,13 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, StyleSheet} from "react-native";
 import Icon from "./Icon";
 
 const NeedWantGoalDetail = (props) => {
+
+    useEffect(() => {
+        console.log("Use effect from NeedWantGoalDetail fired!")
+      }, []);
+
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{props.title}</Text>
@@ -11,6 +16,15 @@ const NeedWantGoalDetail = (props) => {
         </View>
     )
 };
+
+NeedWantGoalDetail.defaultProps = {
+    initialValues: {
+      title: "",
+      amount: "",
+      iconName: "",
+      color: "white"
+    }
+  };
 
 const styles = StyleSheet.create({
     container: {

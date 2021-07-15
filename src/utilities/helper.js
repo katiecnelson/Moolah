@@ -17,3 +17,17 @@ export const formatFullDate = (dateString) => {
     result += dateString.substring(2, 4)
     return result
 }
+
+export const getToSpend = (income, percent) => {
+    return (percent / 100) * income;
+}
+
+export const calculateRemaining = (income, spent) => {
+    return income - spent;
+}
+
+export const percentSpent = (toSpend, spent) => {
+    result = ((spent/toSpend) * 100).toString();
+    result += "%";
+    return result;
+}
