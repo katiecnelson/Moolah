@@ -22,10 +22,8 @@ const Dashboard = (props) => {
                     data={state}
                     ListHeaderComponent={DashboardHeader}
                     keyExtractor={(item, index) => item.ID}
-                    renderItem={({ item, index }) => {
-                        if (index % 2 === 0) {
-                            return (
-                            <View style={{backgroundColor: "#efefef", borderRadius: 5}}>
+                    renderItem={({ item, index }) => (
+                            <View style={{backgroundColor: index % 2 === 0 ? "#efefef" : "white", borderRadius: 5}}>
                                 <TransactionListDetail
                                     key={item["ID"]}
                                     date={formatFullDate(item["Date"])}
@@ -35,22 +33,7 @@ const Dashboard = (props) => {
                                     tag={item["Tag"]}
                                 />
                             </View>
-                            );
-                        } else {
-                            return (
-                            <View style={{borderRadius: 5}}>
-                                <TransactionListDetail
-                                    key={item["ID"]}
-                                    date={formatFullDate(item["Date"])}
-                                    description={item["Description"]}
-                                    amount={formatAmountString(item["Amount"])}
-                                    category={item["Category"]}
-                                    tag={item["Tag"]}
-                                />
-                            </View>
-                            )
-                        }
-                    }}
+                    )}
                 />
             </View>
         </SafeAreaView>
@@ -59,8 +42,6 @@ const Dashboard = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        // alignItems: "center",
         backgroundColor: "#ffffff"
     },
 

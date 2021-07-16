@@ -11,10 +11,7 @@ const NewTransaction = () => {
 
     return (
         <View style={styles.container}>
-            <View style={{borderBottomColor: "#48cae4", borderBottomWidth: 1}}>
-                <Text style={{...styles.text, paddingTop: 25, fontSize: 24}}>NEW TRANSACTION</Text>
-            </View>
-            <View style={{flexDirection: "row", paddingBottom: 15, paddingTop: 25}}>
+            <View style={{flexDirection: "row", paddingBottom: 15, paddingTop: 20}}>
                 <Icon name="edit" style={{fontSize: 32, color: "#48cae4", paddingRight: 10}}/>
                 <Text style={{color: "#48cae4", lineHeight: 32}}>EDIT INCOME</Text>
             </View>
