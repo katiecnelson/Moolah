@@ -8,7 +8,7 @@ const TransactionListDetail = (props) => {
             <View style={{padding: 5}}>
                 <View style={{flexDirection: "row"}}>
                     <Text style={{...styles.text, flex: 1, lineHeight: 28}}>{props.date}</Text>
-                    <Text style={{...styles.text, flex: 1.5, lineHeight: 28}}>{props.description}</Text>
+                    <Text numberOfLines={1} style={{...styles.text, flex: 1.5, lineHeight: 28}}>{props.description}</Text>
                     <Text style={{...styles.text, flex: 1, lineHeight: 28}}>{props.amount}</Text>
                     <Icon name="edit" style={{fontSize: 28, color: "#48cae4", flex: .5}} />
                 </View>

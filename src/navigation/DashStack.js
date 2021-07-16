@@ -5,12 +5,18 @@ import Dashboard from "../screens/Dashboard";
 import { TouchableOpacity } from "react-native";
 import Icon from "../components/Icon";
 import Reminders from "../screens/Reminders";
+import History from "../screens/History";
 
 const Stack = createStackNavigator()
 
 const DashStack = () => {
     return (
-        <Stack.Navigator initialRouteName="Dashboard">
+        <Stack.Navigator
+            screenOptions={{
+                headerBackTitleVisible: false,
+                headerTintColor: "#48cae4",
+            }}
+            initialRouteName="Dashboard">
             <Stack.Screen
                 name="Dashboard"
                 component={Dashboard}
@@ -51,7 +57,32 @@ const DashStack = () => {
                     },
                 }}    
             />
-            <Stack.Screen name="Reminders" component={Reminders}/>
+            <Stack.Screen
+                name="Reminders"
+                component={Reminders}
+                options={{
+                    title: "REMINDERS", 
+                    headerTitleStyle: {
+                        fontFamily: "Nunito-Regular",
+                        color: "#03045e",
+                        fontSize: 24,
+                        textAlign: "center",
+                    },
+                }}
+            />
+            <Stack.Screen
+                name="History"
+                component={History}
+                options={{
+                    title: "TRANSACTION HISTORY", 
+                    headerTitleStyle: {
+                        fontFamily: "Nunito-Regular",
+                        color: "#03045e",
+                        fontSize: 24,
+                        textAlign: "center",
+                    },
+                }}
+            />
         </Stack.Navigator>
     )
 }

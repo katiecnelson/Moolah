@@ -1,11 +1,12 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Needs from "../screens/Needs";
-import Wants from "../screens/Wants";
-import Goals from "../screens/Goals";
 import NewTransaction from "../screens/NewTransaction";
 import Icon from "../components/Icon";
 import DashStack from "./DashStack";
+import NeedsStack from "./NeedsStack"
+import WantsStack from "./WantsStack"
+import GoalsStack from "./GoalsStack";
+import NewTransactionStack from "./NewTransactionStack";
 
 const Tab = createBottomTabNavigator()
 const TabNavigator = () => {
@@ -30,7 +31,7 @@ const TabNavigator = () => {
         />
         <Tab.Screen
             name="Needs"
-            component={Needs}
+            component={NeedsStack}
             options={{
                 tabBarIcon: ({ color, size }) => (
                     <Icon name="needs" color={color} size={32} />
@@ -39,7 +40,7 @@ const TabNavigator = () => {
         />
         <Tab.Screen
             name="Wants"
-            component={Wants}
+            component={WantsStack}
             options={{
                 tabBarIcon: ({ color, size }) => (
                     <Icon name="wants" color={color} size={32} />
@@ -48,7 +49,7 @@ const TabNavigator = () => {
         />
         <Tab.Screen
             name="Goals"
-            component={Goals}
+            component={GoalsStack}
             options={{
                 tabBarIcon: ({ color, size }) => (
                     <Icon name="goals" color={color} size={32} />
@@ -57,7 +58,7 @@ const TabNavigator = () => {
         />
         <Tab.Screen
             name="New"
-            component={NewTransaction}
+            component={NewTransactionStack}
             options={{
                 tabBarIcon: ({ color, size }) => (
                     <Icon name="new" color={color} size={32} />

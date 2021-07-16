@@ -3,12 +3,10 @@ import { View, StyleSheet, TextInput, FlatList, TouchableOpacity, Text } from "r
 import ReminderDetail from "../components/ReminderDetail";
 import Icon from "../components/Icon";
 import { Context } from "../context/ReminderContext"
+import { formatFullDate } from "../utilities/helper";
 
 const Reminders = () => {
     const { state, addReminder, getReminders } = useContext(Context)
-
-    const [newDescription, setNewDescription] = useState("");
-    const [newDate, setNewDate] = useState("");
 
     useEffect(() => {
         console.log("Use effect reminders ran okay!")
@@ -20,18 +18,32 @@ const Reminders = () => {
             <View style={{width: "94%", paddingTop: 10}}>
             <FlatList
                 data={state}
-                keyExtrator={( item ) => item["ID"].toString()}
+                ListFooterComponent={ReminderFooter}
+                keyExtractor={(item, index) => item.ID.toString()}
                 renderItem={({ item }) => {
                         return (
                             <ReminderDetail
-                                date={item["Date"].substring(2).replaceAll("-", "/")}
+                                key={item["ID"]}
+                                date={formatFullDate(item["Date"])}
                                 description={item["Description"]}
                                 done={item["Complete"]}
                             />
                         )
                     }}
                 />
-            <View style={{flexDirection: "row", paddingTop: 10}}>
+            
+            </View>
+        </View>
+    )
+}
+
+const ReminderFooter = () => {
+    const { addReminder, getReminders } = useContext(Context)
+    const [newDescription, setNewDescription] = useState("");
+    const [newDate, setNewDate] = useState("");
+
+    return (
+        <View style={{flexDirection: "row", paddingTop: 10}}>
                 <TextInput 
                     placeholder="DD/MM/YY" 
                     placeholderTextColor="#b7b7b7"
@@ -52,10 +64,8 @@ const Reminders = () => {
                     <Icon name="add" style={{fontSize: 34, color: "#48cae4"}}/>
                 </TouchableOpacity>
             </View>
-            </View>
-        </View>
     )
-}     
+}
 
 const styles = StyleSheet.create({
     container: {

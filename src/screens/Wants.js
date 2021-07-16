@@ -1,42 +1,58 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect} from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import NeedWantGoalHeader from "../components/NeedWantGoalHeader";
-import NeedWantGoalList from "../components/NeedWantGoalList";
 import NeedWantGoalFooter from "../components/NeedWantGoalFooter";
+import TransactionListDetail from "../components/TransactionListDetail";
+import {Context as TransactionContext} from "../context/TransactionContext";
+import {Context as CategoryContext} from "../context//CategoryContext";
+import {formatFullDate, formatAmountString} from "../utilities/helper"
+import { TabActions, useNavigation} from '@react-navigation/native';
 
 const Wants = () => {
+    const transactions = useContext(TransactionContext)
+    const category = useContext(CategoryContext)
+    const navigation = useNavigation();
+    const needs = transactions.state.filter(transaction => transaction["Category"] === "WANTS");
 
-    const [transactions, setTransactions] = useState([
-        { key: "1", date: "11/06", description: "Uber Eats", amount: "£63.25", tag: "Takea..." },
-        { key: "2", date: "07/06", description: "No descrip...", amount: "£15.75", tag: "Takea..." },
-        { key: "3", date: "06/06", description: "John Lewis", amount: "£58.25", tag: "Shopp..." },
-        { key: "4", date: "01/06", description: "Gym", amount: "£45.00", tag: "Hobbies" },
-    ]);
+    useEffect(() => {
+        console.log("Use effect from WANTS ran okay!")
+        transactions.getTransactions();
+        category.getCategories();
+        
+      }, []);
 
-    return (
+      return (
         <View style={styles.container}>
             <View style={{width: "94%", height: "100%"}} >
                 <FlatList
-                    data={transactions}
+                    data={needs}
                     ListHeaderComponent={() => <NeedWantGoalHeader 
-                        title="WANTS"
-                        remaining="£250.00"
-                        spent="£140.00"
-                        total="£390.00"
-                        percent="35.9%"
+                        title={category.state.nameTwo}
+                        remaining={category.state.remainingTwo}
+                        spent={category.state.spentTwo}
+                        total={category.state.toSpendTwo}
+                        percent={category.state.percentSpentTwo}
                         barColor="#1489cc"
+                        onPress={() => navigation.dispatch(TabActions.jumpTo("New"))}
                     />
                     }
-                    ListFooterComponent={NeedWantGoalFooter}
+                    ListFooterComponent={() => <NeedWantGoalFooter 
+                        onPress={() => navigation.navigate("History")}
+                    />
+                    }
+                    keyExtractor={(item, index) => item.ID}
 
-                    keyExtrator={( item, index ) => item.key}
-                    renderItem={({ item, index }) => (
-                        <NeedWantGoalList
-                            date={item.date}
-                            description={item.description}
-                            amount={item.amount}
-                            tag={item.tag}
+                    renderItem={({ item, index })=>(
+                        <View style={{backgroundColor: index % 2 === 0 ? "#efefef" : "white", borderRadius: 5}}>
+                        <TransactionListDetail
+                            key={item["ID"]}
+                            date={formatFullDate(item["Date"])}
+                            description={item["Description"]}
+                            amount={formatAmountString(item["Amount"])}
+                            category={item["Category"]}
+                            tag={item["Tag"]}
                         />
+                        </View>
                     )}
                 />
             </View>
