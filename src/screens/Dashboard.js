@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import { View, StyleSheet, FlatList, SafeAreaView, TouchableOpacity } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import TransactionListDetail from "../components/TransactionListDetail";
 import DashboardHeader from "../components/DashboardHeader";
 import { Context as TransactionContext } from "../context/TransactionContext";
-import { Context as IncomeContext } from "../context/IncomeContext";
 import { formatAmountString, formatFullDate } from "../utilities/helper";
 
 const Dashboard = (props) => {
