@@ -7,8 +7,16 @@ const tagReducer = (state, action) => {
       return action.payload;
     case 'update_tag':
       return state.map(tag => {
-        return tag["ID"] === action.payload.id ? action.payload : tag;
+        return tag["ID"] === action.payload["ID"] ? action.payload : tag;
       });
+    case "add_tag":
+      return [
+        ...state,
+        {
+          "ID": action.payload["ID"],
+          "Name": action.payload["Name"],
+        },
+      ];
     case 'delete_tag':
       return state.filter(tag => tag["ID"] !== action.payload);
     default:
@@ -31,7 +39,7 @@ const updateTag = dispatch => {
 
     dispatch({
       type: 'update_tag',
-      payload: { ID, newName }
+      payload: { "ID": ID, "Name": newName }
     });
     if (callback) {
       callback();
@@ -47,16 +55,26 @@ const deleteTag = dispatch => {
   };
 };
 
-//TODO: does dispatch need to be replaced with () on line below? What about callback two lines below?
 const addTag = dispatch => {
-  return async (name, callback) => {
-    await database.addTag(name);
+  return async (name) => {
+    const response = await database.addTag(name);
+    console.log("this is what response is for addTag: " + response)
 
-    if (callback) {
-      callback();
-    }
+    dispatch({
+      type: "add_tag",
+      payload: {"ID": response, "Name": name }
+    });
   };
 };
+
+// const getTags = dispatch => {
+//   return async () => {
+//     const response = await database.getAllTags();
+//     console.log("this is what response is for getTags: " + response.length)
+
+//     dispatch({ type: 'get_tags', payload: response });
+//   };
+// };
 
 export const { Context, Provider } = createDataContext(
     tagReducer,

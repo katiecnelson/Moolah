@@ -19,18 +19,8 @@ const getTransactions = dispatch => {
   };
 };
 
-const addTransaction = dispatch => {
-  return async (description, date, callback) => {
-    await database.addNewReminder(description, date);
-
-    if (callback) {
-      callback();
-    }
-  };
-};
-
 export const { Context, Provider } = createDataContext(
     transactionReducer,
-  { addTransaction, getTransactions },
+  { getTransactions },
   []
 );

@@ -1,12 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View, Text, StyleSheet} from "react-native";
 import Icon from "./Icon";
 
 const NeedWantGoalDetail = (props) => {
-
-    useEffect(() => {
-        console.log("Use effect from NeedWantGoalDetail fired!")
-      }, []);
 
     return (
         <View style={styles.container}>

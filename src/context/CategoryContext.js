@@ -12,36 +12,11 @@ const CategoryReducer = (state, action) => {
   }
 };
 
-// const getCategories = dispatch => {
-//   return async () => {
-//     const categories = await database.getAllCategories();
-//     const incomeCall = await database.getIncome();
-//     const income = await incomeCall[0]["Amount"];
-
-//     console.log("get categories worked!")
-
-//     dispatch({ type: 'get_categories', payload: { 
-//         one: {
-//             name: categories[0]["Name"].toUpperCase(),
-//             amount: formatAmountString(getPercentage(income, categories[0]["Percent"]))
-//         },
-//         two: {
-//             name: categories[1]["Name"].toUpperCase(),
-//             amount: formatAmountString(getPercentage(income, categories[1]["Percent"]))
-//         },
-//         three: {
-//             name: categories[2]["Name"].toUpperCase(),
-//             amount: formatAmountString(getPercentage(income, categories[2]["Percent"]))
-//         },
-//     }});
-//   };
-// };
-
 const getCategories = dispatch => {
   return async () => {
     const categories = await database.getAllCategories();
     const incomeCall = await database.getIncome();
-    const spent = await database.getNeedSpent();
+    const spent = await database.getSpent();
     const income = await incomeCall[0]["Amount"];
 
     console.log("get categories worked!")
@@ -67,8 +42,6 @@ const getCategories = dispatch => {
     }});
 };
 }
-
-
 
 export const { Context, Provider } = createDataContext(
     CategoryReducer,
