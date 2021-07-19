@@ -16,7 +16,6 @@ const Settings = () => {
     const deleteWithX = (idNum) => {
         setID(idNum);
         tag.deleteTag(idNum);
-        tag.getTags();
     }
 
     useEffect(() => {
@@ -51,11 +50,11 @@ const Settings = () => {
                             <View style={styles.updateView}>
                                 <CustomButton
                                     text="UPDATE" 
-                                    onPress={() => {tag.updateTag(ID, name), setModalVisible(false), tag.getTags() }}
+                                    onPress={() => {tag.updateTag(ID, name), setModalVisible(false)}}
                                 />
                             </View>
                             <View style={styles.deleteView}>
-                                <TouchableOpacity onPress={() => {tag.deleteTag(ID), setModalVisible(false), tag.getTags() }}>
+                                <TouchableOpacity onPress={() => {tag.deleteTag(ID), setModalVisible(false)}}>
                                     <Icon name="delete" style={styles.deleteIcon}/>
                                 </TouchableOpacity>
                             </View>

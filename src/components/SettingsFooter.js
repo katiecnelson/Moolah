@@ -18,7 +18,7 @@ const SettingsFooter = (props) => {
                     style={styles.textInput}
                     onChangeText={text => setName(text)}
                 />
-                <TouchableOpacity onPress={() => {tag.addTag(name), tag.getTags()}}>
+                <TouchableOpacity onPress={() => tag.addTag(name)}>
                     <Icon name="add" style={styles.icon}/>
                 </TouchableOpacity>
                 

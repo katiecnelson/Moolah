@@ -20,7 +20,7 @@ const Dashboard = (props) => {
                 <FlatList
                     data={state}
                     ListHeaderComponent={DashboardHeader}
-                    keyExtractor={(item, index) => item.ID}
+                    keyExtractor={(item, index) => item.ID.toString()}
                     renderItem={({ item, index }) => (
                             <View style={{backgroundColor: index % 2 === 0 ? "#efefef" : "white", borderRadius: 5}}>
                                 <TransactionListDetail

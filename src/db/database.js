@@ -96,9 +96,9 @@ const getAllTransactions = async () => {
     return new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                "SELECT cast(Transactions.ID as TEXT) AS ID, Date, Description, Amount, Categories.Name AS Category, Tags.Name AS Tag FROM Transactions LEFT OUTER JOIN Categories ON Transactions.Category = Categories.ID LEFT OUTER JOIN Tags ON Transactions.Tag = Tags.ID",
+                "SELECT Transactions.ID AS ID, Date, Description, Amount, Categories.Name AS Category, Tags.Name AS Tag FROM Transactions LEFT OUTER JOIN Categories ON Transactions.Category = Categories.ID LEFT OUTER JOIN Tags ON Transactions.Tag = Tags.ID",
                 [],
-                (_, result) => {console.log("GetAllTransactions Worked!"); console.log(result.rows._array); resolve(result.rows._array)},
+                (_, result) => {console.log("GetAllTransactions Worked!"); resolve(result.rows._array)}, //console.log(result.rows._array);
                 (_, error) => {console.log("GetAllTransactions failed"); reject(console.log(error))},
             );
         });
@@ -111,7 +111,7 @@ const getIncome = async () => {
             tx.executeSql(
                 "SELECT * from Income",
                 [],
-                (_, result) => {console.log("getIncome Worked!"); console.log(result.rows._array); resolve(result.rows._array)},
+                (_, result) => {console.log("getIncome DB call Worked!"); resolve(result.rows._array)}, //console.log(result.rows._array);
                 (_, error) => {console.log("getIncome failed"); reject(console.log(error))},
             );
         });
@@ -124,7 +124,7 @@ const getAllCategories = async () => {
             tx.executeSql(
                 "SELECT * from Categories",
                 [],
-                (_, result) => {console.log("getAllCategories database call Worked!"); console.log(result.rows._array); resolve(result.rows._array)},
+                (_, result) => {console.log("getAllCategories database call Worked!"); resolve(result.rows._array)}, //console.log(result.rows._array);
                 (_, error) => {console.log("getCategories failed"); reject(console.log(error))},
             );
         });
@@ -137,7 +137,7 @@ const getAllTags = async () => {
             tx.executeSql(
                 "SELECT * from Tags",
                 [],
-                (_, result) => {console.log("getAllTags database call Worked!"); console.log(result.rows._array); resolve(result.rows._array)},
+                (_, result) => {console.log("getAllTags database call Worked!"); resolve(result.rows._array)}, //console.log(result.rows._array)
                 (_, error) => {console.log("getTags failed"); reject(console.log(error))},
             );
         });
@@ -173,71 +173,56 @@ const deleteTag = async (ID) => {
     }
 
 const addTag = async (name) => {
-    return new Promise((resolve, _reject) => {
-        db.transaction( tx => {
+    return new Promise((resolve, reject) => {
+        db.transaction(tx => {
             tx.executeSql(
-                "INSERT INTO Tags (Name) VALUES (?)", 
-            [name] );
-            },
-            (error) => { console.log("db error adding a new tag"); console.log(error); resolve() },
-            (success) => { console.log("A new tag was successfully added!"); resolve(success)}
-        )
-    })
+                "INSERT INTO Tags (Name) VALUES (?)",
+                [name],
+                (_, result) => {console.log("ADD TAG TO DB WORKED!"); console.log("THIS HERE!!: " + result.insertId); resolve(result.insertId)},
+                (_, error) => {console.log("ADD TAG TO DB failed"); reject(console.log(error))},
+            );
+        });
+    });
 }
 
 const addNewReminder = async (description, date) => {
-    return new Promise((resolve, _reject) => {
-        db.transaction( tx => {
+    return new Promise((resolve, reject) => {
+        db.transaction(tx => {
             tx.executeSql(
                 "INSERT INTO Reminders (Description, Date) VALUES (?,?)", 
-            [description, date] );
-            },
-            (error) => { console.log("db error adding a new reminder"); console.log(error); resolve() },
-            (success) => { console.log("A new reminder was successfully added!"); resolve(success)}
-        )
-    })
+                [description, date],
+                (_, result) => {console.log("ADD NEW REMINDER TO WORKED!"); resolve(result.insertId)},
+                (_, error) => {console.log("Add new reminder to DB failed"); reject(console.log(error))},
+            );
+        });
+    });
 }
 
-const getNeedSpent = async () => {
+// const addNewReminder = async (description, date) => {
+//     return new Promise((resolve, _reject) => {
+//         db.transaction( tx => {
+//             tx.executeSql(
+//                 "INSERT INTO Reminders (Description, Date) VALUES (?,?)", 
+//             [description, date] );
+//             },
+//             (error) => { console.log("db error adding a new reminder"); console.log(error); resolve() },
+//             (success) => { console.log("A new reminder was successfully added!"); resolve(success)}
+//         )
+//     })
+// }
+
+const getSpent = async () => {
     return new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
                 "SELECT SUM(Amount), Category FROM Transactions GROUP BY Category",
                 [],
-                (_, result) => {console.log("getNeedSpent database call Worked!"); console.log(result.rows._array); resolve(result.rows._array)},
-                (_, error) => {console.log("getNeedSpent db call failed"); reject(console.log(error))},
+                (_, result) => {console.log("getSpent db call Worked!"); resolve(result.rows._array)}, //console.log(result.rows._array);
+                (_, error) => {console.log("getSpent db call failed"); reject(console.log(error))},
             );
         });
     });
 }
-
-const getWantSpent = async () => {
-    return new Promise((resolve, reject) => {
-        db.transaction(tx => {
-            tx.executeSql(
-                "SELECT * from Categories",
-                [],
-                (_, result) => {console.log("getWantSpent database call Worked!"); console.log(result.rows._array); resolve(result.rows._array)},
-                (_, error) => {console.log("getWantSpent db call failed"); reject(console.log(error))},
-            );
-        });
-    });
-}
-
-const getGoalSpent = async () => {
-    return new Promise((resolve, reject) => {
-        db.transaction(tx => {
-            tx.executeSql(
-                "SELECT * from Categories",
-                [],
-                (_, result) => {console.log("getGoalSpent database call Worked!"); console.log(result.rows._array); resolve(result.rows._array)},
-                (_, error) => {console.log("getGoalSpent db call failed"); reject(console.log(error))},
-            );
-        });
-    });
-}
-
-
 
 export const database = {
     dropDatabaseTables,
@@ -248,9 +233,7 @@ export const database = {
     getAllTransactions,
     getIncome,
     getAllCategories,
-    getNeedSpent,
-    getWantSpent,
-    getGoalSpent,
+    getSpent,
     getAllTags,
     updateTag,
     deleteTag,

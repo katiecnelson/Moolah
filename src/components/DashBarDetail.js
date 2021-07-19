@@ -1,13 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import GlobalStyle from "./GlobalStyle";
 
 const DashBarDetail = (props) => {
 
-    useEffect(() => {
-        console.log("Use effect from DashBarDetail fired!")
-      }, []);
-    
     return (
         <View>
             <View style={{flexDirection: "row", justifyContent: "flex-end"}}>

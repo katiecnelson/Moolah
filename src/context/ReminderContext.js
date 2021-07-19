@@ -5,11 +5,19 @@ const reminderReducer = (state, action) => {
   switch (action.type) {
     case 'get_reminders':
       return action.payload;
+    case "add_reminder":
+      return [
+        ...state,
+        {
+          "ID": action.payload["ID"],
+          "Description": action.payload["Description"],
+          "Date": action.payload["Date"],
+        },
+      ];
     default:
       return state;
   }
 };
-
 
 const getReminders = dispatch => {
   return async () => {
@@ -20,14 +28,16 @@ const getReminders = dispatch => {
 };
 
 const addReminder = dispatch => {
-  return async (description, date, callback) => {
-    await database.addNewReminder(description, date);
+  return async (description, date) => {
+    const response = await database.addNewReminder(description, date);
 
-    if (callback) {
-      callback();
-    }
+    dispatch({
+      type: "add_reminder",
+      payload: {"ID": response, "Description": description, "Date": date }
+    });
   };
 };
+
 
 
 export const { Context, Provider } = createDataContext(

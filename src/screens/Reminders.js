@@ -60,7 +60,7 @@ const ReminderFooter = () => {
                     onChangeText={text => setNewDescription(text)}
                     style={{marginRight: 7, flex: 1.75, paddingHorizontal: 5, paddingVertical: 10, backgroundColor: "#efefef", borderRadius: 10, color: "#03045e"}}              
                 />
-                <TouchableOpacity style={{flex: .5}} onPress={() => {addReminder(newDescription, newDate), getReminders()}}>
+                <TouchableOpacity style={{flex: .5}} onPress={() => addReminder(newDescription, newDate)}>
                     <Icon name="add" style={{fontSize: 34, color: "#48cae4"}}/>
                 </TouchableOpacity>
             </View>
