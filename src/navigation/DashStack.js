@@ -74,7 +74,7 @@ const DashStack = () => {
                 name="History"
                 component={History}
                 options={{
-                    title: "TRANSACTION HISTORY", 
+                    title: "HISTORICAL DATA", 
                     headerTitleStyle: {
                         fontFamily: "Nunito-Regular",
                         color: "#03045e",

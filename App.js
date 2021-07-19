@@ -7,6 +7,8 @@ import {Provider as ReminderProvider} from "./src/context/ReminderContext";
 import {Provider as TransactionProvider} from "./src/context/TransactionContext";
 import {Provider as IncomeProvider} from "./src/context/IncomeContext";
 import {Provider as CategoryProvider} from "./src/context/CategoryContext";
+import {Provider as TagProvider} from "./src/context/TagContext";
+
 import useDatabase from './src/hooks/useDatabase';
 
 
@@ -25,17 +27,19 @@ export default function App() {
     return <AppLoading />;
   } else {
       return (
-        <CategoryProvider>
-          <IncomeProvider>
-            <TransactionProvider>
-              <ReminderProvider>
-                <NavigationContainer>
-                  <TabNavigator />
-                </NavigationContainer>
-              </ReminderProvider>
-            </TransactionProvider>
-          </IncomeProvider>
-        </CategoryProvider>
+        <TagProvider>
+          <CategoryProvider>
+            <IncomeProvider>
+              <TransactionProvider>
+                <ReminderProvider>
+                  <NavigationContainer>
+                    <TabNavigator />
+                  </NavigationContainer>
+                </ReminderProvider>
+              </TransactionProvider>
+            </IncomeProvider>
+          </CategoryProvider>
+        </TagProvider>
     );
   }
 }

@@ -131,6 +131,60 @@ const getAllCategories = async () => {
     });
 }
 
+const getAllTags = async () => {
+    return new Promise((resolve, reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                "SELECT * from Tags",
+                [],
+                (_, result) => {console.log("getAllTags database call Worked!"); console.log(result.rows._array); resolve(result.rows._array)},
+                (_, error) => {console.log("getTags failed"); reject(console.log(error))},
+            );
+        });
+    });
+}
+
+const updateTag = async (ID, newName) => {
+    return new Promise((resolve, _reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                "UPDATE Tags SET Name = ? WHERE ID = ?;",
+                [newName, ID]
+            );
+        },
+        (error) => { console.log("Database error updating tag!"); console.log(error); resolve() },
+        (success) => { console.log("Tag successfully updated!"); resolve(success)}
+        )
+        })
+    }
+
+const deleteTag = async (ID) => {
+    return new Promise((resolve, _reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                "DELETE FROM Tags WHERE ID = ?;",
+                [ID]
+            );
+        },
+        (error) => { console.log("Database error deleting tag!"); console.log(error); resolve() },
+        (success) => { console.log("Tag successfully deleted!"); resolve(success)}
+        )
+        })
+    }
+
+const addTag = async (name) => {
+    return new Promise((resolve, _reject) => {
+        db.transaction( tx => {
+            tx.executeSql(
+                "INSERT INTO Tags (Name) VALUES (?)", 
+            [name] );
+            },
+            (error) => { console.log("db error adding a new tag"); console.log(error); resolve() },
+            (success) => { console.log("A new tag was successfully added!"); resolve(success)}
+        )
+    })
+}
+
 const addNewReminder = async (description, date) => {
     return new Promise((resolve, _reject) => {
         db.transaction( tx => {
@@ -196,5 +250,9 @@ export const database = {
     getAllCategories,
     getNeedSpent,
     getWantSpent,
-    getGoalSpent
+    getGoalSpent,
+    getAllTags,
+    updateTag,
+    deleteTag,
+    addTag
 }
