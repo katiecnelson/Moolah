@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1626373429226" clover="3.2.0">
-  <project timestamp="1626373429226" name="All files">
-    <metrics statements="20" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6" elements="26" coveredelements="26" complexity="0" loc="20" ncloc="20" packages="1" files="1" classes="1"/>
+<coverage generated="1626881063827" clover="3.2.0">
+  <project timestamp="1626881063827" name="All files">
+    <metrics statements="42" coveredstatements="36" conditionals="8" coveredconditionals="2" methods="10" coveredmethods="9" elements="60" coveredelements="47" complexity="0" loc="42" ncloc="42" packages="1" files="1" classes="1"/>
     <file name="helper.js" path="/Users/katienelson/Dropbox/My Mac (Katies-Mac-mini.local)/Desktop/Dissertation/Moolah/src/utilities/helper.js">
-      <metrics statements="20" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+      <metrics statements="42" coveredstatements="36" conditionals="8" coveredconditionals="2" methods="10" coveredmethods="9"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="6" type="stmt"/>
       <line num="3" count="6" type="stmt"/>
@@ -21,9 +21,31 @@
       <line num="25" count="1" type="stmt"/>
       <line num="26" count="1" type="stmt"/>
       <line num="29" count="1" type="stmt"/>
-      <line num="30" count="1" type="stmt"/>
-      <line num="31" count="1" type="stmt"/>
-      <line num="32" count="1" type="stmt"/>
+      <line num="30" count="3" type="stmt"/>
+      <line num="31" count="3" type="stmt"/>
+      <line num="32" count="3" type="stmt"/>
+      <line num="35" count="1" type="stmt"/>
+      <line num="36" count="1" type="stmt"/>
+      <line num="37" count="1" type="stmt"/>
+      <line num="38" count="1" type="stmt"/>
+      <line num="40" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="41" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="43" count="1" type="stmt"/>
+      <line num="46" count="1" type="stmt"/>
+      <line num="47" count="0" type="stmt"/>
+      <line num="48" count="0" type="stmt"/>
+      <line num="49" count="0" type="stmt"/>
+      <line num="51" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="52" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="54" count="0" type="stmt"/>
+      <line num="57" count="1" type="stmt"/>
+      <line num="58" count="1" type="stmt"/>
+      <line num="59" count="1" type="stmt"/>
+      <line num="60" count="1" type="stmt"/>
+      <line num="61" count="1" type="stmt"/>
+      <line num="62" count="1" type="stmt"/>
+      <line num="65" count="1" type="stmt"/>
+      <line num="66" count="12" type="stmt"/>
     </file>
   </project>
 </coverage>

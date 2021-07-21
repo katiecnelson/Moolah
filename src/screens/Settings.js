@@ -20,7 +20,7 @@ const Settings = () => {
 
     useEffect(() => {
         console.log("Use effect from settings ran okay!")
-        tag.getTags();
+        // tag.getTags();
       }, []);
 
     return (
@@ -64,11 +64,15 @@ const Settings = () => {
             </Modal>
             <View style={styles.flatList}>
                 <FlatList 
-                    data={tag.state}
+                    data={tag.state.sort((a, b) => a["Name"].localeCompare(b["Name"]))}
                     numColumns={2}
                     columnWrapperStyle={{justifyContent: "space-around"}}
                     ListHeaderComponent={SettingsHeader}
-                    ListFooterComponent={SettingsFooter}
+                    ListFooterComponent={() => <SettingsFooter
+                        text="Your tag here ..."
+                        color="#efefef"
+                    />
+                    }
                     keyExtractor={(item, index) => item.ID}
                     renderItem={({ item }) => (
                         <TouchableOpacity onPress={() => {setModalVisible(true), setName(item["Name"]), setID(item["ID"])}}> 

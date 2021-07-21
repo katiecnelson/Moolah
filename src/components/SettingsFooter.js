@@ -8,21 +8,19 @@ const SettingsFooter = (props) => {
     const [name, setName] = useState("");
 
     return (
-        <View style={styles.container}>
-            <View style={styles.flex}>
-                <TextInput
-                    value={name}
-                    maxLength={15}
-                    placeholder="Your tag here ..."
-                    placeholderTextColor="#b7b7b7"
-                    style={styles.textInput}
-                    onChangeText={text => setName(text)}
-                />
-                <TouchableOpacity onPress={() => tag.addTag(name)}>
-                    <Icon name="add" style={styles.icon}/>
-                </TouchableOpacity>
-                
-            </View>
+        <View style={styles.flex}>
+            <TextInput
+                value={name}
+                maxLength={15}
+                placeholder={props.text}
+                placeholderTextColor="#b7b7b7"
+                style={{...styles.textInput, backgroundColor: props.color}}
+                onChangeText={text => setName(text)}
+            />
+            <TouchableOpacity onPress={() => tag.addTag(name)}>
+                <Icon name="add" style={styles.icon}/>
+            </TouchableOpacity>
+            
         </View>
         
     )
@@ -30,18 +28,13 @@ const SettingsFooter = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "white",
-        marginTop: 25,
-        marginBottom: 200,
+        // backgroundColor: "white",
+        // marginTop: 25,
+        // marginBottom: 20,
     },
     textInput: {
-        paddingVertical: 10,
-        paddingLeft: 10,
-        paddingRight: 40,
-        marginTop:10,
-        marginBottom: 30,
-        marginHorizontal: 7,
-        backgroundColor: "#efefef",
+        paddingLeft: 8,
+        height: 45,
         borderRadius: 10,
         fontSize: 20,
         color: "#03045e",
@@ -54,7 +47,7 @@ const styles = StyleSheet.create({
     icon: {
         fontSize: 43,
         color: "#48cae4",
-        lineHeight: 65,
+        lineHeight: 45,
     },
 })
 
