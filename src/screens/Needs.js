@@ -12,20 +12,21 @@ const Needs = () => {
     const transactions = useContext(TransactionContext)
     const category = useContext(CategoryContext)
     const navigation = useNavigation();
-    const needs = transactions.state.filter(transaction => transaction["Category"] === "NEEDS");
 
     useEffect(() => {
         console.log("Use effect from NEEDS ran okay!")
-        transactions.getTransactions();
-        category.getCategories();
+        // transactions.getTransactions();
+        // category.getCategories();
         
       }, []);
+
+      console.log(transactions.state)
 
     return (
         <View style={styles.container}>
             <View style={{width: "94%", height: "100%"}} >
                 <FlatList
-                    data={needs}
+                    data={transactions.state.filter(transaction => transaction["Category"] === "NEEDS")}
                     ListHeaderComponent={() => <NeedWantGoalHeader 
                         title={category.state.nameOne}
                         remaining={category.state.remainingOne}

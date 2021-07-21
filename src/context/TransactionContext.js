@@ -5,6 +5,18 @@ const transactionReducer = (state, action) => {
   switch (action.type) {
     case 'get_transactions':
       return action.payload;
+    case "add_transaction":
+      return [
+        ...state,
+        {
+          "ID": action.payload["ID"],
+          "Amount": action.payload["Amount"],
+          "Date": action.payload["Date"],
+          "Description": action.payload["Description"],
+          "Tag": action.payload["Tag"],
+          "Category": action.payload["Category"],
+        },
+      ];
     default:
       return state;
   }
@@ -19,8 +31,20 @@ const getTransactions = dispatch => {
   };
 };
 
+const addTransaction = dispatch => {
+  return async (amount, date, description, tag, tagLabel, categoryLabel, category) => {
+    const response = await database.addTransaction(amount, date, description, tag, category);
+    console.log("this is what response is for addTransaction: " + response)
+
+    dispatch({
+      type: "add_transaction",
+      payload: {"ID": response, "Amount": amount, "Date": date, "Description": description, "Tag": tagLabel, "Category": categoryLabel }
+    });
+  };
+};
+
 export const { Context, Provider } = createDataContext(
     transactionReducer,
-  { getTransactions },
+  { getTransactions, addTransaction },
   []
 );

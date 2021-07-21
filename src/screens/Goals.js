@@ -16,8 +16,8 @@ const Goals = () => {
 
     useEffect(() => {
         console.log("Use effect from GOALS ran okay!")
-        transactions.getTransactions();
-        category.getCategories();
+        // transactions.getTransactions();
+        // category.getCategories();
         
         }, []);
 

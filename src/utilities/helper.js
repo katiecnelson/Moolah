@@ -31,3 +31,37 @@ export const percentSpent = (toSpend, spent) => {
     result += "%";
     return result;
 }
+
+export const getDateToDisplay = () => {
+    let day = new Date().getDate().toString();
+    let month = (new Date().getMonth() + 1).toString();
+    let year = new Date().getFullYear().toString().substring(2);
+
+    if (day.length === 1) day = "0" + day;
+    if (month.length === 1) month = "0" + month;
+
+    return (day + "/" + month + "/" + year)
+}
+
+export const formatDate = (date) => {
+    let day = date.getDate().toString();
+    let month = (date.getMonth() + 1).toString();
+    let year = date.getFullYear().toString().substring(2);
+
+    if (day.length === 1) day = "0" + day;
+    if (month.length === 1) month = "0" + month;
+
+    return (day + "/" + month + "/" + year)
+}
+
+export const formatDateForDatabase = (date) => {
+    result = "20";
+    result += date.substring(6,8) + "-";
+    result += date.substring(3,5) + "-";
+    result += date.substring(0,2)
+    return result;
+}
+
+export const amountToDatabase = (amount) => {
+    return Math.round(amount * 100)
+}

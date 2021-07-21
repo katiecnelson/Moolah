@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from '@react-navigation/stack';
-import History from "../screens/History";
 import NewTransaction from "../screens/NewTransaction";
+import Settings from "../screens/Settings";
 
 const Stack = createStackNavigator()
 
@@ -25,6 +25,19 @@ const NewTransactionStack = () => {
                         textAlign: "center",
                     },
                 }}
+            />
+            <Stack.Screen
+                name="Settings"
+                component={Settings}
+                options={{
+                    title: "SETTINGS", 
+                    headerTitleStyle: {
+                        fontFamily: "Nunito-Regular",
+                        color: "#03045e",
+                        fontSize: 24,
+                        textAlign: "center",
+                    },
+                }}    
             />
         </Stack.Navigator>
     )

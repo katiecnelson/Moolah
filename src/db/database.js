@@ -105,6 +105,19 @@ const getAllTransactions = async () => {
     });
 }
 
+const addTransaction = async (amount, date, description, tag, category) => {
+    return new Promise((resolve, reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                "INSERT INTO Transactions (Amount, Date, Description, Tag, Category ) VALUES (?,?,?,?,?)",
+                [amount, date, description, tag, category],
+                (_, result) => {console.log("ADD TRANSACTION TO DB WORKED!"); console.log("THIS IS RETURNED BY ADD TRANSACT TO DB!!: " + result.insertId); resolve(result.insertId)},
+                (_, error) => {console.log("ADD TRANSACTION TO DB failed"); reject(console.log(error))},
+            );
+        });
+    });
+}
+
 const getIncome = async () => {
     return new Promise((resolve, reject) => {
         db.transaction(tx => {
@@ -137,7 +150,7 @@ const getAllTags = async () => {
             tx.executeSql(
                 "SELECT * from Tags",
                 [],
-                (_, result) => {console.log("getAllTags database call Worked!"); resolve(result.rows._array)}, //console.log(result.rows._array)
+                (_, result) => {console.log("getAllTags database call Worked!"); console.log(result.rows._array); resolve(result.rows._array)}, //
                 (_, error) => {console.log("getTags failed"); reject(console.log(error))},
             );
         });
@@ -198,18 +211,6 @@ const addNewReminder = async (description, date) => {
     });
 }
 
-// const addNewReminder = async (description, date) => {
-//     return new Promise((resolve, _reject) => {
-//         db.transaction( tx => {
-//             tx.executeSql(
-//                 "INSERT INTO Reminders (Description, Date) VALUES (?,?)", 
-//             [description, date] );
-//             },
-//             (error) => { console.log("db error adding a new reminder"); console.log(error); resolve() },
-//             (success) => { console.log("A new reminder was successfully added!"); resolve(success)}
-//         )
-//     })
-// }
 
 const getSpent = async () => {
     return new Promise((resolve, reject) => {
@@ -237,5 +238,6 @@ export const database = {
     getAllTags,
     updateTag,
     deleteTag,
-    addTag
+    addTag,
+    addTransaction
 }

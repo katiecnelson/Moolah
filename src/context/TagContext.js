@@ -67,15 +67,6 @@ const addTag = dispatch => {
   };
 };
 
-// const getTags = dispatch => {
-//   return async () => {
-//     const response = await database.getAllTags();
-//     console.log("this is what response is for getTags: " + response.length)
-
-//     dispatch({ type: 'get_tags', payload: response });
-//   };
-// };
-
 export const { Context, Provider } = createDataContext(
     tagReducer,
   { getTags, updateTag, deleteTag, addTag },
