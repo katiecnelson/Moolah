@@ -3,21 +3,18 @@ import { View, StyleSheet, Text, SafeAreaView, TouchableOpacity } from "react-na
 import Icon from "./Icon";
 import DashBarDetail from "./DashBarDetail";
 import NeedWantGoalDetail from "../components/NeedWantGoalDetail"
-import { Context as IncomeContext } from "../context/IncomeContext";
-import { Context as CategoryContext } from "../context/CategoryContext";
+import { Context as CategoryIncomeContext } from "../context/CategoryIncomeContext";
 import { formatAmountString } from "../utilities/helper";
 import NewTransactionButton from "./NewTransactionButton";
 import { TabActions, useNavigation} from '@react-navigation/native';
 
 const DashboardHeader = () => {
-    const category = useContext(CategoryContext)
-    const income = useContext(IncomeContext)
+    const categoryIncome = useContext(CategoryIncomeContext)
     const navigation = useNavigation();
 
     useEffect(() => {
         console.log("Use effect from dashboard HEADER ran okay!")
-        income.getIncome();
-        category.getCategories();
+        categoryIncome.getCategoriesIncome();
       }, []);
 
     return (
@@ -25,61 +22,61 @@ const DashboardHeader = () => {
         <SafeAreaView style={{alignItems: "center"}}>
             <TouchableOpacity onPress={() => navigation.navigate("Settings")} style={{alignItems: "center"}}>
                 <Text style={styles.smallTitle}>INCOME:</Text>
-                <Text style={styles.income}>{formatAmountString(income.state.amount)}</Text>
+                <Text style={styles.income}>{formatAmountString(categoryIncome.state.income)}</Text>
                 <Icon name="edit" style={{fontSize: 28, color: "#48cae4"}} />
             </TouchableOpacity>
             <View style={styles.needWantGoalIcons}>
                 <TouchableOpacity onPress={() => navigation.dispatch(TabActions.jumpTo("Needs"))}>
                     <NeedWantGoalDetail
-                        title={category.state.nameOne}
+                        title={categoryIncome.state.labelOne}
                         iconName="needs"
                         color="#9ce0ff"
-                        amount={category.state.toSpendOne}
+                        amount={categoryIncome.state.toSpendOne}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.dispatch(TabActions.jumpTo("Wants"))}>
                     <NeedWantGoalDetail
-                        title={category.state.nameTwo}
+                        title={categoryIncome.state.labelTwo}
                         iconName="wants"
                         color="#1489cc"
-                        amount={category.state.toSpendTwo}
+                        amount={categoryIncome.state.toSpendTwo}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.dispatch(TabActions.jumpTo("Goals"))}>
                     <NeedWantGoalDetail
-                        title={category.state.nameThree}
+                        title={categoryIncome.state.labelThree}
                         iconName="goals"
                         color="#024f86"
-                        amount={category.state.toSpendThree}
+                        amount={categoryIncome.state.toSpendThree}
                     />
                 </TouchableOpacity>
             </View>
             <TouchableOpacity style={{width: "98%"}} onPress={() => navigation.dispatch(TabActions.jumpTo("Needs"))}>
                     <DashBarDetail
-                        label={category.state.nameOne + " REMAINING: "}
-                        amountRemaining={category.state.remainingOne}
-                        amountSpent={category.state.spentOne}
+                        label={categoryIncome.state.labelOne + " REMAINING: "}
+                        amountRemaining={categoryIncome.state.remainingOne}
+                        amountSpent={categoryIncome.state.spentOne}
                         color="#9ce0ff"
-                        percentSpent={category.state.percentSpentOne}
+                        percentSpent={categoryIncome.state.percentSpentOne}
                     />
             </TouchableOpacity>
             <TouchableOpacity style={{width: "98%"}} onPress={() => navigation.dispatch(TabActions.jumpTo("Wants"))}>
                     <DashBarDetail
-                        label={category.state.nameTwo + " REMAINING: "}
-                        amountRemaining={category.state.remainingTwo}
-                        amountSpent={category.state.spentTwo}
+                        label={categoryIncome.state.labelTwo + " REMAINING: "}
+                        amountRemaining={categoryIncome.state.remainingTwo}
+                        amountSpent={categoryIncome.state.spentTwo}
                         color="#1489cc"
-                        percentSpent={category.state.percentSpentTwo}
+                        percentSpent={categoryIncome.state.percentSpentTwo}
                     />
             </TouchableOpacity>
             <TouchableOpacity style={{width: "98%"}} onPress={() => navigation.dispatch(TabActions.jumpTo("Goals"))}>
 
                     <DashBarDetail
-                        label={category.state.nameThree + " REMAINING: "}
-                        amountRemaining={category.state.remainingThree}
-                        amountSpent={category.state.spentThree}
+                        label={categoryIncome.state.labelThree + " REMAINING: "}
+                        amountRemaining={categoryIncome.state.remainingThree}
+                        amountSpent={categoryIncome.state.spentThree}
                         color="#024f86"
-                        percentSpent={category.state.percentSpentThree}
+                        percentSpent={categoryIncome.state.percentSpentThree}
                     />
 
             </TouchableOpacity>

@@ -20,7 +20,7 @@ const Settings = () => {
 
     useEffect(() => {
         console.log("Use effect from settings ran okay!")
-        // tag.getTags();
+        tag.getTags();
       }, []);
 
     return (

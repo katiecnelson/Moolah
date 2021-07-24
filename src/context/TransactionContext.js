@@ -14,7 +14,8 @@ const transactionReducer = (state, action) => {
           "Date": action.payload["Date"],
           "Description": action.payload["Description"],
           "Tag": action.payload["Tag"],
-          "Category": action.payload["Category"],
+          "CategoryLabel": action.payload["CategoryLabel"],
+          "CategoryValue": action.payload["CategoryValue"],
         },
       ];
     default:
@@ -32,13 +33,13 @@ const getTransactions = dispatch => {
 };
 
 const addTransaction = dispatch => {
-  return async (amount, date, description, tag, tagLabel, categoryLabel, category) => {
-    const response = await database.addTransaction(amount, date, description, tag, category);
+  return async (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue) => {
+    const response = await database.addTransaction(amount, date, description, tag, categoryID);
     console.log("this is what response is for addTransaction: " + response)
 
     dispatch({
       type: "add_transaction",
-      payload: {"ID": response, "Amount": amount, "Date": date, "Description": description, "Tag": tagLabel, "Category": categoryLabel }
+      payload: {"ID": response, "Amount": amount, "Date": date, "Description": description, "Tag": tagLabel, "CategoryLabel": categoryLabel, "CategoryValue": categoryValue }
     });
   };
 };
