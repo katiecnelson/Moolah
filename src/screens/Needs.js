@@ -4,35 +4,26 @@ import NeedWantGoalHeader from "../components/NeedWantGoalHeader";
 import NeedWantGoalFooter from "../components/NeedWantGoalFooter";
 import TransactionListDetail from "../components/TransactionListDetail";
 import {Context as TransactionContext} from "../context/TransactionContext";
-import {Context as CategoryContext} from "../context//CategoryContext";
+import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
 import {formatFullDate, formatAmountString} from "../utilities/helper"
 import { TabActions, useNavigation} from '@react-navigation/native';
 
 const Needs = () => {
     const transactions = useContext(TransactionContext)
-    const category = useContext(CategoryContext)
+    const categoryIncome = useContext(CategoryIncomeContext)
     const navigation = useNavigation();
-
-    useEffect(() => {
-        console.log("Use effect from NEEDS ran okay!")
-        // transactions.getTransactions();
-        // category.getCategories();
-        
-      }, []);
-
-      console.log(transactions.state)
 
     return (
         <View style={styles.container}>
             <View style={{width: "94%", height: "100%"}} >
                 <FlatList
-                    data={transactions.state.filter(transaction => transaction["Category"] === "NEEDS")}
+                    data={transactions.state.filter(transaction => transaction["CategoryValue"] === "one")}
                     ListHeaderComponent={() => <NeedWantGoalHeader 
-                        title={category.state.nameOne}
-                        remaining={category.state.remainingOne}
-                        spent={category.state.spentOne}
-                        total={category.state.toSpendOne}
-                        percent={category.state.percentSpentOne}
+                        // title={categoryIncome.state.nameOne}
+                        remaining={categoryIncome.state.remainingOne}
+                        spent={categoryIncome.state.spentOne}
+                        total={categoryIncome.state.toSpendOne}
+                        percent={categoryIncome.state.percentSpentOne}
                         barColor="#9ce0ff"
                         onPress={() => navigation.dispatch(TabActions.jumpTo("New"))}
                     />
@@ -50,7 +41,7 @@ const Needs = () => {
                             date={formatFullDate(item["Date"])}
                             description={item["Description"]}
                             amount={formatAmountString(item["Amount"])}
-                            category={item["Category"]}
+                            category={item["CategoryLabel"]}
                             tag={item["Tag"]}
                         />
                         </View>

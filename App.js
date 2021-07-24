@@ -5,8 +5,7 @@ import TabNavigator from "./src/navigation/TabNavigator"
 import {useFonts} from "expo-font";
 import {Provider as ReminderProvider} from "./src/context/ReminderContext";
 import {Provider as TransactionProvider} from "./src/context/TransactionContext";
-import {Provider as IncomeProvider} from "./src/context/IncomeContext";
-import {Provider as CategoryProvider} from "./src/context/CategoryContext";
+import {Provider as CategoryIncomeProvider} from "./src/context/CategoryIncomeContext";
 import {Provider as TagProvider} from "./src/context/TagContext";
 
 import useDatabase from './src/hooks/useDatabase';
@@ -28,8 +27,7 @@ export default function App() {
   } else {
       return (
         <TagProvider>
-          <CategoryProvider>
-            <IncomeProvider>
+          <CategoryIncomeProvider>
               <TransactionProvider>
                 <ReminderProvider>
                   <NavigationContainer>
@@ -37,8 +35,7 @@ export default function App() {
                   </NavigationContainer>
                 </ReminderProvider>
               </TransactionProvider>
-            </IncomeProvider>
-          </CategoryProvider>
+          </CategoryIncomeProvider>
         </TagProvider>
     );
   }

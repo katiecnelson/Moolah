@@ -27,9 +27,9 @@ const setUpDatabase = async () => {
         tx.executeSql(
             "CREATE TABLE IF NOT EXISTS Reminders (ID INTEGER PRIMARY KEY, Description TEXT NOT NULL, Date TEXT NOT NULL, Complete INTEGER DEFAULT 0);");
         tx.executeSql(
-            "CREATE TABLE IF NOT EXISTS Categories (ID INTEGER PRIMARY KEY, Name TEXT NOT NULL, Percent INTEGER NOT NULL);");
+            "CREATE TABLE IF NOT EXISTS Categories (ID INTEGER PRIMARY KEY, Value TEXT NOT NULL, Label TEXT NOT NULL, Percent INTEGER NOT NULL);");
         tx.executeSql(
-            "CREATE TABLE IF NOT EXISTS Income (ID INTEGER PRIMARY KEY, Amount INTEGER NOT NULL, Date TEXT NOT NULL);");
+            "CREATE TABLE IF NOT EXISTS Income (ID INTEGER PRIMARY KEY, Amount INTEGER NOT NULL);");
         tx.executeSql(
             "CREATE TABLE IF NOT EXISTS Tags (ID INTEGER PRIMARY KEY, Name TEXT NOT NULL);");
         tx.executeSql(
@@ -46,9 +46,9 @@ return new Promise((resolve, _reject) => {
     db.transaction( tx => {
         tx.executeSql( "INSERT INTO Reminders (Description, Date) VALUES (?,?)", ["This is a test", "2021-06-01"] );
         tx.executeSql( "INSERT INTO Reminders (Description, Date) VALUES (?,?)", ["Test TWO", "2021-06-05"] );
-        tx.executeSql( "INSERT INTO Categories (Name, Percent) VALUES (?,?)", ["NEEDS", 50] ); // 1 
-        tx.executeSql( "INSERT INTO Categories (Name, Percent) VALUES (?,?)", ["WANTS", 30] ); // 2
-        tx.executeSql( "INSERT INTO Categories (Name, Percent) VALUES (?,?)", ["GOALS", 20] ); // 3
+        tx.executeSql( "INSERT INTO Categories (Value, Label, Percent) VALUES (?,?,?)", ["one", "NEEDS", 50] ); // 1 
+        tx.executeSql( "INSERT INTO Categories (Value, Label, Percent) VALUES (?,?,?)", ["two", "WANTS", 30] ); // 2
+        tx.executeSql( "INSERT INTO Categories (Value, Label, Percent) VALUES (?,?,?)", ["three", "GOALS", 20] ); // 3
         tx.executeSql( "INSERT INTO Tags (Name) VALUES (?)", ["Alcohol"] ); // 1
         tx.executeSql( "INSERT INTO Tags (Name) VALUES (?)", ["Charity"] ); // 2
         tx.executeSql( "INSERT INTO Tags (Name) VALUES (?)", ["Credit Payoff"] ); // 3
@@ -61,7 +61,7 @@ return new Promise((resolve, _reject) => {
         tx.executeSql( "INSERT INTO Tags (Name) VALUES (?)", ["Takeaway"] ); // 10
         tx.executeSql( "INSERT INTO Tags (Name) VALUES (?)", ["Transportation"] ); // 11
         tx.executeSql( "INSERT INTO Tags (Name) VALUES (?)", ["Utilities"] ); // 12
-        tx.executeSql( "INSERT INTO Income (Amount, Date) VALUES (?, ?)", [130000, "2021-07-01"] );
+        tx.executeSql( "INSERT INTO Income (Amount) VALUES (?)", [130000] );
         tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-07-12", "RBS Savings", 7, 3] );
         tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-07-12", "Scottish Power", 12, 1] );
         tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-07-11", "Uber Eats", 10, 2] );
@@ -96,9 +96,9 @@ const getAllTransactions = async () => {
     return new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                "SELECT Transactions.ID AS ID, Date, Description, Amount, Categories.Name AS Category, Tags.Name AS Tag FROM Transactions LEFT OUTER JOIN Categories ON Transactions.Category = Categories.ID LEFT OUTER JOIN Tags ON Transactions.Tag = Tags.ID",
+                "SELECT Transactions.ID AS ID, Date, Description, Amount, Categories.Label AS CategoryLabel, Categories.Value AS CategoryValue, Tags.Name AS Tag FROM Transactions LEFT OUTER JOIN Categories ON Transactions.Category = Categories.ID LEFT OUTER JOIN Tags ON Transactions.Tag = Tags.ID",
                 [],
-                (_, result) => {console.log("GetAllTransactions Worked!"); resolve(result.rows._array)}, //console.log(result.rows._array);
+                (_, result) => {console.log("GetAllTransactions Worked!"); console.log(result.rows._array); resolve(result.rows._array)}, //console.log(result.rows._array);
                 (_, error) => {console.log("GetAllTransactions failed"); reject(console.log(error))},
             );
         });
@@ -131,18 +131,45 @@ const getIncome = async () => {
     });
 }
 
+const updateIncome = async (amount) => {
+    return new Promise((resolve, _reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                "UPDATE Income SET Amount = ?;",
+                [amount]
+            );
+        },
+        (error) => { console.log("Database error updating income!"); console.log(error); resolve() },
+        (success) => { console.log("Income successfully updated!"); resolve(success)}
+        )
+        })
+    }
+
 const getAllCategories = async () => {
     return new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                "SELECT * from Categories",
+                "SELECT ID, Value AS CategoryValue, Label as CategoryLabel, Percent FROM Categories",
                 [],
-                (_, result) => {console.log("getAllCategories database call Worked!"); resolve(result.rows._array)}, //console.log(result.rows._array);
+                (_, result) => {console.log("getAllCategories database call Worked!"); console.log(result.rows._array); resolve(result.rows._array)}, //
                 (_, error) => {console.log("getCategories failed"); reject(console.log(error))},
             );
         });
     });
 }
+
+const updateCategories = async (newAliasOne, newPercentOne, newAliasTwo, newPercentTwo, newAliasThree, newPercentThree) => {
+    return new Promise((resolve, _reject) => {
+        db.transaction(tx => {
+            tx.executeSql( "UPDATE Categories SET Label = ?, Percent = ? WHERE Value = ?;", [newAliasOne, newPercentOne, "one"] );
+            tx.executeSql( "UPDATE Categories SET Label = ?, Percent = ? WHERE Value = ?;", [newAliasTwo, newPercentTwo, "two"] );
+            tx.executeSql( "UPDATE Categories SET Label = ?, Percent = ? WHERE Value = ?;", [newAliasThree, newPercentThree, "three"] );
+        },
+        (error) => { console.log("Database error updating categories!"); console.log(error); resolve() },
+        (success) => { console.log("Categories successfully updated!"); resolve(success)}
+        )
+        })
+    }
 
 const getAllTags = async () => {
     return new Promise((resolve, reject) => {
@@ -211,7 +238,6 @@ const addNewReminder = async (description, date) => {
     });
 }
 
-
 const getSpent = async () => {
     return new Promise((resolve, reject) => {
         db.transaction(tx => {
@@ -239,5 +265,7 @@ export const database = {
     updateTag,
     deleteTag,
     addTag,
-    addTransaction
+    addTransaction,
+    updateIncome,
+    updateCategories
 }

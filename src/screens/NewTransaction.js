@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Modal, FlatList, Alert } from "react-native";
 import Icon from "../components/Icon";
 import CustomButton from "../components/CustomButton";
-import {Context as CategoryContext} from "../context/CategoryContext";
+import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
 import {getDateToDisplay, formatDate} from "../utilities/helper";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import {Context as TagContext} from "../context/TagContext"
@@ -14,7 +14,7 @@ import Toast from "../components/Toast";
 import {formatDateForDatabase, amountToDatabase} from "../utilities/helper"
 
 const NewTransaction = () => {
-    const categories = useContext(CategoryContext);
+    const categoryIncome = useContext(CategoryIncomeContext);
     const transaction = useContext(TransactionContext);
     const tags = useContext(TagContext);
     const navigation = useNavigation();
@@ -24,7 +24,9 @@ const NewTransaction = () => {
     const [description, setDescription] = useState(null)
 
     //Buttons to choose category
-    const [category, setCategory] = useState(0)
+
+    const [categoryID, setCategoryID] = useState(0)
+    const [categoryValue, setCategoryValue] = useState(null)
     const [categoryLabel, setCategoryLabel] = useState("")
     //Date picker state
     const [showDatePicker, setShowDatePicker] = useState(false);
@@ -40,38 +42,27 @@ const NewTransaction = () => {
       };
     
     const addTransaction = () => {
-        if (amount === 0 || amount === null || category === 0) {
+        if (amount === 0 || amount === null || categoryValue === 0) {
             setShowToast(true);
         } else {
-            // (amount, date, description, tag, tagLabel, categoryLabel, category)
-            transaction.addTransaction(amountToDatabase(amount), formatDateForDatabase(date), description, tag, tagLabel, categoryLabel, category)
+            // (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue)
+            transaction.addTransaction(amountToDatabase(amount), formatDateForDatabase(date), description, tag, tagLabel, categoryID, categoryLabel, categoryValue)
         }
     }
 
       useEffect(() => {
-        console.log("Use effect NewTransaction ran okay!")
-        //below is commented out as a test
-        // tags.getTags();
+        tags.getTags();
       }, []);
 
     return (
         <KeyboardAvoidingView behavior={"padding"} style={styles.container}>
-            <Toast show={showToast} onPress={() => setShowToast(false)} text="Please input an amount and select a category."/>
+            <Toast show={showToast} onRequestClose={() => setOpenDropdown(false)} onPress={() => setShowToast(false)} text="Please input an amount and select a category."/>
             <TouchableOpacity style={{flexDirection: "row", paddingBottom: 15, paddingTop: 20}} onPress={() => navigation.navigate("Settings")}>
                 <Icon name="edit" style={{fontSize: 32, color: "#48cae4", paddingRight: 10}}/>
                 <Text style={{color: "#48cae4", lineHeight: 32}}>EDIT INCOME</Text>
             </TouchableOpacity>
             <View style={{flexDirection: "row", justifyContent: "space-between", width: "94%"}}>
-                {/* <CurrencyInput
-                    placeholder="£00.00" 
-                    placeholderTextColor="#b7b7b7"
-                    textAlign={"center"}
-                    keyboardType={"decimal-pad"}
-                    style={{padding: 10, backgroundColor: "#efefef", borderRadius: 10, fontSize: 28, color: "#03045e", width: "48%"}}
-                /> */}
                 <CurrencyInput
-                    // placeholder="£00.00" 
-                    // placeholderTextColor="#b7b7b7"
                     textAlign={"center"}
                     keyboardType={"number-pad"}
                     style={{padding: 10, backgroundColor: "#efefef", borderRadius: 10, fontSize: 28, color: "#03045e", width: "48%"}}
@@ -81,9 +72,6 @@ const NewTransaction = () => {
                     delimiter=","
                     separator="."
                     precision={2}
-                    // onChangeText={(formattedValue) => {
-                    //     console.log(formattedValue); // $2,310.46
-                    // }}
                     />
                 <TouchableOpacity onPress={() => setShowDatePicker(true)} style={{backgroundColor: "#efefef", borderRadius: 10, width: "48%", alignItems: "center" }}>
                     <Text style={{padding: 15, fontSize: 28, color: "#03045e"}}>{date}</Text>  
@@ -97,23 +85,23 @@ const NewTransaction = () => {
                     onConfirm={handleOnConfirm}
                 />
             <View style={styles.needsWantsGoals}>
-                <TouchableOpacity activeOpacity={.8} onPress={() => {setCategory(1); setCategoryLabel("NEEDS")}} style={styles.containerIcons}>
-                    <View style={{backgroundColor: category === 1 ? "#efefef" : "white", borderRadius: 10}}>
+                <TouchableOpacity activeOpacity={.8} onPress={() => {setCategoryID(1); setCategoryValue("one"); setCategoryLabel(categoryIncome.state.labelOne)}} style={styles.containerIcons}>
+                    <View style={{backgroundColor: categoryID === 1 ? "#efefef" : "white", borderRadius: 10}}>
                         <Icon name="needs" style={{...styles.icon, color: "#9ce0ff"}} />
                     </View>
-                    <Text style={styles.textBold}>{categories.state.nameOne}</Text>
+                    <Text style={styles.textBold}>{categoryIncome.state.labelOne}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity activeOpacity={.8} onPress={() => {setCategory(2); setCategoryLabel("WANTS")}} style={styles.containerIcons}>
-                    <View style={{backgroundColor: category === 2 ? "#efefef" : "white", borderRadius: 10}}>
+                <TouchableOpacity activeOpacity={.8} onPress={() => {setCategoryID(2); setCategoryValue("two"); setCategoryLabel(categoryIncome.state.labelTwo)}} style={styles.containerIcons}>
+                    <View style={{backgroundColor: categoryID === 2 ? "#efefef" : "white", borderRadius: 10}}>
                         <Icon name="wants" style={{...styles.icon, color: "#1489cc"}} />
                     </View>
-                    <Text style={styles.textBold}>{categories.state.nameTwo}</Text>
+                    <Text style={styles.textBold}>{categoryIncome.state.labelTwo}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity activeOpacity={.8} onPress={() => {setCategory(3); setCategoryLabel("GOALS")}} style={styles.containerIcons}>
-                    <View style={{backgroundColor: category === 3 ? "#efefef" : "white", borderRadius: 10}}>
+                <TouchableOpacity activeOpacity={.8} onPress={() => {setCategoryID(3); setCategoryValue("three"); setCategoryLabel(categoryIncome.state.labelThree)}} style={styles.containerIcons}>
+                    <View style={{backgroundColor: categoryID === 3 ? "#efefef" : "white", borderRadius: 10}}>
                         <Icon name="goals" style={{...styles.icon, color: "#024f86"}} />
                     </View>
-                    <Text style={styles.textBold}>{categories.state.nameThree}</Text>
+                    <Text style={styles.textBold}>{categoryIncome.state.labelThree}</Text>
                 </TouchableOpacity>
             </View>
             <TextInput
