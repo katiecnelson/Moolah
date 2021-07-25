@@ -17,4 +17,10 @@ export default StyleSheet.create({
         fontFamily: "Nunito-Bold",
         color: "white",
     },
+    headerTitleStyle: {
+        fontFamily: "Nunito-Regular",
+        color: "#03045e",
+        fontSize: 24,
+        textAlign: "center",
+    },
 });
