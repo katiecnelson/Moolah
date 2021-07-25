@@ -26,9 +26,6 @@ const SettingsHeader = () => {
     const [showToast, setShowToast] = useState(false)
 
     const navigation = useNavigation();
-    
-
-    // updateCategoriesIncome(income, newAliasOne, newPercentOne, newAliasTwo, newPercentTwo, newAliasThree, newPercentThree)
 
     const handleSave = async () => {
         if (parseInt(percentOne) + parseInt(percentTwo) + parseInt(percentThree) !== 100

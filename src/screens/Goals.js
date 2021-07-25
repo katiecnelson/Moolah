@@ -20,7 +20,6 @@ const Goals = () => {
                 <FlatList
                     data={needs}
                     ListHeaderComponent={() => <NeedWantGoalHeader 
-                        // title={categoryIncome.state.nameThree}
                         remaining={categoryIncome.state.remainingThree}
                         spent={categoryIncome.state.spentThree}
                         total={categoryIncome.state.toSpendThree}

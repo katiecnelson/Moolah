@@ -1,11 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
 import { createStackNavigator } from '@react-navigation/stack';
 import Goals from "../screens/Goals";
 import History from "../screens/History";
+import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
+import GlobalStyle from "../components/GlobalStyle";
 
 const Stack = createStackNavigator()
 
 const GoalsStack = () => {
+    const categoryIncome = useContext(CategoryIncomeContext)
+    const title = categoryIncome.state.labelThree;
+    const headerTitleStyle = GlobalStyle.headerTitleStyle;
+    
     return (
         <Stack.Navigator
             screenOptions={{
@@ -17,13 +23,8 @@ const GoalsStack = () => {
                 name="Goals"
                 component={Goals}
                 options={{
-                    title: "GOALS", 
-                    headerTitleStyle: {
-                        fontFamily: "Nunito-Regular",
-                        color: "#03045e",
-                        fontSize: 24,
-                        textAlign: "center",
-                    },
+                    title: title, 
+                    headerTitleStyle: headerTitleStyle
                 }}
             />
             <Stack.Screen
@@ -31,12 +32,7 @@ const GoalsStack = () => {
                 component={History}
                 options={{
                     title: "HISTORICAL DATA", 
-                    headerTitleStyle: {
-                        fontFamily: "Nunito-Regular",
-                        color: "#03045e",
-                        fontSize: 24,
-                        textAlign: "center",
-                    },
+                    headerTitleStyle: headerTitleStyle
                 }}   
             />
         </Stack.Navigator>

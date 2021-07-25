@@ -1,6 +1,5 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import NewTransaction from "../screens/NewTransaction";
 import Icon from "../components/Icon";
 import DashStack from "./DashStack";
 import NeedsStack from "./NeedsStack"
@@ -24,8 +23,8 @@ const TabNavigator = () => {
             name="Dash"
             component={DashStack}
             options={{
-                tabBarIcon: ({ color, size }) => (
-                    <Icon name="dashboard" color={color} size={32} />
+                tabBarIcon: props => (
+                    <Icon name="dashboard" color={props.color} size={props.focused ? 36 : 30} />
                 ),
             }}
         />
@@ -33,8 +32,8 @@ const TabNavigator = () => {
             name="Needs"
             component={NeedsStack}
             options={{
-                tabBarIcon: ({ color, size }) => (
-                    <Icon name="needs" color={color} size={32} />
+                tabBarIcon: props => (
+                    <Icon name="needs" color={props.color} size={props.focused ? 36 : 30} />
                 ),
             }}
         />
@@ -42,8 +41,8 @@ const TabNavigator = () => {
             name="Wants"
             component={WantsStack}
             options={{
-                tabBarIcon: ({ color, size }) => (
-                    <Icon name="wants" color={color} size={32} />
+                tabBarIcon: props => (
+                    <Icon name="wants" color={props.color} size={props.focused ? 36 : 30} />
                 ),
             }}
         />
@@ -51,8 +50,8 @@ const TabNavigator = () => {
             name="Goals"
             component={GoalsStack}
             options={{
-                tabBarIcon: ({ color, size }) => (
-                    <Icon name="goals" color={color} size={32} />
+                tabBarIcon: props => (
+                    <Icon name="goals" color={props.color} size={props.focused ? 36 : 30} />
                 ),
             }}
         />
@@ -60,8 +59,8 @@ const TabNavigator = () => {
             name="New"
             component={NewTransactionStack}
             options={{
-                tabBarIcon: ({ color, size }) => (
-                    <Icon name="new" color={color} size={32} />
+                tabBarIcon: props => (
+                    <Icon name="new" color={props.color} size={props.focused ? 36 : 30} />
                 ),
             }}
         />

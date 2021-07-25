@@ -6,10 +6,14 @@ import { TouchableOpacity } from "react-native";
 import Icon from "../components/Icon";
 import Reminders from "../screens/Reminders";
 import History from "../screens/History";
+import GlobalStyle from "../components/GlobalStyle";
 
 const Stack = createStackNavigator()
 
 const DashStack = () => {
+
+    const headerTitleStyle = GlobalStyle.headerTitleStyle;
+
     return (
         <Stack.Navigator
             screenOptions={{
@@ -22,12 +26,7 @@ const DashStack = () => {
                 component={Dashboard}
                 options={({navigation}) => ({
                     title: "DASHBOARD", 
-                    headerTitleStyle: {
-                        fontFamily: "Nunito-Regular",
-                        color: "#03045e",
-                        fontSize: 24,
-                        textAlign: "center",
-                    },
+                    headerTitleStyle: headerTitleStyle,
                     headerRight: () => {
                         return (
                             <TouchableOpacity style={{paddingRight: 7}} onPress={() => navigation.navigate("Settings")}>
@@ -49,12 +48,7 @@ const DashStack = () => {
                 component={Settings}
                 options={{
                     title: "SETTINGS", 
-                    headerTitleStyle: {
-                        fontFamily: "Nunito-Regular",
-                        color: "#03045e",
-                        fontSize: 24,
-                        textAlign: "center",
-                    },
+                    headerTitleStyle: headerTitleStyle,
                 }}    
             />
             <Stack.Screen
@@ -62,12 +56,7 @@ const DashStack = () => {
                 component={Reminders}
                 options={{
                     title: "REMINDERS", 
-                    headerTitleStyle: {
-                        fontFamily: "Nunito-Regular",
-                        color: "#03045e",
-                        fontSize: 24,
-                        textAlign: "center",
-                    },
+                    headerTitleStyle: headerTitleStyle,
                 }}
             />
             <Stack.Screen
@@ -75,12 +64,7 @@ const DashStack = () => {
                 component={History}
                 options={{
                     title: "HISTORICAL DATA", 
-                    headerTitleStyle: {
-                        fontFamily: "Nunito-Regular",
-                        color: "#03045e",
-                        fontSize: 24,
-                        textAlign: "center",
-                    },
+                    headerTitleStyle: headerTitleStyle,
                 }}
             />
         </Stack.Navigator>
