@@ -6,6 +6,7 @@ import { TouchableOpacity } from "react-native";
 import Icon from "../components/Icon";
 import Reminders from "../screens/Reminders";
 import History from "../screens/History";
+import EditTransaction from "../screens/EditTransaction";
 import GlobalStyle from "../components/GlobalStyle";
 
 const Stack = createStackNavigator()
@@ -64,6 +65,14 @@ const DashStack = () => {
                 component={History}
                 options={{
                     title: "HISTORICAL DATA", 
+                    headerTitleStyle: headerTitleStyle,
+                }}
+            />
+            <Stack.Screen
+                name="Edit Transaction"
+                component={EditTransaction}
+                options={{
+                    title: "EDIT TRANSACTION", 
                     headerTitleStyle: headerTitleStyle,
                 }}
             />

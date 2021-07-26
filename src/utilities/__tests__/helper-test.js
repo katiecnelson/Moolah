@@ -35,7 +35,7 @@ test("returns the amount left to spend in each category", () => {
 });
 
 test("returns the date formatted as a string for the display", () => {
-    expect(helper.getDateToDisplay()).toBe("21/07/21");
+    expect(helper.getDateToDisplay()).toBe("25/07/21");
 });
 
 test("returns the amount of money spent multiplied by 100", () => {
@@ -56,4 +56,16 @@ test("returns the amount of money spent multiplied by 100", () => {
 
 test("returns the date formatted as a string for the database", () => {
     expect(helper.formatDateForDatabase("20/07/21")).toBe("2021-07-20");
+});
+
+test("returns an integer in place of string for 1, 2, 3", () => {
+    expect(helper.categoryNameToID("one")).toBe(1);
+    expect(helper.categoryNameToID("two")).toBe(2);
+    expect(helper.categoryNameToID("three")).toBe(3);
+    expect(helper.categoryNameToID("four")).toBe(0);
+    expect(helper.categoryNameToID("HELLO")).toBe(0);
+});
+
+test("returns a string of today's date formated as YYYY-MM-DD", () => {
+    expect(helper.getDateDatabaseFormat()).toBe("2021-07-25");
 });

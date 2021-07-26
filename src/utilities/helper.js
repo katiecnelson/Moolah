@@ -31,6 +31,7 @@ export const percentSpent = (toSpend, spent) => {
     result += "%";
     return result;
 }
+//TODO: Am I using the below function anywhere?!
 
 export const getDateToDisplay = () => {
     let day = new Date().getDate().toString();
@@ -41,6 +42,17 @@ export const getDateToDisplay = () => {
     if (month.length === 1) month = "0" + month;
 
     return (day + "/" + month + "/" + year)
+}
+
+export const getDateDatabaseFormat = () => {
+    let day = new Date().getDate().toString();
+    let month = (new Date().getMonth() + 1).toString();
+    let year = new Date().getFullYear().toString();
+
+    if (day.length === 1) day = "0" + day;
+    if (month.length === 1) month = "0" + month;
+
+    return (year + "-" + month + "-" + day)
 }
 
 export const formatDate = (date) => {
@@ -64,4 +76,17 @@ export const formatDateForDatabase = (date) => {
 
 export const amountToDatabase = (amount) => {
     return Math.round(amount * 100)
+}
+
+export const categoryNameToID = (categoryName) => {
+    switch(categoryName) {
+        case "one":
+          return 1
+        case "two":
+          return 2
+        case "three":
+            return 3
+        default:
+          return 0
+      }
 }

@@ -96,7 +96,7 @@ const getAllTransactions = async () => {
     return new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                "SELECT Transactions.ID AS ID, Date, Description, Amount, Categories.Label AS CategoryLabel, Categories.Value AS CategoryValue, Tags.Name AS Tag FROM Transactions LEFT OUTER JOIN Categories ON Transactions.Category = Categories.ID LEFT OUTER JOIN Tags ON Transactions.Tag = Tags.ID",
+                "SELECT Transactions.ID AS ID, Date, Description, Amount, Categories.Label AS CategoryLabel, Categories.Value AS CategoryValue, Tag AS TagID, Tags.Name AS Tag FROM Transactions LEFT OUTER JOIN Categories ON Transactions.Category = Categories.ID LEFT OUTER JOIN Tags ON Transactions.Tag = Tags.ID",
                 [],
                 (_, result) => {console.log("GetAllTransactions Worked!"); console.log(result.rows._array); resolve(result.rows._array)}, //console.log(result.rows._array);
                 (_, error) => {console.log("GetAllTransactions failed"); reject(console.log(error))},
@@ -117,6 +117,34 @@ const addTransaction = async (amount, date, description, tag, category) => {
         });
     });
 }
+
+const updateTransaction = async (ID, newAmount, newCategory, newDate, newDescription, newTagID) => {
+    return new Promise((resolve, _reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                "UPDATE Transactions SET Amount = ?, Category = ?, Date = ?, Description = ?, Tag = ? WHERE ID = ?;",
+                [newAmount, newCategory, newDate, newDescription, newTagID, ID]
+            );
+        },
+        (error) => { console.log("Database error updating transaction!"); console.log(error); resolve() },
+        (success) => { console.log("Transaction successfully updated in DB!"); resolve(success)}
+        )
+        })
+    }
+
+const deleteTransaction = async (ID) => {
+    return new Promise((resolve, _reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                "DELETE FROM Transactions WHERE ID = ?;",
+                [ID]
+            );
+        },
+        (error) => { console.log("Database error deleting transaction!"); console.log(error); resolve() },
+        (success) => { console.log("Transaction successfully deleted from DB!"); resolve(success)}
+        )
+        })
+    }
 
 const getIncome = async () => {
     return new Promise((resolve, reject) => {
@@ -267,5 +295,7 @@ export const database = {
     addTag,
     addTransaction,
     updateIncome,
-    updateCategories
+    updateCategories,
+    updateTransaction,
+    deleteTransaction
 }
