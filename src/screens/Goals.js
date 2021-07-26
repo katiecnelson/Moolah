@@ -14,6 +14,11 @@ const Goals = () => {
     const navigation = useNavigation();
     const needs = transactions.state.filter(transaction => transaction["CategoryValue"] === "three");
 
+    useEffect(() => {
+        //below is just for testing
+        transactions.getTransactions();
+      }, []);
+
     return (
         <View style={styles.container}>
             <View style={{width: "94%", height: "100%"}} >

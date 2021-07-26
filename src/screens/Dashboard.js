@@ -5,7 +5,7 @@ import DashboardHeader from "../components/DashboardHeader";
 import { Context as TransactionContext } from "../context/TransactionContext";
 import { formatAmountString, formatFullDate } from "../utilities/helper";
 
-const Dashboard = (props) => {
+const Dashboard = ({navigation}) => {
     const { state, getTransactions } = useContext(TransactionContext)
 
     useEffect(() => {
@@ -23,11 +23,13 @@ const Dashboard = (props) => {
                             <View style={{backgroundColor: index % 2 === 0 ? "#efefef" : "white", borderRadius: 5}}>
                                 <TransactionListDetail
                                     key={item["ID"]}
+                                    ID={item["ID"]}
                                     date={formatFullDate(item["Date"])}
                                     description={item["Description"]}
                                     amount={formatAmountString(item["Amount"])}
                                     category={item["CategoryLabel"]}
                                     tag={item["Tag"]}
+                                    onPress={() => navigation.navigate("Edit Transaction", {ID: item["ID"]})}
                                 />
                             </View>
                     )}
