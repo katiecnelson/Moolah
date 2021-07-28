@@ -35,7 +35,7 @@ test("returns the amount left to spend in each category", () => {
 });
 
 test("returns the date formatted as a string for the display", () => {
-    expect(helper.getDateToDisplay()).toBe("25/07/21");
+    expect(helper.getDateToDisplay()).toBe("28/07/21");
 });
 
 test("returns the amount of money spent multiplied by 100", () => {
@@ -67,5 +67,9 @@ test("returns an integer in place of string for 1, 2, 3", () => {
 });
 
 test("returns a string of today's date formated as YYYY-MM-DD", () => {
-    expect(helper.getDateDatabaseFormat()).toBe("2021-07-25");
+    expect(helper.getDateDatabaseFormat()).toBe("2021-07-28");
+});
+
+test("returns a string of the current month", () => {
+    expect(helper.getCurrentMonth()).toBe("2021-07");
 });

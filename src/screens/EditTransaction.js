@@ -25,17 +25,26 @@ const EditTransaction = ({route}) => {
         );
         // navigation.dispatch(StackActions.pop(1)) <-- doing this will NOT totally refresh the categories on dash
         transactions.deleteTransaction(transaction["ID"])
-        transactions.getTransactions(); 
-        
+
     }
+
+    const handleOnSubmit = (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue) => {
+        navigation.dispatch(CommonActions.reset({
+            index: 0,
+            routes: [
+              { name: 'Dashboard' },
+            ],
+          })
+        );
+        transactions.editTransaction(transaction["ID"], amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue, () => console.log("SUCCESS FOR EDIT TRANSACTION!"));
+    }
+
 
     return (
         transaction !== undefined ? <View behavior={"padding"} style={styles.container}>
             <View style={{marginTop: 40}}></View>
             <TransactionForm 
-                onSubmit={(amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue) => {
-                    transactions.editTransaction(transaction["ID"], amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue, () => console.log("SUCCESS FOR EDIT TRANSACTION!"));
-                  }}
+                onSubmit={handleOnSubmit}
                 initialValues= {{
                     amount: transaction["Amount"],
                     date: transaction["Date"],

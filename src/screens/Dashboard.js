@@ -3,10 +3,11 @@ import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import TransactionListDetail from "../components/TransactionListDetail";
 import DashboardHeader from "../components/DashboardHeader";
 import { Context as TransactionContext } from "../context/TransactionContext";
-import { formatAmountString, formatFullDate } from "../utilities/helper";
+import { formatAmountString, formatFullDate, getCurrentMonth } from "../utilities/helper";
 
 const Dashboard = ({navigation}) => {
-    const { state, getTransactions } = useContext(TransactionContext)
+    const { state, getTransactions } = useContext(TransactionContext);
+    const currentMonth = getCurrentMonth();
 
     useEffect(() => {
         getTransactions();
@@ -16,7 +17,7 @@ const Dashboard = ({navigation}) => {
         <SafeAreaView style={{backgroundColor: "white", flex: 1, alignItems: "center"}} >
             <View style={{backgroundColor: "white", width: "94%"}}>
                 <FlatList
-                    data={state}
+                    data={state.filter(transaction => transaction["Date"].substring(0,7) === currentMonth).sort((a, b) => b["Date"].localeCompare(a["Date"]))}
                     ListHeaderComponent={DashboardHeader}
                     keyExtractor={(item, index) => item.ID.toString()}
                     renderItem={({ item, index }) => (
@@ -25,7 +26,7 @@ const Dashboard = ({navigation}) => {
                                     key={item["ID"]}
                                     ID={item["ID"]}
                                     date={formatFullDate(item["Date"])}
-                                    description={item["Description"]}
+                                    description={item["Description"] === null ? "No description" : item["Description"]}
                                     amount={formatAmountString(item["Amount"])}
                                     category={item["CategoryLabel"]}
                                     tag={item["Tag"]}

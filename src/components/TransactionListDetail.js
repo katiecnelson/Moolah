@@ -17,7 +17,7 @@ const TransactionListDetail = (props) => {
                 <View style={{flexDirection: "row", width: "100%", paddingTop: 5}}>
                     <Text style={{...styles.text, flex: 1.4, lineHeight: 28}}>{props.category}</Text>
                     <View style={{flex: 2}}>
-                        <View style={{backgroundColor: "#48cae4", borderRadius: 5, alignSelf: "flex-start"}}>
+                    <View style={{backgroundColor: props.tag === null ? "rgba(0, 0, 0, 0)" : "#48cae4", borderRadius: 5, alignSelf: "flex-start"}}>
                             <Text style={{fontFamily: "Nunito-Regular", color: "white", padding: 3, alignSelf: "center"}}>{props.tag}</Text>
                         </View>
                     </View>

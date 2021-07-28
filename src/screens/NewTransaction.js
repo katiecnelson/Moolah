@@ -3,10 +3,22 @@ import { StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Icon from "../components/Icon";
 import TransactionForm from "../components/TransactionForm";
 import {Context as TransactionContext} from "../context/TransactionContext";
+import { CommonActions } from '@react-navigation/native';
 
 const NewTransaction = ({navigation}) => {
 
     const transactions = useContext(TransactionContext);
+
+    const handleOnSubmit = (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue) => {
+        navigation.dispatch(CommonActions.reset({
+            index: 0,
+            routes: [
+              { name: 'Dash' },
+            ],
+          })
+        );
+        transactions.addTransaction(amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue, () => console.log("SUCCESS FOR ADD TRANSACTION!"));
+    }
 
     return (
         <View style={styles.container}>
@@ -15,9 +27,7 @@ const NewTransaction = ({navigation}) => {
                 <Text style={styles.text}>EDIT INCOME</Text>
             </TouchableOpacity>
             <TransactionForm
-                onSubmit={(amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue) => {
-                    transactions.addTransaction(amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue, () => console.log("SUCCESS FOR ADD TRANSACTION!"));
-                  }}
+                onSubmit={handleOnSubmit}
             />
         </View>
     )

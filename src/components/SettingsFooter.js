@@ -8,7 +8,7 @@ const SettingsFooter = (props) => {
     const [name, setName] = useState("");
 
     return (
-        <View style={styles.flex}>
+        <View style={[styles.flex, props.styling]}>
             <TextInput
                 value={name}
                 maxLength={15}

@@ -40,7 +40,7 @@ const TransactionForm = ({initialValues, onSubmit}) => {
       };
     
     const addTransaction = () => {
-        if (amount === 0 || amount === null || categoryValue === 0) {
+        if (amount === 0 || amount === null || categoryValue === null) {
             setShowToast(true);
         } else {
             // (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue)
@@ -77,6 +77,8 @@ const TransactionForm = ({initialValues, onSubmit}) => {
                     mode="date"
                     onCancel={() => {setShowDatePicker(false)}}
                     onConfirm={handleOnConfirm}
+                    minimumDate={new Date(2021, 0, 1)}
+                    maximumDate={new Date()}
                 />
             <View style={styles.needsWantsGoals}>
                 <TouchableOpacity activeOpacity={.8} onPress={() => {setCategoryID(1); setCategoryValue("one"); setCategoryLabel(categoryIncome.state.labelOne)}} style={styles.containerIcons}>

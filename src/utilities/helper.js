@@ -90,3 +90,12 @@ export const categoryNameToID = (categoryName) => {
           return 0
       }
 }
+
+export const getCurrentMonth = () => {
+    let month = (new Date().getMonth() + 1).toString();
+    let year = new Date().getFullYear().toString();
+
+    if (month.length === 1) month = "0" + month;
+
+    return (year + "-" + month)
+}
