@@ -5,7 +5,7 @@ import GlobalStyle from "./GlobalStyle";
 const DashBarDetail = (props) => {
 
     return (
-        <View>
+        props.percentSpent !== undefined ? <View>
             <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
                 <Text>
                     <Text style={GlobalStyle.BlueBold}>{props.label}</Text>
@@ -15,7 +15,7 @@ const DashBarDetail = (props) => {
             <View style={styles.container}>
                 <View>
                     <View style={styles.barBackground}>
-                        <View style={{...styles.barColor, width: props.percentSpent, backgroundColor: props.color}}>
+                        <View style={{...styles.barColor, width: Number(props.percentSpent.replace("%", "")) >= 100 ? "100%": props.percentSpent, backgroundColor: props.color}}>
                         </View>
                     </View>
                 </View>
@@ -26,7 +26,7 @@ const DashBarDetail = (props) => {
                     </Text>
                 </View>
             </View>
-        </View>
+        </View> : null
     )
 };
 

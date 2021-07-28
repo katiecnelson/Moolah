@@ -1,5 +1,8 @@
 import * as SQLite from 'expo-sqlite';
 const db = SQLite.openDatabase("db.db");
+import {getCurrentMonth} from "../utilities/helper";
+
+const currentMonth = getCurrentMonth()
 
 const dropDatabaseTables = async () => {
     return new Promise((resolve, reject) => {
@@ -44,9 +47,8 @@ const setUpDatabase = async () => {
 const setUpTestData = async () => {
 return new Promise((resolve, _reject) => {
     db.transaction( tx => {
-        tx.executeSql( "INSERT INTO Reminders (Description, Date) VALUES (?,?)", ["This is a test", "2021-06-01"] );
         tx.executeSql( "INSERT INTO Reminders (Description, Date) VALUES (?,?)", ["Test TWO", "2021-06-05"] );
-        tx.executeSql( "INSERT INTO Categories (Value, Label, Percent) VALUES (?,?,?)", ["one", "NEEDS", 50] ); // 1 
+        tx.executeSql( "INSERT INTO Categories (Value, Label, Percent) VALUES (?,?,?)", ["one", "NEEDS", 50] ); // 1
         tx.executeSql( "INSERT INTO Categories (Value, Label, Percent) VALUES (?,?,?)", ["two", "WANTS", 30] ); // 2
         tx.executeSql( "INSERT INTO Categories (Value, Label, Percent) VALUES (?,?,?)", ["three", "GOALS", 20] ); // 3
         tx.executeSql( "INSERT INTO Tags (Name) VALUES (?)", ["Alcohol"] ); // 1
@@ -62,16 +64,26 @@ return new Promise((resolve, _reject) => {
         tx.executeSql( "INSERT INTO Tags (Name) VALUES (?)", ["Transportation"] ); // 11
         tx.executeSql( "INSERT INTO Tags (Name) VALUES (?)", ["Utilities"] ); // 12
         tx.executeSql( "INSERT INTO Income (Amount) VALUES (?)", [130000] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-07-12", "RBS Savings", 7, 3] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-07-12", "Scottish Power", 12, 1] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-07-11", "Uber Eats", 10, 2] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6575, "2021-07-10", "Glasgow City Council", 12, 1] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1575, "2021-07-07", "No description", 10, 2] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [5825, "2021-07-06", "John Lewis", 6, 2] );
         tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [2150, "2021-07-04", "Tesco", 5, 1] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6575, "2021-07-03", "Vanguard", 9, 3] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1200, "2021-07-02", "Sainsbury’s", 5, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-07-12", "RBS Savings", 7, 3] );
         tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [4500, "2021-07-01", "Gym membership fee", 6, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6575, "2021-07-03", "Vanguard", 9, 3] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6575, "2021-07-10", "Glasgow City Council", 12, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1575, "2021-07-07", null, null, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [5825, "2021-07-06", "John Lewis", null, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-07-12", "Scottish Power", 12, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1200, "2021-07-02", "Sainsbury’s", 5, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-07-11", "Uber Eats", 10, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [2150, "2021-06-04", "Sainsbury's", 5, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-06-12", "RBS save", 7, 3] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [4500, "2021-06-01", "Gym payment", 6, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6575, "2021-06-03", "Vanguard savings", 9, 3] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6575, "2021-06-10", "Glasgow tax", 12, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1575, "2021-06-07", null, null, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [5825, "2021-06-06", "TK Max", 6, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-06-12", "Scottish Power", 12, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1200, "2021-06-02", "Tesco", 5, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-06-11", "Deliveroo", 10, 2] );
     },
     (error) => { console.log("db error setting up Reminders"); console.log(error); resolve() },
     (success) => { console.log("Test data loaded!"); resolve(success)}
@@ -270,9 +282,9 @@ const getSpent = async () => {
     return new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                "SELECT SUM(Amount), Category FROM Transactions GROUP BY Category",
+                "SELECT SUM(Amount), Category FROM Transactions WHERE Date LIKE '" + currentMonth + "%" + "' GROUP BY Category",
                 [],
-                (_, result) => {console.log("getSpent db call Worked!"); resolve(result.rows._array)}, //console.log(result.rows._array);
+                (_, result) => {console.log("getSpent db call Worked!"); console.log(result.rows._array); resolve(result.rows._array)},
                 (_, error) => {console.log("getSpent db call failed"); reject(console.log(error))},
             );
         });

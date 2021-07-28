@@ -71,6 +71,7 @@ const Settings = () => {
                     ListFooterComponent={() => <SettingsFooter
                         text="Your tag here ..."
                         color="#efefef"
+                        styling={{paddingVertical: 30}}
                     />
                     }
                     keyExtractor={(item, index) => item.ID}
