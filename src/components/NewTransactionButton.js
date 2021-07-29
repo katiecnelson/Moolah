@@ -4,12 +4,12 @@ import Icon from "./Icon";
 
 const NewTransactionButton = (props) => {
     return (
-        <TouchableOpacity onPress={props.onPress}>
-            <View style={styles.container}>
+        <View style={{alignItems: "flex-start", marginTop: 15, marginBottom: 10}} >
+            <TouchableOpacity style={styles.container} onPress={props.onPress}>
                 <Icon name="new" style={styles.icon}/>
                 <Text style={styles.text}>NEW TRANSACTION</Text>
-            </View>
-        </TouchableOpacity>
+            </TouchableOpacity>
+        </View>
     )
 };
 
@@ -17,8 +17,7 @@ const styles = StyleSheet.create({
 
     container: {
         flexDirection: "row",
-        paddingTop: 15,
-        paddingBottom: 10,
+        padding: 3,
     },
 
     icon: {

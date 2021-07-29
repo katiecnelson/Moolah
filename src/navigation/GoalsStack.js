@@ -4,6 +4,7 @@ import Goals from "../screens/Goals";
 import History from "../screens/History";
 import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
 import GlobalStyle from "../components/GlobalStyle";
+import EditTransaction from "../screens/EditTransaction";
 
 const Stack = createStackNavigator()
 
@@ -34,6 +35,14 @@ const GoalsStack = () => {
                     title: "HISTORICAL DATA", 
                     headerTitleStyle: headerTitleStyle
                 }}   
+            />
+            <Stack.Screen
+                name="Edit Transaction"
+                component={EditTransaction}
+                options={{
+                    title: "EDIT TRANSACTION", 
+                    headerTitleStyle: headerTitleStyle,
+                }}
             />
         </Stack.Navigator>
     )

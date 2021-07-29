@@ -78,13 +78,12 @@ const DashboardHeader = () => {
                         color="#024f86"
                         percentSpent={categoryIncome.state.percentSpentThree}
                     />
-
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("History")} style={{marginTop: 15, marginBottom:30, alignSelf: "stretch"}}>
-                <View >
-                    <Icon name="history" style={{fontSize: 28, color: "#03045e", position: "absolute", right: 7}}/>
-                </View>
-            </TouchableOpacity>
+            <View style={{width: "100%", alignItems: "flex-end"}}>
+                <TouchableOpacity onPress={() => navigation.navigate("History")} style={{marginTop: 15, marginBottom:25, alignItems: "flex-end"}}>
+                    <Icon name="history" style={{padding: 3, fontSize: 28, color: "#03045e"}}/>
+                </TouchableOpacity>
+            </View>
             <View style={{borderBottomColor: "#48cae4", borderBottomWidth: 1, marginBottom: 10}}>
                 <Text style={styles.title}>TRANSACTIONS</Text>
             </View>

@@ -10,6 +10,7 @@ import {formatAmountNum, getToSpend} from "../utilities/helper";
 import Toast from "../components/Toast";
 import { StackActions, useNavigation } from '@react-navigation/native';
 import {amountToDatabase} from "../utilities/helper"
+import AddTag from "./AddTag";
 
 
 const SettingsHeader = () => {
@@ -39,7 +40,7 @@ const SettingsHeader = () => {
         }
     }
 
-    console.log(typeof percentThree)
+    // console.log(typeof percentThree)
 
     return (
         <View>
@@ -132,6 +133,11 @@ const SettingsHeader = () => {
                 <View style={{borderBottomColor: "#48cae4", borderBottomWidth: 1, marginBottom: 25}}>
                     <Text style={styles.title}>TAGS</Text>
                 </View>
+                <AddTag
+                    text="Your tag here ..."
+                    color="#efefef"
+                    styling={{paddingBottom: 25, paddingTop: 10}}
+                />
             </View>
         </View>
     )
