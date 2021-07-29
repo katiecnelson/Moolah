@@ -44,7 +44,7 @@ const TransactionForm = ({initialValues, onSubmit}) => {
             setShowToast(true);
         } else {
             // (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue)
-            onSubmit(amountToDatabase(amount), formatDateForDatabase(date), description, tag, tagLabel, categoryID, categoryLabel, categoryValue)
+            onSubmit(amountToDatabase(amount), formatDateForDatabase(date), description, tag, tagLabel === "TAG (OPTIONAL)" ? null : tagLabel, categoryID, categoryLabel, categoryValue)
         }
     }
 
