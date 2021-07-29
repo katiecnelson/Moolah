@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { View, StyleSheet, FlatList, Modal, Text, TouchableOpacity, TextInput } from "react-native";
 import { Context as TagContext } from "../context/TagContext";
 import SettingsHeader from "../components/SettingsHeader";
-import SettingsFooter from "../components/SettingsFooter";
+import AddTag from "../components/AddTag";
 import TagListDetail from "../components/TagListDetail";
 import Icon from "../components/Icon";
 import CustomButton from "../components/CustomButton";
@@ -68,12 +68,6 @@ const Settings = () => {
                     numColumns={2}
                     columnWrapperStyle={{justifyContent: "space-around"}}
                     ListHeaderComponent={SettingsHeader}
-                    ListFooterComponent={() => <SettingsFooter
-                        text="Your tag here ..."
-                        color="#efefef"
-                        styling={{paddingVertical: 30}}
-                    />
-                    }
                     keyExtractor={(item, index) => item.ID}
                     renderItem={({ item }) => (
                         <TouchableOpacity onPress={() => {setModalVisible(true), setName(item["Name"]), setID(item["ID"])}}> 

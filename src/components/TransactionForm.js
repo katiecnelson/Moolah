@@ -6,7 +6,7 @@ import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext
 import {DateTimePickerModal} from "react-native-modal-datetime-picker";
 import {Context as TagContext} from "../context/TagContext"
 import {Context as TransactionContext} from "../context/TransactionContext";
-import SettingsFooter from "../components/SettingsFooter";
+import AddTag from "./AddTag";
 import { useNavigation } from '@react-navigation/native';
 import CurrencyInput from 'react-native-currency-input';
 import Toast from "../components/Toast";
@@ -126,7 +126,7 @@ const TransactionForm = ({initialValues, onSubmit}) => {
                    
                     <FlatList
                         data={tags.state.sort((a, b) => a["Name"].localeCompare(b["Name"]))}
-                        ListHeaderComponent={() => <SettingsFooter
+                        ListHeaderComponent={() => <AddTag
                             text="NEW TAG ..."
                             color="#fcfcfc"
                         />
