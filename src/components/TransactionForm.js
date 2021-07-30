@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Modal, FlatList } from "react-native";
 import Icon from "../components/Icon";
 import CustomButton from "../components/CustomButton";
@@ -47,10 +47,6 @@ const TransactionForm = ({initialValues, onSubmit}) => {
             onSubmit(amountToDatabase(amount), formatDateForDatabase(date), description, tag, tagLabel === "TAG (OPTIONAL)" ? null : tagLabel, categoryID, categoryLabel, categoryValue)
         }
     }
-
-      useEffect(() => {
-        tags.getTags();
-      }, []);
 
     return (
         <View style={styles.container}>

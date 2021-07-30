@@ -13,29 +13,30 @@ const EditTransaction = ({route}) => {
 
     const navigation = useNavigation();
 
-    // console.log(transaction)
+
 
     const handleOnPress = () => {
-        navigation.dispatch(CommonActions.reset({
-            index: 0,
-            routes: [
-              { name: 'Dashboard' },
-            ],
-          })
-        );
-        // navigation.dispatch(StackActions.pop(1)) <-- doing this will NOT totally refresh the categories on dash
+        // navigation.dispatch(CommonActions.reset({
+        //     index: 0,
+        //     routes: [
+        //       { name: 'Dashboard' },
+        //     ],
+        //   })
+        // );
+        navigation.dispatch(StackActions.pop(1)) // <-- doing this will NOT totally refresh the categories on dash
         transactions.deleteTransaction(transaction["ID"])
 
     }
 
     const handleOnSubmit = (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue) => {
-        navigation.dispatch(CommonActions.reset({
-            index: 0,
-            routes: [
-              { name: 'Dashboard' },
-            ],
-          })
-        );
+        // navigation.dispatch(CommonActions.reset({
+        //     index: 0,
+        //     routes: [
+        //       { name: 'Dashboard' },
+        //     ],
+        //   })
+        // );
+        navigation.dispatch(StackActions.pop(1))
         transactions.editTransaction(transaction["ID"], amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue, () => console.log("SUCCESS FOR EDIT TRANSACTION!"));
     }
 

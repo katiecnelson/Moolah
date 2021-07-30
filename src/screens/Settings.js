@@ -1,14 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, StyleSheet, FlatList, Modal, Text, TouchableOpacity, TextInput } from "react-native";
 import { Context as TagContext } from "../context/TagContext";
+import { Context as TransactionContext } from "../context/TransactionContext";
 import SettingsHeader from "../components/SettingsHeader";
-import AddTag from "../components/AddTag";
 import TagListDetail from "../components/TagListDetail";
 import Icon from "../components/Icon";
 import CustomButton from "../components/CustomButton";
 
 const Settings = () => {
     const tag = useContext(TagContext)
+    const transaction = useContext(TransactionContext)
     const [modalVisible, setModalVisible] = useState(false)
     const [ID, setID] = useState(0)
     const [name, setName] = useState("")
@@ -16,12 +17,8 @@ const Settings = () => {
     const deleteWithX = (idNum) => {
         setID(idNum);
         tag.deleteTag(idNum);
+        transaction.deleteTransactionTag(idNum);
     }
-
-    useEffect(() => {
-        console.log("Use effect from settings ran okay!")
-        tag.getTags();
-      }, []);
 
     return (
         <View style={styles.container}>
@@ -50,11 +47,11 @@ const Settings = () => {
                             <View style={styles.updateView}>
                                 <CustomButton
                                     text="UPDATE" 
-                                    onPress={() => {tag.updateTag(ID, name), setModalVisible(false)}}
+                                    onPress={() => {tag.updateTag(ID, name), setModalVisible(false), transaction.editTransactionTag(ID, name)}}
                                 />
                             </View>
                             <View style={styles.deleteView}>
-                                <TouchableOpacity onPress={() => {tag.deleteTag(ID), setModalVisible(false)}}>
+                                <TouchableOpacity onPress={() => {tag.deleteTag(ID), setModalVisible(false), transaction.deleteTransactionTag(ID);}}>
                                     <Icon name="delete" style={styles.deleteIcon}/>
                                 </TouchableOpacity>
                             </View>

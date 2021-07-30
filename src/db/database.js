@@ -36,7 +36,7 @@ const setUpDatabase = async () => {
         tx.executeSql(
             "CREATE TABLE IF NOT EXISTS Tags (ID INTEGER PRIMARY KEY, Name TEXT NOT NULL);");
         tx.executeSql(
-            "CREATE TABLE IF NOT EXISTS Transactions (ID INTEGER PRIMARY KEY, Amount INTEGER NOT NULL, Date TEXT NOT NULL, Description TEXT, Tag INTEGER, Category INTEGER, CONSTRAINT tag_constraint FOREIGN KEY (Tag) REFERENCES Tags (ID), CONSTRAINT category_constraint FOREIGN KEY (Category) REFERENCES Categories (ID));");
+            "CREATE TABLE IF NOT EXISTS Transactions (ID INTEGER PRIMARY KEY, Amount INTEGER NOT NULL, Date TEXT NOT NULL, Description TEXT, Tag INTEGER, Category INTEGER, CONSTRAINT tag_constraint FOREIGN KEY (Tag) REFERENCES Tags (ID) ON DELETE SET NULL, CONSTRAINT category_constraint FOREIGN KEY (Category) REFERENCES Categories (ID));");
         },
         (_, error) => { console.log("db error creating tables"); console.log(error); reject(error) },
         (_, success) => { console.log("Created All Tables!"); resolve(success)}

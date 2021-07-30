@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import NeedWantGoalHeader from "../components/NeedWantGoalHeader";
 import {Context as TransactionContext} from "../context/TransactionContext";
 import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
@@ -12,6 +12,11 @@ const Goals = () => {
     const navigation = useNavigation();
     const currentMonth = getCurrentMonth();
     const goals = transactions.state.filter(transaction => transaction["CategoryValue"] === "three" && transaction["Date"].substring(0,7) === currentMonth);
+
+    // //TODO: Below is for testing ONLY!!!
+    // useEffect(() => {
+    //     transactions.getTransactions();
+    //   }, []);
 
     return (
         <NeedWantGoalPages 

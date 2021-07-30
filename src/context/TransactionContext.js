@@ -1,16 +1,35 @@
 import createDataContext from "./createDataContext";
 import { database } from "../db/database"
 
+const mapTagsDelete = transaction => {
+  transaction["TagID"] = null;
+  transaction["Tag"] = null;
+  return transaction;
+}
+
+const mapTagsEdit = (transaction, name) => {
+  transaction["Tag"] = name;
+  return transaction;
+}
+
 const transactionReducer = (state, action) => {
   switch (action.type) {
     case 'get_transactions':
       return action.payload;
     case 'edit_transaction':
       return state.map(transaction => {
-        return transaction.ID === action.payload.ID ? action.payload : transaction;
+        return transaction["ID"] === action.payload["ID"] ? action.payload : transaction;
       });
+    case 'delete_transaction_tag':
+      return state.map(transaction => {
+        return transaction["TagID"] === action.payload ? mapTagsDelete(transaction) : transaction;
+      });
+    case 'edit_transaction_tag':
+    return state.map(transaction => {
+      return transaction["TagID"] === action.payload["TagID"] ? mapTagsEdit(transaction, action.payload["Tag"]) : transaction;
+    });
     case 'delete_transaction':
-      return state.filter(tag => tag["ID"] !== action.payload);
+      return state.filter(transaction => transaction["ID"] !== action.payload);
     case "add_transaction":
       return [
         ...state,
@@ -76,8 +95,22 @@ const deleteTransaction = dispatch => {
   };
 };
 
+const deleteTransactionTag = dispatch => {
+  return ID => {
+
+    dispatch({ type: 'delete_transaction_tag', payload: ID });
+  };
+};
+
+const editTransactionTag = dispatch => {
+  return (ID, name) => {
+
+    dispatch({ type: 'edit_transaction_tag', payload: {"TagID": ID, "Tag": name}});
+  };
+};
+
 export const { Context, Provider } = createDataContext(
     transactionReducer,
-  { getTransactions, addTransaction, editTransaction, deleteTransaction },
+  { getTransactions, addTransaction, editTransaction, deleteTransaction, deleteTransactionTag, editTransactionTag },
   []
 );

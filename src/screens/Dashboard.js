@@ -3,15 +3,21 @@ import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import TransactionListDetail from "../components/TransactionListDetail";
 import DashboardHeader from "../components/DashboardHeader";
 import { Context as TransactionContext } from "../context/TransactionContext";
+import { Context as TagContext } from "../context/TagContext";
 import { formatAmountString, formatFullDate, getCurrentMonth } from "../utilities/helper";
 
 const Dashboard = ({navigation}) => {
     const { state, getTransactions } = useContext(TransactionContext);
+    const tag = useContext(TagContext);
     const currentMonth = getCurrentMonth();
 
     useEffect(() => {
         getTransactions();
+        tag.getTags();
       }, []);
+
+      //TODO: Below is for testing only!
+    //   console.log("THIS IS TRANSACTION STATE FROM DASH: " + JSON.stringify(state))
 
     return (
         <SafeAreaView style={{backgroundColor: "white", flex: 1, alignItems: "center"}} >
