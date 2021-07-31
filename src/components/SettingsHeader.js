@@ -28,19 +28,16 @@ const SettingsHeader = () => {
 
     const navigation = useNavigation();
 
-    const handleSave = async () => {
+    const handleSave = () => {
         if (parseInt(percentOne) + parseInt(percentTwo) + parseInt(percentThree) !== 100
         || income === 0 || labelOne === "" || labelTwo === "" || labelThree === "") {
             setShowToast(true);
         } else {
-            await categoryIncome.updateCategoriesIncome(amountToDatabase(income), labelOne.toUpperCase(), parseInt(percentOne), labelTwo.toUpperCase(), parseInt(percentTwo), labelThree.toUpperCase(), parseInt(percentThree))
-            await categoryIncome.getCategoriesIncome();
-            await transaction.getTransactions();
+            categoryIncome.updateCategoriesIncome(amountToDatabase(income), labelOne.toUpperCase(), parseInt(percentOne), labelTwo.toUpperCase(), parseInt(percentTwo), labelThree.toUpperCase(), parseInt(percentThree))
+            transaction.editCategoryName(labelOne, labelTwo, labelThree);
             navigation.dispatch(StackActions.pop(1));
         }
     }
-
-    // console.log(typeof percentThree)
 
     return (
         <View>

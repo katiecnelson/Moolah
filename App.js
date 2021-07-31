@@ -20,6 +20,7 @@ export default function App() {
     "Moolah-Icons": require("./assets/fonts/icomoon.ttf"),
   });
 
+
   const isDBLoaded = useDatabase();
 
   if (!loaded || !isDBLoaded) {

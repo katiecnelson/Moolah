@@ -59,6 +59,7 @@ const TabNavigator = () => {
             name="New"
             component={NewTransactionStack}
             options={{
+                unmountOnBlur: true,
                 tabBarIcon: props => (
                     <Icon name="new" color={props.color} size={props.focused ? 36 : 30} />
                 ),

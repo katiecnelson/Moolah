@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import GlobalStyle from "./GlobalStyle";
+import {percentSpentString} from "../utilities/helper";
 
 const DashBarDetail = (props) => {
 
@@ -15,7 +16,7 @@ const DashBarDetail = (props) => {
             <View style={styles.container}>
                 <View>
                     <View style={styles.barBackground}>
-                        <View style={{...styles.barColor, width: Number(props.percentSpent.replace("%", "")) >= 100 ? "100%": props.percentSpent, backgroundColor: props.color}}>
+                        <View style={{...styles.barColor, width: props.percentSpent >= 100 ? "100%": percentSpentString(props.percentSpent), backgroundColor: props.color}}>
                         </View>
                     </View>
                 </View>
@@ -59,3 +60,6 @@ const styles = StyleSheet.create({
 });
 
 export default DashBarDetail;
+
+
+//<View style={{...styles.barColor, width: Number(props.percentSpent.replace("%", "")) >= 100 ? "100%": props.percentSpent, backgroundColor: props.color}}>

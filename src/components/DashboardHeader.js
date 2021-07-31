@@ -31,7 +31,7 @@ const DashboardHeader = () => {
                         title={categoryIncome.state.labelOne}
                         iconName="needs"
                         color="#9ce0ff"
-                        amount={categoryIncome.state.toSpendOne}
+                        amount={formatAmountString(categoryIncome.state.toSpendOne)}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.dispatch(TabActions.jumpTo("Wants"))}>
@@ -39,7 +39,7 @@ const DashboardHeader = () => {
                         title={categoryIncome.state.labelTwo}
                         iconName="wants"
                         color="#1489cc"
-                        amount={categoryIncome.state.toSpendTwo}
+                        amount={formatAmountString(categoryIncome.state.toSpendTwo)}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.dispatch(TabActions.jumpTo("Goals"))}>
@@ -47,15 +47,15 @@ const DashboardHeader = () => {
                         title={categoryIncome.state.labelThree}
                         iconName="goals"
                         color="#024f86"
-                        amount={categoryIncome.state.toSpendThree}
+                        amount={formatAmountString(categoryIncome.state.toSpendThree)}
                     />
                 </TouchableOpacity>
             </View>
             <TouchableOpacity style={{width: "98%"}} onPress={() => navigation.dispatch(TabActions.jumpTo("Needs"))}>
                     <DashBarDetail
                         label={categoryIncome.state.labelOne + " REMAINING: "}
-                        amountRemaining={categoryIncome.state.remainingOne}
-                        amountSpent={categoryIncome.state.spentOne}
+                        amountRemaining={formatAmountString(categoryIncome.state.remainingOne)}
+                        amountSpent={formatAmountString(categoryIncome.state.spentOne)}
                         color="#9ce0ff"
                         percentSpent={categoryIncome.state.percentSpentOne}
                     />
@@ -63,8 +63,8 @@ const DashboardHeader = () => {
             <TouchableOpacity style={{width: "98%"}} onPress={() => navigation.dispatch(TabActions.jumpTo("Wants"))}>
                     <DashBarDetail
                         label={categoryIncome.state.labelTwo + " REMAINING: "}
-                        amountRemaining={categoryIncome.state.remainingTwo}
-                        amountSpent={categoryIncome.state.spentTwo}
+                        amountRemaining={formatAmountString(categoryIncome.state.remainingTwo)}
+                        amountSpent={formatAmountString(categoryIncome.state.spentTwo)}
                         color="#1489cc"
                         percentSpent={categoryIncome.state.percentSpentTwo}
                     />
@@ -73,8 +73,8 @@ const DashboardHeader = () => {
 
                     <DashBarDetail
                         label={categoryIncome.state.labelThree + " REMAINING: "}
-                        amountRemaining={categoryIncome.state.remainingThree}
-                        amountSpent={categoryIncome.state.spentThree}
+                        amountRemaining={formatAmountString(categoryIncome.state.remainingThree)}
+                        amountSpent={formatAmountString(categoryIncome.state.spentThree)}
                         color="#024f86"
                         percentSpent={categoryIncome.state.percentSpentThree}
                     />

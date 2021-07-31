@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import NeedWantGoalHeader from "../components/NeedWantGoalHeader";
 import {Context as TransactionContext} from "../context/TransactionContext";
 import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
-import {getCurrentMonth} from "../utilities/helper"
+import {getCurrentMonth, formatAmountString} from "../utilities/helper"
 import { TabActions, useNavigation} from '@react-navigation/native';
 import NeedWantGoalPages from "../components/NeedWantGoalPages";
 
@@ -17,9 +17,9 @@ const Needs = () => {
         <NeedWantGoalPages
             data={needs.sort((a, b) => b["Date"].localeCompare(a["Date"]))}
             header={() => <NeedWantGoalHeader 
-                remaining={categoryIncome.state.remainingOne}
-                spent={categoryIncome.state.spentOne}
-                total={categoryIncome.state.toSpendOne}
+                remaining={formatAmountString(categoryIncome.state.remainingOne)}
+                spent={formatAmountString(categoryIncome.state.spentOne)}
+                total={formatAmountString(categoryIncome.state.toSpendOne)}
                 percent={categoryIncome.state.percentSpentOne}
                 barColor="#9ce0ff"
                 onPress={() => navigation.dispatch(TabActions.jumpTo("New"))}
