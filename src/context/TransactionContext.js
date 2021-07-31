@@ -24,6 +24,19 @@ const transactionReducer = (state, action) => {
       return state.map(transaction => {
         return transaction["TagID"] === action.payload ? mapTagsDelete(transaction) : transaction;
       });
+    case 'edit_category_name': //WORK HERE
+      return state.map(transaction => {
+        if (transaction["CategoryValue"] === "one") {
+          transaction["CategoryLabel"] = action.payload.labelOne;
+          return transaction;
+        } else if (transaction["CategoryValue"] === "two") {
+          transaction["CategoryLabel"] = action.payload.labelTwo;
+          return transaction;
+        } else if (transaction["CategoryValue"] === "three") {
+          transaction["CategoryLabel"] = action.payload.labelThree;
+          return transaction;
+        }
+      });
     case 'edit_transaction_tag':
     return state.map(transaction => {
       return transaction["TagID"] === action.payload["TagID"] ? mapTagsEdit(transaction, action.payload["Tag"]) : transaction;
@@ -109,8 +122,15 @@ const editTransactionTag = dispatch => {
   };
 };
 
+const editCategoryName = dispatch => {
+  return (labelOne, labelTwo, labelThree) => {
+
+    dispatch({ type: 'edit_category_name', payload: {labelOne, labelTwo, labelThree} });
+  };
+};
+
 export const { Context, Provider } = createDataContext(
     transactionReducer,
-  { getTransactions, addTransaction, editTransaction, deleteTransaction, deleteTransactionTag, editTransactionTag },
+  { getTransactions, addTransaction, editTransaction, deleteTransaction, deleteTransactionTag, editTransactionTag, editCategoryName },
   []
 );

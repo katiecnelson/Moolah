@@ -3,15 +3,22 @@ import { StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Icon from "../components/Icon";
 import TransactionForm from "../components/TransactionForm";
 import {Context as TransactionContext} from "../context/TransactionContext";
+import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
 import { useNavigation, StackActions, CommonActions } from '@react-navigation/native';
+import {getCurrentMonth} from "../utilities/helper";
 
 const EditTransaction = ({route}) => {
 
     const transactions = useContext(TransactionContext);
+    const categoryIncome = useContext(CategoryIncomeContext);
 
     const transaction = transactions.state.find(transaction => transaction["ID"] === route.params.ID)
 
     const navigation = useNavigation();
+
+    const originalCategory = transaction !== undefined ? transaction["CategoryValue"] : "zero";
+    const originalAmount = transaction !== undefined ? transaction["Amount"] : 0;
+    const currentMonth = getCurrentMonth();
 
 
 
@@ -25,19 +32,24 @@ const EditTransaction = ({route}) => {
         // );
         navigation.dispatch(StackActions.pop(1)) // <-- doing this will NOT totally refresh the categories on dash
         transactions.deleteTransaction(transaction["ID"])
+        categoryIncome.categoriesDeleteTransaction(originalCategory, originalAmount)
 
     }
 
     const handleOnSubmit = (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue) => {
-        // navigation.dispatch(CommonActions.reset({
-        //     index: 0,
-        //     routes: [
-        //       { name: 'Dashboard' },
-        //     ],
-        //   })
-        // );
-        navigation.dispatch(StackActions.pop(1))
+        navigation.dispatch(CommonActions.reset({
+            index: 0,
+            routes: [
+              { name: 'Dashboard' },
+            ],
+          })
+        );
+        // navigation.dispatch(StackActions.pop(1))
         transactions.editTransaction(transaction["ID"], amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue, () => console.log("SUCCESS FOR EDIT TRANSACTION!"));
+        // if (date.substring(0,7) === currentMonth) {
+        //     categoryIncome.categoriesEditTransaction(categoryValue, originalCategory, originalAmount, amount);
+        // }
+        
     }
 
 

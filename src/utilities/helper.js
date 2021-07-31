@@ -27,10 +27,13 @@ export const calculateRemaining = (income, spent) => {
 }
 
 export const percentSpent = (toSpend, spent) => {
-    result = ((spent/toSpend) * 100).toString();
-    result += "%";
-    return result;
+    return (spent/toSpend) * 100;
 }
+
+export const percentSpentString = (percentSpent) => {
+    return percentSpent.toString() + "%";
+}
+
 //TODO: Am I using the below function anywhere?!
 
 export const getDateToDisplay = () => {

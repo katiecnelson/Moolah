@@ -123,7 +123,7 @@ const addTransaction = async (amount, date, description, tag, category) => {
             tx.executeSql(
                 "INSERT INTO Transactions (Amount, Date, Description, Tag, Category ) VALUES (?,?,?,?,?)",
                 [amount, date, description, tag, category],
-                (_, result) => {console.log("ADD TRANSACTION TO DB WORKED!"); console.log("THIS IS RETURNED BY ADD TRANSACT TO DB!!: " + result.insertId); resolve(result.insertId)},
+                (_, result) => {console.log("ADD TRANSACTION TO DB WORKED!"); resolve(result.insertId)},
                 (_, error) => {console.log("ADD TRANSACTION TO DB failed"); reject(console.log(error))},
             );
         });

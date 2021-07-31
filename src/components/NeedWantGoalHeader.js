@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import NewTransactionButton from "./NewTransactionButton";
+import {percentSpentString} from "../utilities/helper";
 
 const NeedWantGoalHeader = (props) => {
     return (
@@ -14,7 +15,7 @@ const NeedWantGoalHeader = (props) => {
                 </View>
                 <View>
                         <View style={{height: 50, borderRadius: 5, backgroundColor: "#efefef"}}>
-                            <View style={{width: props.percent, height: 50, borderRadius: 5, backgroundColor: props.barColor}}>
+                            <View style={{width: props.percent >= 100 ? "100%" : percentSpentString(props.percent), height: 50, borderRadius: 5, backgroundColor: props.barColor}}>
                             </View>
                         </View>
                     </View>
