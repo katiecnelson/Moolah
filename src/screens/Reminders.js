@@ -1,69 +1,57 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, StyleSheet, TextInput, FlatList, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet, FlatList, TouchableOpacity} from "react-native";
 import ReminderDetail from "../components/ReminderDetail";
-import Icon from "../components/Icon";
-import { Context } from "../context/ReminderContext"
-import { formatFullDate } from "../utilities/helper";
+import { Context as ReminderContext } from "../context/ReminderContext";
+import ReminderHeader from "../components/ReminderHeader";
+import ReminderFooter from "../components/ReminderFooter";
 
 const Reminders = () => {
-    const { state, addReminder, getReminders } = useContext(Context)
+    const reminder = useContext(ReminderContext);
+    const [showCompleted, setShowCompleted] = useState(false);
 
     useEffect(() => {
         console.log("Use effect reminders ran okay!")
-        getReminders();
+        reminder.getReminders();
       }, []);
+
+    const handleOnPress = () => {
+        if (showCompleted) {
+            setShowCompleted(false);
+        } else {
+            setShowCompleted(true);
+        }
+        //BELOW IS FOR TESTING ONLY!
+        reminder.getReminders();
+    }
 
     return (
         <View style={styles.container}>
-            <View style={{width: "94%", paddingTop: 10}}>
+            <View style={{width: "94%"}}>
             <FlatList
-                data={state}
-                ListFooterComponent={ReminderFooter}
+                data={reminder.state.sort((a, b) => a["Date"].localeCompare(b["Date"]))}
+                ListHeaderComponent={ReminderHeader}
+                ListFooterComponent={() =>
+                    <TouchableOpacity onPress={handleOnPress}>
+                        <ReminderFooter
+                            showCompleted={showCompleted}
+                        />
+                    </TouchableOpacity> 
+                }
                 keyExtractor={(item, index) => item.ID.toString()}
                 renderItem={({ item }) => {
                         return (
-                            <ReminderDetail
+                            !item["Complete"] || !showCompleted ? <ReminderDetail
                                 key={item["ID"]}
-                                date={formatFullDate(item["Date"])}
+                                ID={item["ID"]}
+                                date={item["Date"]}
                                 description={item["Description"]}
                                 done={item["Complete"]}
-                            />
+                            /> : null
                         )
                     }}
                 />
-            
             </View>
         </View>
-    )
-}
-
-const ReminderFooter = () => {
-    const { addReminder, getReminders } = useContext(Context)
-    const [newDescription, setNewDescription] = useState("");
-    const [newDate, setNewDate] = useState("");
-
-    return (
-        <View style={{flexDirection: "row", paddingTop: 10}}>
-                <TextInput 
-                    placeholder="DD/MM/YY" 
-                    placeholderTextColor="#b7b7b7"
-                    textAlign={"center"}
-                    value={newDate}
-                    onChangeText={text => setNewDate(text)}
-                    style={{marginRight: 7, flex: 1, paddingHorizontal: 5, paddingVertical: 10, backgroundColor: "#efefef", borderRadius: 10, color: "#03045e"}}
-                />
-
-                <TextInput 
-                    placeholder="Your reminder ..." 
-                    placeholderTextColor="#b7b7b7"
-                    value={newDescription}
-                    onChangeText={text => setNewDescription(text)}
-                    style={{marginRight: 7, flex: 1.75, paddingHorizontal: 5, paddingVertical: 10, backgroundColor: "#efefef", borderRadius: 10, color: "#03045e"}}              
-                />
-                <TouchableOpacity style={{flex: .5}} onPress={() => addReminder(newDescription, newDate)}>
-                    <Icon name="add" style={{fontSize: 34, color: "#48cae4"}}/>
-                </TouchableOpacity>
-            </View>
     )
 }
 
@@ -76,10 +64,3 @@ const styles = StyleSheet.create({
 })
 
 export default Reminders;
-
-
-
-// const remindersArray = [
-//     {id: "1", date: "TODAY", description: "Cancel free trial", done: false},
-//     {id: "2", date: "01/08/21", description: "Insurance review", done: false}
-// ]

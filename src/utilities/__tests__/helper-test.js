@@ -36,8 +36,8 @@ test("returns the string representation of the percentSpent", () => {
     expect(helper.percentSpentString(25)).toBe("25%");
 }) 
 
-test("returns the date formatted as a string for the display", () => {
-    expect(helper.getDateToDisplay()).toBe("31/07/21");
+test("returns today's date in the format the database uses: YYYY-MM-DD", () => {
+    expect(helper.getTodayDateDatabase()).toBe("2021-08-01");
 });
 
 test("returns the amount of money spent multiplied by 100", () => {
@@ -69,11 +69,11 @@ test("returns an integer in place of string for 1, 2, 3", () => {
 });
 
 test("returns a string of today's date formated as YYYY-MM-DD", () => {
-    expect(helper.getDateDatabaseFormat()).toBe("2021-07-31");
+    expect(helper.getDateDatabaseFormat()).toBe("2021-08-01");
 });
 
 test("returns a string of the current month as numbers", () => {
-    expect(helper.getCurrentMonth()).toBe("2021-07");
+    expect(helper.getCurrentMonth()).toBe("2021-08");
 });
 
 test("returns a string of the current month as words, ex: January 2021", () => {

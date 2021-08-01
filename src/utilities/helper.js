@@ -34,17 +34,15 @@ export const percentSpentString = (percentSpent) => {
     return percentSpent.toString() + "%";
 }
 
-//TODO: Am I using the below function anywhere?!
-
-export const getDateToDisplay = () => {
+export const getTodayDateDatabase = () => {
     let day = new Date().getDate().toString();
     let month = (new Date().getMonth() + 1).toString();
-    let year = new Date().getFullYear().toString().substring(2);
+    let year = new Date().getFullYear().toString();
 
     if (day.length === 1) day = "0" + day;
     if (month.length === 1) month = "0" + month;
 
-    return (day + "/" + month + "/" + year)
+    return (year + "-" + month + "-" + day)
 }
 
 export const getDateDatabaseFormat = () => {
@@ -67,6 +65,18 @@ export const formatDate = (date) => {
     if (month.length === 1) month = "0" + month;
 
     return (day + "/" + month + "/" + year)
+}
+
+//This will allow to format the date from the picker in database-style format
+export const formatDateDBStyle = (date) => {
+    let day = date.getDate().toString();
+    let month = (date.getMonth() + 1).toString();
+    let year = date.getFullYear().toString();
+
+    if (day.length === 1) day = "0" + day;
+    if (month.length === 1) month = "0" + month;
+
+    return (year + "-" + month + "-" + day)
 }
 
 export const formatDateForDatabase = (date) => {
@@ -157,7 +167,7 @@ export const processHistoricalData = (data) => {
     filtered.forEach(e => {
         const date = e["Date"].substring(0,7);
         let newObj = result.find(element => element.title === date);
-        console.log("THIS IS NEW OBJ: " + JSON.stringify(newObj))
+        // console.log("THIS IS NEW OBJ: " + JSON.stringify(newObj))
         if (newObj) {
             newObj.total += e["Amount"];
             newObj.data.push(e);
@@ -167,6 +177,18 @@ export const processHistoricalData = (data) => {
     });
     console.log(result);
     return result; 
+}
+
+export const getBadgeCount = (data) => {
+    const today = getTodayDateDatabase();
+    let count = 0;
+    data.forEach(element => {
+        if (element["Date"] <= today && !element["Complete"]) {
+            console.log("THIS IS ELEMENT: " + element);
+            count++;
+        } 
+    });
+    return count;
 }
 
 //BELOW is the buggy version of history that breaks the months down by category spending in the header
