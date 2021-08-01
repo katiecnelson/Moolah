@@ -64,26 +64,38 @@ return new Promise((resolve, _reject) => {
         tx.executeSql( "INSERT INTO Tags (Name) VALUES (?)", ["Transportation"] ); // 11
         tx.executeSql( "INSERT INTO Tags (Name) VALUES (?)", ["Utilities"] ); // 12
         tx.executeSql( "INSERT INTO Income (Amount) VALUES (?)", [130000] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [2150, "2021-07-04", "Tesco", 5, 1] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-07-12", "RBS Savings", 7, 3] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [4500, "2021-07-01", "Gym membership fee", 6, 2] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6575, "2021-07-03", "Vanguard", 9, 3] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6575, "2021-07-10", "Glasgow City Council", 12, 1] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1575, "2021-07-07", null, null, 2] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [5825, "2021-07-06", "John Lewis", null, 2] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-07-12", "Scottish Power", 12, 1] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1200, "2021-07-02", "Sainsbury’s", 5, 1] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-07-11", "Uber Eats", 10, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [2150, "2021-08-04", "Tesco", 5, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-08-12", "RBS Savings", 7, 3] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [4500, "2021-08-01", "Gym membership fee", 6, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6575, "2021-08-03", "Vanguard", 9, 3] );
+
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [2853, "2021-02-11", "Debenhams", 10, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1999, "2021-01-04", "Co-Op", 5, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [2485, "2021-05-12", "Savings", 7, 3] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [9044, "2021-02-01", null, null, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [2411, "2021-03-03", "Retirement funds", 9, 3] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1557, "2021-05-10", "Cell phone bill", 12, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [2455, "2021-03-07", null, null, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [8309, "2021-05-06", "Apple store", 6, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [9974, "2021-04-12", "Electric bill", 12, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6735, "2021-02-02", "Waitrose", 5, 1] );
+
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6575, "2021-08-10", "Glasgow City Council", 12, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1575, "2021-08-07", null, null, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [5825, "2021-08-06", "John Lewis", null, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-08-12", "Scottish Power", 12, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1200, "2021-08-02", "Sainsbury’s", 5, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-08-11", "Uber Eats", 10, 2] );
         tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [2150, "2021-06-04", "Sainsbury's", 5, 1] );
         tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-06-12", "RBS save", 7, 3] );
         tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [4500, "2021-06-01", "Gym payment", 6, 2] );
         tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6575, "2021-06-03", "Vanguard savings", 9, 3] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6575, "2021-06-10", "Glasgow tax", 12, 1] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1575, "2021-06-07", null, null, 2] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [5825, "2021-06-06", "TK Max", 6, 2] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-06-12", "Scottish Power", 12, 1] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1200, "2021-06-02", "Tesco", 5, 1] );
-        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-06-11", "Deliveroo", 10, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6575, "2021-05-10", "Glasgow tax", 12, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1575, "2021-05-07", null, null, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [5825, "2021-05-06", "TK Max", 6, 2] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-04-12", "Scottish Power", 12, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [1200, "2021-04-02", "Tesco", 5, 1] );
+        tx.executeSql( "INSERT INTO Transactions (Amount, Date, Description, Tag, Category) VALUES (?,?,?,?,?)", [6325, "2021-04-11", "Deliveroo", 10, 2] );
     },
     (error) => { console.log("db error setting up Reminders"); console.log(error); resolve() },
     (success) => { console.log("Test data loaded!"); resolve(success)}
