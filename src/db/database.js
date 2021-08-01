@@ -109,12 +109,53 @@ const getAllReminders = async () => {
             tx.executeSql(
                 "SELECT * FROM Reminders",
                 [],
-                (_, result) => {console.log("GetAllRemindersWorked!"); resolve(result.rows._array)},
+                (_, result) => {console.log("GetAllRemindersWorked!"); console.log(result.rows._array); resolve(result.rows._array)},
                 (_, error) => {console.log("GetAllReminders failed"); reject(console.log(error))},
             );
         });
     });
 }
+
+const doneReminder = async (bool, ID) => {
+    return new Promise((resolve, reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                "UPDATE Reminders SET Complete = ? WHERE ID = ?;",
+                [bool, ID],
+                (_, result) => {console.log("Reminder complete status updated in the DB!"); console.log(result.rows._array); resolve(result.rows._array)},
+                (_, error) => {console.log("Changing reminder complete status failed in DB"); reject(console.log(error))},
+            );
+        });
+    });
+}
+
+const updateReminder = async (ID, newDescription, newDate, newComplete) => {
+    return new Promise((resolve, _reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                "UPDATE Reminders SET Description = ?, Date = ?, Complete = ? WHERE ID = ?;",
+                [newDescription, newDate, newComplete, ID]
+            );
+        },
+        (error) => { console.log("Database error updating reminder!"); console.log(error); resolve() },
+        (success) => { console.log("Reminder successfully updated!"); resolve(success)}
+        )
+        })
+    }
+
+const deleteReminder = async (ID) => {
+    return new Promise((resolve, _reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                "DELETE FROM Reminders WHERE ID = ?;",
+                [ID]
+            );
+        },
+        (error) => { console.log("Database error deleting reminder!"); console.log(error); resolve() },
+        (success) => { console.log("Reminder successfully deleted from DB!"); resolve(success)}
+        )
+        })
+    }
 
 const getAllTransactions = async () => {
     return new Promise((resolve, reject) => {
@@ -321,5 +362,8 @@ export const database = {
     updateIncome,
     updateCategories,
     updateTransaction,
-    deleteTransaction
+    deleteTransaction,
+    doneReminder,
+    updateReminder,
+    deleteReminder
 }

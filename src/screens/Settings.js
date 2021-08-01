@@ -1,11 +1,10 @@
 import React, { useContext, useState } from "react";
-import { View, StyleSheet, FlatList, Modal, Text, TouchableOpacity, TextInput } from "react-native";
+import { View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { Context as TagContext } from "../context/TagContext";
 import { Context as TransactionContext } from "../context/TransactionContext";
 import SettingsHeader from "../components/SettingsHeader";
 import TagListDetail from "../components/TagListDetail";
-import Icon from "../components/Icon";
-import CustomButton from "../components/CustomButton";
+import PopUp from "../components/PopUp";
 
 const Settings = () => {
     const tag = useContext(TagContext)
@@ -22,43 +21,16 @@ const Settings = () => {
 
     return (
         <View style={styles.container}>
-            <Modal
+            <PopUp
+                showDate={false} 
                 visible={modalVisible}
-                onRequestClose={() => setModalVisible(false)}
-                transparent
-                >
-                <View style={styles.modalView}>
-                    <View style={styles.width} >
-                        <View style={styles.modal}>
-                            <View>
-                                <TouchableOpacity
-                                    style={styles.exitOpacity}
-                                    onPress={() => setModalVisible(false)}
-                                >
-                                    <Text style={styles.exit}>X</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <TextInput
-                                value={name}
-                                maxLength={15}
-                                style={styles.textInput}
-                                onChangeText={text => setName(text)}
-                            />
-                            <View style={styles.updateView}>
-                                <CustomButton
-                                    text="UPDATE" 
-                                    onPress={() => {tag.updateTag(ID, name), setModalVisible(false), transaction.editTransactionTag(ID, name)}}
-                                />
-                            </View>
-                            <View style={styles.deleteView}>
-                                <TouchableOpacity onPress={() => {tag.deleteTag(ID), setModalVisible(false), transaction.deleteTransactionTag(ID);}}>
-                                    <Icon name="delete" style={styles.deleteIcon}/>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-                </View>
-            </Modal>
+                close={() => setModalVisible(false)}
+                text={name}
+                maxLength={15}
+                onChangeText={text => setName(text)}
+                onUpdate={() => {tag.updateTag(ID, name), setModalVisible(false), transaction.editTransactionTag(ID, name)}}
+                delete={() => {tag.deleteTag(ID), setModalVisible(false), transaction.deleteTransactionTag(ID)}}
+            />
             <View style={styles.flatList}>
                 <FlatList 
                     data={tag.state.sort((a, b) => a["Name"].localeCompare(b["Name"]))}

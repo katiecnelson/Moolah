@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Modal, FlatList } from "react-native";
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, Modal, FlatList } from "react-native";
 import Icon from "../components/Icon";
 import CustomButton from "../components/CustomButton";
 import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
@@ -10,7 +10,15 @@ import AddTag from "./AddTag";
 import { useNavigation } from '@react-navigation/native';
 import CurrencyInput from 'react-native-currency-input';
 import Toast from "../components/Toast";
-import {formatAmountNum, formatDateForDatabase, amountToDatabase, categoryNameToID, formatDate, getDateToDisplay, formatFullDate, getDateDatabaseFormat} from "../utilities/helper"
+import {
+    formatAmountNum,
+    formatDateForDatabase,
+    amountToDatabase,
+    categoryNameToID,
+    formatDate,
+    formatFullDate,
+    getDateDatabaseFormat
+    } from "../utilities/helper"
 
 const TransactionForm = ({initialValues, onSubmit}) => {
     const categoryIncome = useContext(CategoryIncomeContext);

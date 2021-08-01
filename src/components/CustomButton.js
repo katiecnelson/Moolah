@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     button: {
         borderRadius: 10,
         backgroundColor: "#48cae4",
-        width: 100,
+        // width: 100,
     },
 
     buttonText: {
@@ -25,6 +25,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: "center",
         paddingVertical: 10,
-        paddingHorizontal: 10,
+        paddingHorizontal: 15,
     }
 })
