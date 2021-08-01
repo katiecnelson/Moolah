@@ -80,7 +80,7 @@ const DashboardHeader = () => {
                     />
             </TouchableOpacity>
             <View style={{width: "100%", alignItems: "flex-end"}}>
-                <TouchableOpacity onPress={() => navigation.navigate("History")} style={{marginTop: 15, marginBottom:25, alignItems: "flex-end"}}>
+                <TouchableOpacity onPress={() => navigation.navigate("History")} style={{marginTop: 20, marginBottom: 4, alignItems: "flex-end"}}>
                     <Icon name="history" style={{padding: 3, fontSize: 28, color: "#03045e"}}/>
                 </TouchableOpacity>
             </View>

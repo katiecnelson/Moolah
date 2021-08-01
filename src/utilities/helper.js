@@ -101,4 +101,105 @@ export const getCurrentMonth = () => {
     if (month.length === 1) month = "0" + month;
 
     return (year + "-" + month)
+};
+
+export const getMonthName = (date) => {
+    const month = date.substring(5, 7);
+    let dateString = ""
+    switch (month) {
+        case "01":
+            dateString = "JANUARY";
+          break;
+        case "02":
+            dateString = "FEBRUARY";
+            break;
+        case "03":
+            dateString = "MARCH";
+            break;
+        case "04":
+            dateString = "APRIL";
+            break;
+        case "05":
+            dateString = "MAY";
+            break;
+        case "06":
+            dateString = "JUNE";
+            break;
+        case "07":
+            dateString = "JULY";
+            break;
+        case "08":
+            dateString = "AUGUST";
+            break;
+        case "09":
+            dateString = "SEPTEMBER";
+            break;
+        case "10":
+            dateString = "OCTOBER";
+            break;
+        case "11":
+            dateString = "NOVEMBER";
+            break;
+        case "12":
+            dateString = "DECEMBER";
+            break;
+        default:
+            dateString = "MONTH"
+            break;
+      }
+      return dateString += " " + date.substring(0, 4)
+};
+
+export const processHistoricalData = (data) => {
+    const currentMonth = getCurrentMonth();
+    const filtered = data.filter(transaction => transaction["Date"].substring(0,7) !== currentMonth).sort((a, b) => b["Date"].localeCompare(a["Date"]))
+    const result = [];
+    filtered.forEach(e => {
+        const date = e["Date"].substring(0,7);
+        let newObj = result.find(element => element.title === date);
+        console.log("THIS IS NEW OBJ: " + JSON.stringify(newObj))
+        if (newObj) {
+            newObj.total += e["Amount"];
+            newObj.data.push(e);
+        } else {
+            result.push({title: date, data: [e], total: e["Amount"]});
+        }
+    });
+    console.log(result);
+    return result; 
 }
+
+//BELOW is the buggy version of history that breaks the months down by category spending in the header
+
+// export const processHistoricalData = (data) => {
+//     const currentMonth = getCurrentMonth();
+//     const filtered = data.filter(transaction => transaction["Date"].substring(0,7) !== currentMonth).sort((a, b) => b["Date"].localeCompare(a["Date"]))
+//     const result = [];
+//     filtered.forEach(e => {
+//         const date = e["Date"].substring(0,7);
+//         let newObj = result.find(element => element.title === date);
+//         console.log("THIS IS NEW OBJ: " + JSON.stringify(newObj))
+//         if (newObj) {
+//             if (e["CategoryValue"] === "one") {
+//                 newObj.one =+ e["Amount"];
+//             } else if (e["CategoryValue"] === "two") {
+//                 newObj.two =+ e["Amount"];
+//             } else if (e["CategoryValue"] === "three") {
+//                 newObj.three =+ e["Amount"];
+//             } 
+//             newObj.total += e["Amount"];
+//             newObj.data.push(e);
+//         } else {
+//             if (e["CategoryValue"] === "one") {
+//                 result.push({title: date, data: [e], total: e["Amount"], one: e["Amount"], two: 0, three: 0});
+//             } else if (e["CategoryValue"] === "two") {
+//                 result.push({title: date, data: [e], total: e["Amount"], one: 0, two: e["Amount"], three: 0});
+//             } else if (e["CategoryValue"] === "three") {
+//                 result.push({title: date, data: [e], total: e["Amount"], one: 0, two: 0, three: e["Amount"]});
+//             }
+            
+//         }
+//     });
+//     console.log(result);
+//     return result; 
+// }
