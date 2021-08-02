@@ -9,11 +9,6 @@ const Reminders = () => {
     const reminder = useContext(ReminderContext);
     const [showCompleted, setShowCompleted] = useState(false);
 
-    useEffect(() => {
-        console.log("Use effect reminders ran okay!")
-        reminder.getReminders();
-      }, []);
-
     const handleOnPress = () => {
         if (showCompleted) {
             setShowCompleted(false);

@@ -54,6 +54,10 @@ const PopUp = (props) => {
                             style={styles.textInput}
                             onChangeText={props.onChangeText}
                         />
+                        {( props.showWarning
+                        ? <Text style={{fontFamily: "Nunito-Bold", color: "#48cae4", paddingBottom: 7, paddingTop: -10, textAlign: "center"}}>{props.warningText}</Text>
+                        : null
+                        )}
                         <View style={styles.updateView}>
                             <CustomButton
                                 text="UPDATE" 
@@ -112,7 +116,7 @@ const styles = StyleSheet.create({
     textInput: {
         padding: 10,
         marginTop:10,
-        marginBottom: 30,
+        marginBottom: 10,
         marginHorizontal: 7,
         backgroundColor: "#efefef",
         borderRadius: 10,
@@ -130,6 +134,7 @@ const styles = StyleSheet.create({
     },
     updateView: {
         alignItems: "center",
+        marginTop: 20
     }
 })
 

@@ -7,13 +7,14 @@ import Toast from "./Toast";
 const AddTag = (props) => {
     const tag = useContext(TagContext);
     const [name, setName] = useState("");
-    const [showToast, setShowToast] = useState(false)
+    const [showToast, setShowToast] = useState(false);
 
     const handleOnPress = () => {
-        if (name === "") {
+        if (name === "" || tag.state.find(e => e["Name"].toLowerCase() === name.toLowerCase())) {
             setShowToast(true);
         } else {
             tag.addTag(name);
+            setName("");
         }
     }
 
@@ -22,7 +23,7 @@ const AddTag = (props) => {
             <Toast
                 show={showToast}
                 onRequestClose={() => setShowToast(false)}
-                text="Please input a text for the tag."
+                text="Please input a text for the tag. Tags must be unique."
                 onPress={() => setShowToast(false)}
             />
             <View style={[styles.flex, props.styling]}>

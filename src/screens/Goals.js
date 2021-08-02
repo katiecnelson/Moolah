@@ -13,10 +13,10 @@ const Goals = () => {
     const currentMonth = getCurrentMonth();
     const goals = transactions.state.filter(transaction => transaction["CategoryValue"] === "three" && transaction["Date"].substring(0,7) === currentMonth);
 
-    // //TODO: Below is for testing ONLY!!!
-    // useEffect(() => {
-    //     transactions.getTransactions();
-    //   }, []);
+    //Below is for testing only!
+    useEffect(() => {
+        transactions.getTransactions();
+      }, []);
 
     return (
         <NeedWantGoalPages 

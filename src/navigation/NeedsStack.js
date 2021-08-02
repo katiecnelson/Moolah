@@ -16,6 +16,7 @@ const DashStack = () => {
     return (
         <Stack.Navigator
             screenOptions={{
+                headerTitleAlign: "center",
                 headerBackTitleVisible: false,
                 headerTintColor: "#48cae4",
             }}

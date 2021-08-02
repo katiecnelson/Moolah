@@ -23,6 +23,8 @@ const ReminderHeader = () => {
             setShowToast(true);
         } else{
             addReminder(newDescription, formatDateForDatabase(date));
+            setDate("DD/MM/YY");
+            setNewDescription("");
         }
     }
 

@@ -19,10 +19,16 @@ const TagModal = (props) => {
                 </TouchableOpacity>
             <FlatList
                 data={tags.state.sort((a, b) => a["Name"].localeCompare(b["Name"]))}
-                ListHeaderComponent={() => <AddTag
+                ListHeaderComponent={() => 
+                <View style={{borderBottomColor: "#03045e", borderBottomWidth: 1}}>
+                <AddTag
                     text="NEW TAG ..."
                     color="#fcfcfc"
                 />
+                <TouchableOpacity onPress={() => props.done("TAG (OPTIONAL)", null)}>
+                    <Text style={{fontFamily: "Nunito-Bold", color: "#48cae4", fontSize: 18, padding: 15}}>None</Text>
+                </TouchableOpacity>
+                </View>
                 }
                 keyExtractor={(item, index) => item.ID.toString()}
                 renderItem={({ item }) => (
@@ -33,7 +39,7 @@ const TagModal = (props) => {
                     </TouchableOpacity>
                 )}
             />
-                </View>
+            </View>
         </View>
     </Modal>
     )

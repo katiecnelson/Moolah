@@ -37,7 +37,7 @@ const ReminderDetail = (props) => {
             />
             <TouchableOpacity style={{flexDirection: "row", width: "100%"}} onPress={handleOnPress}> 
                 <CustomCheckbox doneStatus={props.done} />
-                <Text style={{flex: 1.15, lineHeight: 24, paddingLeft: 10, textDecorationLine: !props.done ? "none" : "line-through", fontFamily: date <= today ? "Nunito-Bold" : "Nunito-Regular", color: props.date <= today ? "#48cae4": "#03045e"}}>{props.date === today ? "TODAY" : formatFullDate(props.date)}</Text>
+                <Text style={{flex: 1.3, lineHeight: 24, paddingLeft: 10, textDecorationLine: !props.done ? "none" : "line-through", fontFamily: date <= today ? "Nunito-Bold" : "Nunito-Regular", color: props.date <= today ? "#48cae4": "#03045e"}}>{props.date === today ? "TODAY" : formatFullDate(props.date)}</Text>
                 <Text style={{flex: 3, lineHeight: 24, fontFamily: "Nunito-Regular", textDecorationLine: !props.done ? "none" : "line-through", color: "#03045e"}}>{props.description}</Text>
                 <TouchableOpacity style={{width: "15%", alignItems: "flex-end"}} onPress={() => setModalVisible(true)}>
                     <Icon name="edit" style={{...styles.editIcon, flex: .5}}/>

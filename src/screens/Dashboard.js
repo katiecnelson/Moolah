@@ -16,9 +16,6 @@ const Dashboard = ({navigation}) => {
         tag.getTags();
       }, []);
 
-      //TODO: Below is for testing only!
-    //   console.log("THIS IS TRANSACTION STATE FROM DASH: " + JSON.stringify(state))
-
     return (
         <SafeAreaView style={{backgroundColor: "white", flex: 1, alignItems: "center"}} >
             <View style={{backgroundColor: "white", width: "94%"}}>
