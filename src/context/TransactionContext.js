@@ -16,10 +16,10 @@ const transactionReducer = (state, action) => {
   switch (action.type) {
     case 'get_transactions':
       return action.payload;
-    case 'edit_transaction':
-      return state.map(transaction => {
-        return transaction["ID"] === action.payload["ID"] ? action.payload : transaction;
-      });
+    // case 'edit_transaction':
+    //   return state.map(transaction => {
+    //     return transaction["ID"] === action.payload["ID"] ? action.payload : transaction;
+    //   });
     case 'delete_transaction_tag':
       return state.map(transaction => {
         return transaction["TagID"] === action.payload ? mapTagsDelete(transaction) : transaction;
@@ -86,17 +86,10 @@ const addTransaction = dispatch => {
   };
 };
 
-const editTransaction = dispatch => {
+const editTransaction = () => {
   return async (ID, amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue, callback) => {
     await database.updateTransaction(ID, amount, categoryID, date, description, tag);
-
-    dispatch({
-      type: 'edit_transaction',
-      payload: {"ID": ID, "Amount": amount, "Date": date, "Description": description, "TagID": tag, "Tag": tagLabel, "CategoryLabel": categoryLabel, "CategoryValue": categoryValue }
-    });
-    if (callback) {
       callback();
-    }
   };
 };
 

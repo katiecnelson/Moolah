@@ -14,6 +14,7 @@ const TabNavigator = () => {
             showLabel: false,
             activeTintColor: "#48cae4",
             inactiveTintColor: "#b7b7b7",
+            keyboardHidesTabBar: true,
             style: {
                 backgroundColor: "#fcfcfc"
             }

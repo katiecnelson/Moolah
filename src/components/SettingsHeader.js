@@ -56,7 +56,8 @@ const SettingsHeader = () => {
                     delimiter=","
                     separator="."
                     precision={2}
-                    text={income} 
+                    text={income}
+                    maxLength={9}
                     textAlign={"center"}
                     keyboardType={"number-pad"}
                     style={{padding: 10, backgroundColor: "#efefef", borderRadius: 10, fontSize: 28, color: "#03045e"}}

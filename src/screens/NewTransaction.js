@@ -29,12 +29,10 @@ const NewTransaction = () => {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.editIncomeOpacity} onPress={() => navigation.navigate("Settings")}>
-                <Icon name="edit" style={styles.icon}/>
-                <Text style={styles.text}>EDIT INCOME</Text>
-            </TouchableOpacity>
             <TransactionForm
                 onSubmit={handleOnSubmit}
+                showDelete={false}
+                showIncome
             />
         </View>
     )
@@ -45,21 +43,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#ffffff",
         flex: 1,
     },
-    editIncomeOpacity: {
-        flexDirection: "row",
-        justifyContent: "center",
-        paddingBottom: 15,
-        paddingTop: 20
-    },
-    text: {
-        color: "#48cae4",
-        lineHeight: 32
-    },
-    icon: {
-        fontSize: 32,
-        color: "#48cae4",
-        paddingRight: 10
-    },
+    
+    
 })
 
 export default NewTransaction;
