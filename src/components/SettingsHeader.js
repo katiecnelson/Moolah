@@ -1,14 +1,14 @@
 import React, {useContext, useState} from "react";
-import { View, StyleSheet, Text, TextInput, FlatList } from "react-native";
+import {View, StyleSheet, Text, TextInput} from "react-native";
 import Icon from "../components/Icon";
 import CustomButton from "../components/CustomButton";
 import GlobalStyle from "../components/GlobalStyle";
 import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
 import {Context as TransactionContext} from "../context/TransactionContext";
 import CurrencyInput from 'react-native-currency-input';
-import {formatAmountNum, getToSpend} from "../utilities/helper";
+import {formatAmountNum} from "../utilities/helper";
 import Toast from "../components/Toast";
-import { StackActions, useNavigation } from '@react-navigation/native';
+import {StackActions, useNavigation} from '@react-navigation/native';
 import {amountToDatabase} from "../utilities/helper"
 import AddTag from "./AddTag";
 
@@ -126,7 +126,9 @@ const SettingsHeader = () => {
                         <Text style={[GlobalStyle.BlueRegular, styles.percent]}>%</Text>
                     </View>
                 </View>
-                <CustomButton text="save" onPress={handleSave}/>
+                <View style={{marginBottom: 20}}>
+                    <CustomButton text="save" onPress={handleSave} />
+                </View>
                 <View style={{borderBottomColor: "#48cae4", borderBottomWidth: 1, marginBottom: 25}}>
                     <Text style={styles.title}>TAGS</Text>
                 </View>

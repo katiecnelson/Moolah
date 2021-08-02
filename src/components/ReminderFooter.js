@@ -12,7 +12,8 @@ const ReminderFooter = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 65,
+        marginTop: 40,
+        marginBottom: 20,
         alignItems: "center"
     },
 })

@@ -34,10 +34,9 @@ const Settings = () => {
             <View style={styles.flatList}>
                 <FlatList 
                     data={tag.state.sort((a, b) => a["Name"].localeCompare(b["Name"]))}
-                    numColumns={2}
-                    columnWrapperStyle={{justifyContent: "space-around"}}
                     ListHeaderComponent={SettingsHeader}
-                    keyExtractor={(item, index) => item.ID}
+                    contentContainerStyle={{alignItems: "center", width: "100%", paddingBottom: 25}}
+                    keyExtractor={(item, index) => item.ID.toString()}
                     renderItem={({ item }) => (
                         <TouchableOpacity onPress={() => {setModalVisible(true), setName(item["Name"]), setID(item["ID"])}}> 
                             <TagListDetail
@@ -113,7 +112,7 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     flatList: {
-        width: "94%",
+        width: "100%",
     },
     updateView: {
         alignItems: "center",
