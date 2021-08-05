@@ -1,14 +1,19 @@
 import React from "react";
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from "@react-navigation/stack";
 import NewTransaction from "../screens/NewTransaction";
 import Settings from "../screens/Settings";
+import GlobalStyle from "../components/GlobalStyle";
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
 const NewTransactionStack = () => {
+
+    const headerTitleStyle = GlobalStyle.headerTitleStyle;
+
     return (
         <Stack.Navigator
             screenOptions={{
+                headerTitleAlign: "center",
                 headerBackTitleVisible: false,
                 headerTintColor: "#48cae4",
             }}
@@ -18,12 +23,7 @@ const NewTransactionStack = () => {
                 component={NewTransaction}
                 options={{
                     title: "NEW TRANSACTION", 
-                    headerTitleStyle: {
-                        fontFamily: "Nunito-Regular",
-                        color: "#03045e",
-                        fontSize: 24,
-                        textAlign: "center",
-                    },
+                    headerTitleStyle: headerTitleStyle
                 }}
             />
             <Stack.Screen
@@ -31,15 +31,11 @@ const NewTransactionStack = () => {
                 component={Settings}
                 options={{
                     title: "SETTINGS", 
-                    headerTitleStyle: {
-                        fontFamily: "Nunito-Regular",
-                        color: "#03045e",
-                        fontSize: 24,
-                        textAlign: "center",
-                    },
+                    headerTitleStyle: headerTitleStyle
                 }}    
             />
         </Stack.Navigator>
-    )
-}
+    );
+};
+
 export default NewTransactionStack;

@@ -1,38 +1,38 @@
 export const formatAmountString = (amountInt) => {
-    let result = "£"
-    result += Number(parseFloat(amountInt / 100).toFixed(2)).toLocaleString('en', {
+    let result = "£";
+    result += Number(parseFloat(amountInt / 100).toFixed(2)).toLocaleString("en", {
         minimumFractionDigits: 2
     });
-    return result
-}
+    return result;
+};
 
 export const formatAmountNum = (amountInt) => {
     return amountInt / 100;
-}
+};
 
 export const formatFullDate = (dateString) => {
-    let result = ""
-    result += dateString.substring(8) + "/"
-    result += dateString.substring(5,7) + "/"
-    result += dateString.substring(2, 4)
-    return result
-}
+    let result = "";
+    result += dateString.substring(8) + "/";
+    result += dateString.substring(5,7) + "/";
+    result += dateString.substring(2, 4);
+    return result;
+};
 
 export const getToSpend = (income, percent) => {
     return (percent / 100) * income;
-}
+};
 
 export const calculateRemaining = (income, spent) => {
     return income - spent;
-}
+};
 
 export const percentSpent = (toSpend, spent) => {
     return (spent/toSpend) * 100;
-}
+};
 
 export const percentSpentString = (percentSpent) => {
     return percentSpent.toString() + "%";
-}
+};
 
 export const getTodayDateDatabase = () => {
     let day = new Date().getDate().toString();
@@ -42,8 +42,8 @@ export const getTodayDateDatabase = () => {
     if (day.length === 1) day = "0" + day;
     if (month.length === 1) month = "0" + month;
 
-    return (year + "-" + month + "-" + day)
-}
+    return (year + "-" + month + "-" + day);
+};
 
 export const getDateDatabaseFormat = () => {
     let day = new Date().getDate().toString();
@@ -53,8 +53,8 @@ export const getDateDatabaseFormat = () => {
     if (day.length === 1) day = "0" + day;
     if (month.length === 1) month = "0" + month;
 
-    return (year + "-" + month + "-" + day)
-}
+    return (year + "-" + month + "-" + day);
+};
 
 export const formatDate = (date) => {
     let day = date.getDate().toString();
@@ -64,8 +64,8 @@ export const formatDate = (date) => {
     if (day.length === 1) day = "0" + day;
     if (month.length === 1) month = "0" + month;
 
-    return (day + "/" + month + "/" + year)
-}
+    return (day + "/" + month + "/" + year);
+};
 
 //This will allow to format the date from the picker in database-style format
 export const formatDateDBStyle = (date) => {
@@ -76,20 +76,20 @@ export const formatDateDBStyle = (date) => {
     if (day.length === 1) day = "0" + day;
     if (month.length === 1) month = "0" + month;
 
-    return (year + "-" + month + "-" + day)
-}
+    return (year + "-" + month + "-" + day);
+};
 
 export const formatDateForDatabase = (date) => {
     result = "20";
     result += date.substring(6,8) + "-";
     result += date.substring(3,5) + "-";
-    result += date.substring(0,2)
+    result += date.substring(0,2);
     return result;
-}
+};
 
 export const amountToDatabase = (amount) => {
-    return Math.round(amount * 100)
-}
+    return Math.round(amount * 100);
+};
 
 export const categoryNameToID = (categoryName) => {
     switch(categoryName) {
@@ -102,7 +102,7 @@ export const categoryNameToID = (categoryName) => {
         default:
           return 0
       }
-}
+};
 
 export const getCurrentMonth = () => {
     let month = (new Date().getMonth() + 1).toString();
@@ -110,12 +110,12 @@ export const getCurrentMonth = () => {
 
     if (month.length === 1) month = "0" + month;
 
-    return (year + "-" + month)
+    return (year + "-" + month);
 };
 
 export const getMonthName = (date) => {
     const month = date.substring(5, 7);
-    let dateString = ""
+    let dateString = "";
     switch (month) {
         case "01":
             dateString = "JANUARY";
@@ -157,17 +157,18 @@ export const getMonthName = (date) => {
             dateString = "MONTH"
             break;
       }
-      return dateString += " " + date.substring(0, 4)
+      return dateString += " " + date.substring(0, 4);
 };
 
 export const processHistoricalData = (data) => {
     const currentMonth = getCurrentMonth();
-    const filtered = data.filter(transaction => transaction["Date"].substring(0,7) !== currentMonth).sort((a, b) => b["Date"].localeCompare(a["Date"]))
+    const filtered = data.filter(
+        transaction => transaction["Date"].substring(0,7) !== currentMonth)
+        .sort((a, b) => b["Date"].localeCompare(a["Date"]));
     const result = [];
     filtered.forEach(e => {
         const date = e["Date"].substring(0,7);
         let newObj = result.find(element => element.title === date);
-        // console.log("THIS IS NEW OBJ: " + JSON.stringify(newObj))
         if (newObj) {
             newObj.total += e["Amount"];
             newObj.data.push(e);
@@ -175,53 +176,36 @@ export const processHistoricalData = (data) => {
             result.push({title: date, data: [e], total: e["Amount"]});
         }
     });
-    console.log(result);
     return result; 
-}
+};
 
 export const getBadgeCount = (data) => {
     const today = getTodayDateDatabase();
     let count = 0;
     data.forEach(element => {
         if (element["Date"] <= today && !element["Complete"]) {
-            console.log("THIS IS ELEMENT: " + element);
             count++;
         } 
     });
     return count;
-}
+};
 
-//BELOW is the buggy version of history that breaks the months down by category spending in the header
+export const filterSortDash = (data) => {
+    return data.filter(transaction => transaction["Date"]
+    .substring(0,7) === getCurrentMonth())
+    .sort((a, b) => b["Date"].localeCompare(a["Date"]));
+};
 
-// export const processHistoricalData = (data) => {
-//     const currentMonth = getCurrentMonth();
-//     const filtered = data.filter(transaction => transaction["Date"].substring(0,7) !== currentMonth).sort((a, b) => b["Date"].localeCompare(a["Date"]))
-//     const result = [];
-//     filtered.forEach(e => {
-//         const date = e["Date"].substring(0,7);
-//         let newObj = result.find(element => element.title === date);
-//         console.log("THIS IS NEW OBJ: " + JSON.stringify(newObj))
-//         if (newObj) {
-//             if (e["CategoryValue"] === "one") {
-//                 newObj.one =+ e["Amount"];
-//             } else if (e["CategoryValue"] === "two") {
-//                 newObj.two =+ e["Amount"];
-//             } else if (e["CategoryValue"] === "three") {
-//                 newObj.three =+ e["Amount"];
-//             } 
-//             newObj.total += e["Amount"];
-//             newObj.data.push(e);
-//         } else {
-//             if (e["CategoryValue"] === "one") {
-//                 result.push({title: date, data: [e], total: e["Amount"], one: e["Amount"], two: 0, three: 0});
-//             } else if (e["CategoryValue"] === "two") {
-//                 result.push({title: date, data: [e], total: e["Amount"], one: 0, two: e["Amount"], three: 0});
-//             } else if (e["CategoryValue"] === "three") {
-//                 result.push({title: date, data: [e], total: e["Amount"], one: 0, two: 0, three: e["Amount"]});
-//             }
-            
-//         }
-//     });
-//     console.log(result);
-//     return result; 
-// }
+export const filterSortTabs = (data, category) => {
+    return data.filter(transaction => transaction["CategoryValue"] === category 
+    && transaction["Date"].substring(0,7) === getCurrentMonth())
+    .sort((a, b) => b["Date"].localeCompare(a["Date"]));
+};
+
+export const sortDescending = (data, sortBy) => {
+    return data.sort((a, b) => a[sortBy].localeCompare(b[sortBy]));
+};
+
+export const findTag = (data, name) => {
+    return data.find(e => e["Name"].toLowerCase() === name.toLowerCase());
+};

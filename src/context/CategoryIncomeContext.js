@@ -1,13 +1,13 @@
 import createDataContext from "./createDataContext";
-import { database } from "../db/database";
-import { getToSpend, formatAmountString, calculateRemaining, percentSpent } from "../utilities/helper";
+import {database} from "../db/database";
+import {getToSpend, calculateRemaining, percentSpent} from "../utilities/helper";
 
 
 const CategoryIncomeReducer = (state, action) => {
   switch (action.type) {
-    case 'get_categories_income':
+    case "get_categories_income":
       return action.payload;
-    case 'update_categories_income':
+    case "update_categories_income":
       return {
         income: action.payload.income,
 
@@ -35,7 +35,7 @@ const CategoryIncomeReducer = (state, action) => {
         percentSpentThree: percentSpent(getToSpend(action.payload.income, action.payload.percentThree), state.spentThree),
         percentThree: action.payload.percentThree,
       };
-    case 'categories_delete_transaction':
+    case "categories_delete_transaction":
       if (action.payload.category === "one") {
         return {
           ...state,
@@ -58,7 +58,7 @@ const CategoryIncomeReducer = (state, action) => {
           percentSpentThree: percentSpent(getToSpend(state.income, state.percentThree), state.spentThree - action.payload.amount),
         };
       }
-    case 'categories_add_transaction':
+    case "categories_add_transaction":
       if (action.payload.category === "one") {
         return {
           ...state,
@@ -78,7 +78,7 @@ const CategoryIncomeReducer = (state, action) => {
           ...state,
           spentThree: state.spentThree + action.payload.amount,
           remainingThree: calculateRemaining(getToSpend(state.income, state.percentThree), state.spentThree + action.payload.amount),
-          percentSpentThree: percentSpent(getToSpend(state.income, state.percentThree), state.spentThree -+action.payload.amount),
+          percentSpentThree: percentSpent(getToSpend(state.income, state.percentThree), state.spentThree +action.payload.amount),
         };
       }
     default:
@@ -97,46 +97,45 @@ const getCategoriesIncome = dispatch => {
     const spentThree = spent.find(category => category["Category"] === 3) ? spent.find(category => category["Category"] === 3)["SUM(Amount)"]: 0;
     const percentOne = categories[0]["Percent"];
     const percentTwo = categories[1]["Percent"];
-    const percentThree = categories[2]["Percent"]
+    const percentThree = categories[2]["Percent"];
 
-    console.log("FROM CONTEXT: get categories and income worked!")
+    dispatch({ type: "get_categories_income", payload: {
+      income: income,
 
-    dispatch({ type: 'get_categories_income', payload: {
-        income: income,
+      valueOne: categories[0]["CategoryValue"],
+      labelOne: categories[0]["CategoryLabel"], 
+      toSpendOne: getToSpend(income, percentOne),
+      spentOne: spentOne,
+      remainingOne: calculateRemaining(getToSpend(income, percentOne), spentOne),
+      percentSpentOne: percentSpent(getToSpend(income, percentOne), spentOne),
+      percentOne: percentOne, 
 
-        valueOne: categories[0]["CategoryValue"],
-        labelOne: categories[0]["CategoryLabel"], 
-        toSpendOne: getToSpend(income, percentOne),
-        spentOne: spentOne,
-        remainingOne: calculateRemaining(getToSpend(income, percentOne), spentOne),
-        percentSpentOne: percentSpent(getToSpend(income, percentOne), spentOne),
-        percentOne: percentOne, 
+      valueTwo: categories[1]["CategoryValue"],
+      labelTwo: categories[1]["CategoryLabel"],
+      toSpendTwo: getToSpend(income, percentTwo),
+      spentTwo: spentTwo,
+      remainingTwo: calculateRemaining(getToSpend(income, percentTwo), spentTwo),
+      percentSpentTwo: percentSpent(getToSpend(income, percentTwo), spentTwo),
+      percentTwo: percentTwo,
 
-        valueTwo: categories[1]["CategoryValue"],
-        labelTwo: categories[1]["CategoryLabel"],
-        toSpendTwo: getToSpend(income, percentTwo),
-        spentTwo: spentTwo,
-        remainingTwo: calculateRemaining(getToSpend(income, percentTwo), spentTwo),
-        percentSpentTwo: percentSpent(getToSpend(income, percentTwo), spentTwo),
-        percentTwo: percentTwo,
-
-        valueThree: categories[2]["CategoryValue"],
-        labelThree: categories[2]["CategoryLabel"],
-        toSpendThree: getToSpend(income, percentThree),
-        spentThree: spentThree,
-        remainingThree: calculateRemaining(getToSpend(income, percentThree), spentThree),
-        percentSpentThree: percentSpent(getToSpend(income, percentThree), spentThree),
-        percentThree: percentThree,
-    }});
+      valueThree: categories[2]["CategoryValue"],
+      labelThree: categories[2]["CategoryLabel"],
+      toSpendThree: getToSpend(income, percentThree),
+      spentThree: spentThree,
+      remainingThree: calculateRemaining(getToSpend(income, percentThree), spentThree),
+      percentSpentThree: percentSpent(getToSpend(income, percentThree), spentThree),
+      percentThree: percentThree,
+      }
+    });
+  };
 };
-}
 
 const updateCategoriesIncome = dispatch => {
-  return async (income, newAliasOne, newPercentOne, newAliasTwo, newPercentTwo, newAliasThree, newPercentThree ) => {
+  return async (income, newAliasOne, newPercentOne, newAliasTwo, newPercentTwo, newAliasThree, newPercentThree) => {
     await database.updateIncome(income);
     await database.updateCategories(newAliasOne, newPercentOne, newAliasTwo, newPercentTwo, newAliasThree, newPercentThree)
 
-    dispatch({ type: 'update_categories_income', payload: {
+    dispatch({type: "update_categories_income", payload: {
       income: income,
 
       valueOne: "one",
@@ -153,34 +152,30 @@ const updateCategoriesIncome = dispatch => {
       labelThree: newAliasThree,
       toSpendThree: getToSpend(income, newPercentThree),
       percentThree: newPercentThree,
-  }});
+      }
+    });
   };
 };
 
 const categoriesDeleteTransaction = dispatch => {
   return (category, amount) => {
-    dispatch({ type: 'categories_delete_transaction', payload: {category, amount}});
+    dispatch({type: "categories_delete_transaction", payload: {category, amount}});
   };
-}
+};
 
 const categoriesAddTransaction = dispatch => {
   return (category, amount) => {
-    dispatch({ type: 'categories_add_transaction', payload: {category, amount}});
+    dispatch({type: "categories_add_transaction", payload: {category, amount}});
   };
-}
+};
 
-// const categoriesEditTransaction = dispatch => {
-//   return (categoryValue, originalCategory, originalAmount, amount) => {
-//     dispatch({ type: 'categories_edit_transaction', payload: {oldCategory: originalCategory, amount}});
-//   };
-// }
-
-export const { Context, Provider } = createDataContext(
+export const {Context, Provider} = createDataContext(
   CategoryIncomeReducer,
-    { getCategoriesIncome,
+    {
+      getCategoriesIncome,
       updateCategoriesIncome,
       categoriesDeleteTransaction,
-      categoriesAddTransaction },
+      categoriesAddTransaction
+    },
   []
 );
-

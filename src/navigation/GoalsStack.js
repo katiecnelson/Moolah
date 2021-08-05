@@ -1,21 +1,22 @@
 import React, {useContext} from "react";
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from "@react-navigation/stack";
 import Goals from "../screens/Goals";
 import History from "../screens/History";
 import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
 import GlobalStyle from "../components/GlobalStyle";
 import EditTransaction from "../screens/EditTransaction";
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
 const GoalsStack = () => {
-    const categoryIncome = useContext(CategoryIncomeContext)
+    const categoryIncome = useContext(CategoryIncomeContext);
     const title = categoryIncome.state.labelThree;
     const headerTitleStyle = GlobalStyle.headerTitleStyle;
     
     return (
         <Stack.Navigator
             screenOptions={{
+                headerTitleAlign: "center",
                 headerBackTitleVisible: false,
                 headerTintColor: "#48cae4",
             }}
@@ -45,6 +46,7 @@ const GoalsStack = () => {
                 }}
             />
         </Stack.Navigator>
-    )
-}
+    );
+};
+
 export default GoalsStack;

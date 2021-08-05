@@ -1,45 +1,82 @@
-import React, { useContext, useState } from "react";
-import { View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
-import { Context as TagContext } from "../context/TagContext";
-import { Context as TransactionContext } from "../context/TransactionContext";
+import React, {useContext, useState} from "react";
+import {View, StyleSheet, FlatList, TouchableOpacity} from "react-native";
+import {Context as TagContext} from "../context/TagContext";
+import {Context as TransactionContext} from "../context/TransactionContext";
 import SettingsHeader from "../components/SettingsHeader";
 import TagListDetail from "../components/TagListDetail";
 import PopUp from "../components/PopUp";
+import {sortDescending, findTag} from "../utilities/helper";
 
 const Settings = () => {
-    const tag = useContext(TagContext)
-    const transaction = useContext(TransactionContext)
-    const [modalVisible, setModalVisible] = useState(false)
-    const [ID, setID] = useState(0)
-    const [name, setName] = useState("")
+    const tag = useContext(TagContext);
+    const transaction = useContext(TransactionContext);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [ID, setID] = useState(0);
+    const [name, setName] = useState("");
+    const [warning, setWarning] = useState(false);
+    const [warningText, setWarningText] = useState("");
 
     const deleteWithX = (idNum) => {
         setID(idNum);
         tag.deleteTag(idNum);
         transaction.deleteTransactionTag(idNum);
-    }
+    };
+
+    const handleOnUpdate = () => {
+        if (name === "") {
+            setWarningText("Tags must contain at least one character!");
+            setWarning(true); 
+        } else if (findTag(tag.state, name)) {
+            setWarningText("You already have a tag with this name!")
+            setWarning(true);
+        } else {
+            setWarning(false);
+            tag.updateTag(ID, name);
+            setModalVisible(false);
+            transaction.editTransactionTag(ID, name);
+        }
+    };
+
+    const handleClose = () => {
+        setModalVisible(false);
+        setWarning(false);
+    };
+
+    const handleDelete = () => {
+        tag.deleteTag(ID);
+        setModalVisible(false);
+        transaction.deleteTransactionTag(ID);
+        setWarning(false);
+    };
+
+    const openPopUp = (name, ID) => {
+        setModalVisible(true);
+        setName(name);
+        setID(ID);
+    };
 
     return (
         <View style={styles.container}>
             <PopUp
-                showDate={false} 
+                showDate={false}
+                showWarning={warning}
+                warningText={warningText}
                 visible={modalVisible}
-                close={() => setModalVisible(false)}
+                close={handleClose}
                 text={name}
                 maxLength={15}
                 onChangeText={text => setName(text)}
-                onUpdate={() => {tag.updateTag(ID, name), setModalVisible(false), transaction.editTransactionTag(ID, name)}}
-                delete={() => {tag.deleteTag(ID), setModalVisible(false), transaction.deleteTransactionTag(ID)}}
+                onUpdate={handleOnUpdate}
+                delete={handleDelete}
             />
-            <View style={styles.flatList}>
+            <View style={styles.listWidth}>
                 <FlatList 
-                    data={tag.state.sort((a, b) => a["Name"].localeCompare(b["Name"]))}
-                    numColumns={2}
-                    columnWrapperStyle={{justifyContent: "space-around"}}
+                    data={sortDescending(tag.state, "Name")}
                     ListHeaderComponent={SettingsHeader}
-                    keyExtractor={(item, index) => item.ID}
-                    renderItem={({ item }) => (
-                        <TouchableOpacity onPress={() => {setModalVisible(true), setName(item["Name"]), setID(item["ID"])}}> 
+                    contentContainerStyle={styles.flatList}
+                    keyExtractor={(item) => item.ID.toString()}
+                    renderItem={({item}) => (
+                        <TouchableOpacity onPress={() => {openPopUp(item["Name"], item["ID"])}}> 
                             <TagListDetail
                                 key={item["ID"]}
                                 name={item["Name"]}
@@ -50,8 +87,8 @@ const Settings = () => {
                 />
             </View>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -59,65 +96,14 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         alignItems: "center",
     },
-    text: {
-        fontFamily: "Nunito-Bold",
-        color: "#03045e"
-    },
-    modalView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "rgba(75, 75, 75, 0.25)",
-    },
-    width: {
-        width: "84%",
-    },
-    modal: {
-        borderLeftWidth: 10,
-        borderTopWidth: 10,
-        borderTopLeftRadius:15,
-        borderBottomLeftRadius: 15,
-        borderTopRightRadius: 15,
-        borderColor: "#03045e",
-        backgroundColor: "white",
-        paddingHorizontal: 7,
-        paddingVertical: 7,
-        borderRadius: 10,
-        elevation: 35,
-    },
-    exitOpacity: {
-        width: 20,
-    },
-    exit: {
-        fontFamily: "Nunito-Black",
-        color: "#03045e",
-        fontSize: 24,
-    },
-    textInput: {
-        padding: 10,
-        marginTop:10,
-        marginBottom: 30,
-        marginHorizontal: 7,
-        backgroundColor: "#efefef",
-        borderRadius: 10,
-        fontSize: 20,
-        color: "#03045e",
-    },
-    deleteView: {
-        alignItems: "flex-end",
+    listWidth: {
         width: "100%",
     },
-    deleteIcon: {
-        fontSize: 36,
-        color: "#03045e",
-        padding: 5,
-    },
     flatList: {
-        width: "94%",
-    },
-    updateView: {
         alignItems: "center",
+        width: "100%",
+        paddingBottom: 25
     }
-})
+});
 
 export default Settings;

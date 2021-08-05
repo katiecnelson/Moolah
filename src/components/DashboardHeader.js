@@ -1,32 +1,34 @@
-import React, { useContext, useEffect } from "react";
-import { View, StyleSheet, Text, SafeAreaView, TouchableOpacity } from "react-native";
+import React, {useContext, useEffect} from "react";
+import {View, StyleSheet, Text, TouchableOpacity} from "react-native";
 import Icon from "./Icon";
 import DashBarDetail from "./DashBarDetail";
 import NeedWantGoalDetail from "../components/NeedWantGoalDetail"
-import { Context as CategoryIncomeContext } from "../context/CategoryIncomeContext";
-import { formatAmountString } from "../utilities/helper";
+import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
+import {formatAmountString} from "../utilities/helper";
 import NewTransactionButton from "./NewTransactionButton";
-import { TabActions, useNavigation} from '@react-navigation/native';
+import {TabActions, useNavigation} from "@react-navigation/native";
 
 const DashboardHeader = () => {
-    const categoryIncome = useContext(CategoryIncomeContext)
+    const categoryIncome = useContext(CategoryIncomeContext);
     const navigation = useNavigation();
 
     useEffect(() => {
-        console.log("Use effect from dashboard HEADER ran okay!")
         categoryIncome.getCategoriesIncome();
       }, []);
 
+    const jumpTabs = (tab) => {
+        navigation.dispatch(TabActions.jumpTo(tab));
+    };
+
     return (
-        
-        <SafeAreaView style={{alignItems: "center"}}>
-            <TouchableOpacity onPress={() => navigation.navigate("Settings")} style={{alignItems: "center"}}>
+        <View style={styles.container}>
+            <TouchableOpacity onPress={() => navigation.navigate("Settings")} style={styles.opacity}>
                 <Text style={styles.smallTitle}>INCOME:</Text>
                 <Text style={styles.income}>{formatAmountString(categoryIncome.state.income)}</Text>
-                <Icon name="edit" style={{fontSize: 28, color: "#48cae4"}} />
+                <Icon name="edit" style={styles.editIcon} />
             </TouchableOpacity>
             <View style={styles.needWantGoalIcons}>
-                <TouchableOpacity onPress={() => navigation.dispatch(TabActions.jumpTo("Needs"))}>
+                <TouchableOpacity onPress={() => jumpTabs("Needs")}>
                     <NeedWantGoalDetail
                         title={categoryIncome.state.labelOne}
                         iconName="needs"
@@ -34,7 +36,7 @@ const DashboardHeader = () => {
                         amount={formatAmountString(categoryIncome.state.toSpendOne)}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.dispatch(TabActions.jumpTo("Wants"))}>
+                <TouchableOpacity onPress={() => jumpTabs("Wants")}>
                     <NeedWantGoalDetail
                         title={categoryIncome.state.labelTwo}
                         iconName="wants"
@@ -42,7 +44,7 @@ const DashboardHeader = () => {
                         amount={formatAmountString(categoryIncome.state.toSpendTwo)}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.dispatch(TabActions.jumpTo("Goals"))}>
+                <TouchableOpacity onPress={() => jumpTabs("Goals")}>
                     <NeedWantGoalDetail
                         title={categoryIncome.state.labelThree}
                         iconName="goals"
@@ -51,7 +53,7 @@ const DashboardHeader = () => {
                     />
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity style={{width: "98%"}} onPress={() => navigation.dispatch(TabActions.jumpTo("Needs"))}>
+            <TouchableOpacity style={styles.detailOpacity} onPress={() => jumpTabs("Needs")}>
                     <DashBarDetail
                         label={categoryIncome.state.labelOne + " REMAINING: "}
                         amountRemaining={formatAmountString(categoryIncome.state.remainingOne)}
@@ -60,7 +62,7 @@ const DashboardHeader = () => {
                         percentSpent={categoryIncome.state.percentSpentOne}
                     />
             </TouchableOpacity>
-            <TouchableOpacity style={{width: "98%"}} onPress={() => navigation.dispatch(TabActions.jumpTo("Wants"))}>
+            <TouchableOpacity style={styles.detailOpacity} onPress={() => jumpTabs("Wants")}>
                     <DashBarDetail
                         label={categoryIncome.state.labelTwo + " REMAINING: "}
                         amountRemaining={formatAmountString(categoryIncome.state.remainingTwo)}
@@ -69,8 +71,7 @@ const DashboardHeader = () => {
                         percentSpent={categoryIncome.state.percentSpentTwo}
                     />
             </TouchableOpacity>
-            <TouchableOpacity style={{width: "98%"}} onPress={() => navigation.dispatch(TabActions.jumpTo("Goals"))}>
-
+            <TouchableOpacity style={styles.detailOpacity} onPress={() => jumpTabs("Goals")}>
                     <DashBarDetail
                         label={categoryIncome.state.labelThree + " REMAINING: "}
                         amountRemaining={formatAmountString(categoryIncome.state.remainingThree)}
@@ -79,32 +80,30 @@ const DashboardHeader = () => {
                         percentSpent={categoryIncome.state.percentSpentThree}
                     />
             </TouchableOpacity>
-            <View style={{width: "100%", alignItems: "flex-end"}}>
-                <TouchableOpacity onPress={() => navigation.navigate("History")} style={{marginTop: 20, marginBottom: 4, alignItems: "flex-end"}}>
-                    <Icon name="history" style={{padding: 3, fontSize: 28, color: "#03045e"}}/>
+            <View style={styles.historyView}>
+                <TouchableOpacity onPress={() => navigation.navigate("History")} style={styles.historyOpacity}>
+                    <Icon name="history" style={styles.history}/>
                 </TouchableOpacity>
             </View>
-            <View style={{borderBottomColor: "#48cae4", borderBottomWidth: 1, marginBottom: 10}}>
+            <View style={styles.lowerTitle}>
                 <Text style={styles.title}>TRANSACTIONS</Text>
             </View>
-            <View style={{width: "100%"}}>
-                <NewTransactionButton onPress={() => navigation.dispatch(TabActions.jumpTo("New"))}/>
+            <View style={styles.newTransact}>
+                <NewTransactionButton onPress={() => jumpTabs("New")} />
             </View>
-        </SafeAreaView>
+        </View>
     ) 
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#ffffff"
+        alignItems: "center"
     },
-
     title: {
         fontFamily: "Nunito-Regular",
         fontSize: 24,
         color: "#03045e"
     },
-
     smallTitle: {
         fontFamily: "Nunito-Bold",
         paddingTop: 15,
@@ -123,7 +122,38 @@ const styles = StyleSheet.create({
         width: "100%",
         justifyContent: "space-around"
     },
-
-})
+    opacity: {
+        alignItems: "center"
+    },
+    detailOpacity: {
+        width: "98%"
+    },
+    editIcon: {
+        fontSize: 28,
+        color: "#48cae4"
+    },
+    historyOpacity: {
+        marginTop: 20,
+        marginBottom: 4,
+        alignItems: "flex-end"
+    },
+    history: {
+        padding: 3,
+        fontSize: 28,
+        color: "#03045e"
+    },
+    historyView: {
+        width: "100%",
+        alignItems: "flex-end"
+    },
+    lowerTitle: {
+        borderBottomColor: "#48cae4",
+        borderBottomWidth: 1,
+        marginBottom: 10
+    },
+    newTransact: {
+        width: "100%"
+    }
+});
 
 export default DashboardHeader;

@@ -1,18 +1,16 @@
 import React from "react";
 import {StyleSheet, TouchableOpacity, Text, View} from "react-native";
 
-export default function TagListDetail(props) {
+const TagListDetail = (props) => {
     return (
         <View style={styles.tagBackground}>
             <TouchableOpacity onPress={props.onPress}>
                 <Text style={styles.deleteText}>X</Text>
             </TouchableOpacity>
-            {/* <TouchableOpacity onPress={props.onPress}> */}
-                <Text style={styles.buttonText}>{props.name}</Text>
-            {/* </TouchableOpacity> */}
+            <Text style={styles.buttonText}>{props.name}</Text>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     tagBackground: {
@@ -21,17 +19,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginBottom: 10,
     },
-
-    buttonText: {
-        color: "#03045e",
-        fontFamily: "Nunito-Bold",
-        textTransform: "uppercase",
-        textAlign: "center",
-        paddingVertical: 10,
-        paddingHorizontal: 10,
-
-    },
-
     deleteText: {
         fontSize: 20,
         fontFamily: "Nunito-Black",
@@ -39,4 +26,14 @@ const styles = StyleSheet.create({
         lineHeight: 40,
         paddingLeft: 15
     },
-})
+    buttonText: {
+        color: "#03045e",
+        fontFamily: "Nunito-Bold",
+        textTransform: "uppercase",
+        textAlign: "center",
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+    },
+});
+
+export default TagListDetail;
