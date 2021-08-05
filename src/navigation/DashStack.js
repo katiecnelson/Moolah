@@ -1,9 +1,9 @@
 import React, {useContext, useEffect} from "react";
-import {View, Text} from "react-native";
-import { createStackNavigator } from '@react-navigation/stack';
+import {View, Text, StyleSheet} from "react-native";
+import {createStackNavigator} from "@react-navigation/stack";
 import Settings from "../screens/Settings";
 import Dashboard from "../screens/Dashboard";
-import { TouchableOpacity } from "react-native";
+import {TouchableOpacity} from "react-native";
 import Icon from "../components/Icon";
 import Reminders from "../screens/Reminders";
 import History from "../screens/History";
@@ -41,18 +41,18 @@ const DashStack = () => {
                     headerTitleStyle: headerTitleStyle,
                     headerRight: () => {
                         return (
-                            <TouchableOpacity style={{paddingRight: 7}} onPress={() => navigation.navigate("Settings")}>
-                                <Icon name="gear" style={{fontSize: 32, color: "#b7b7b7"}} />
+                            <TouchableOpacity style={styles.touchRight} onPress={() => navigation.navigate("Settings")}>
+                                <Icon name="gear" style={styles.icons} />
                             </TouchableOpacity>
                         )
                     },
                     headerLeft: () => {
                         return (
-                            <TouchableOpacity style={{paddingLeft: 7}} onPress={() => navigation.navigate("Reminders")}>
-                                <View style={{flexDirection: "row"}}>
-                                <Icon name="bell" style={{fontSize: 32, color: "#b7b7b7"}} />
+                            <TouchableOpacity style={styles.touchLeft} onPress={() => navigation.navigate("Reminders")}>
+                                <View style={styles.viewRow}>
+                                <Icon name="bell" style={styles.icons} />
                                 {( badgeCount > 0
-                                   ? <View style={{position: "absolute", marginLeft: 15, lineHeight: 2, backgroundColor: "#48cae4", borderRadius: 50, width: 23, height: 23, alignItems: "center", justifyContent: "center"}}>
+                                   ? <View style={styles.badge}>
                                         <Text style={GlobalStyle.WhiteBold}>{badgeCount}</Text>
                                     </View>
                                     : null
@@ -96,6 +96,34 @@ const DashStack = () => {
                 }}
             />
         </Stack.Navigator>
-    )
-}
+    );
+};
+
+const styles = StyleSheet.create({
+    touchRight: {
+        paddingRight: 7
+    },
+    touchLeft: {
+        paddingLeft: 7
+    },
+    icons: {
+        fontSize: 32,
+        color: "#b7b7b7"
+    },
+    badge: {
+        position: "absolute",
+        marginLeft: 15,
+        lineHeight: 2,
+        backgroundColor: "#48cae4",
+        borderRadius: 50,
+        width: 23,
+        height: 23,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    viewRow: {
+        flexDirection: "row"
+    }
+});
+
 export default DashStack;

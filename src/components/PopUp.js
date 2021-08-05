@@ -3,7 +3,8 @@ import {View, Modal, Text, TextInput, TouchableOpacity, StyleSheet} from "react-
 import Icon from "./Icon";
 import CustomButton from "./CustomButton";
 import {DateTimePickerModal} from "react-native-modal-datetime-picker";
-import {formatDate, formatFullDate} from "../utilities/helper";
+import {formatFullDate} from "../utilities/helper";
+import GlobalStyle from "./GlobalStyle";
 
 const PopUp = (props) => {
     const [showDatePicker, setShowDatePicker] = useState(false);
@@ -33,16 +34,15 @@ const PopUp = (props) => {
                         <View>
                             <TouchableOpacity
                                 style={styles.exitOpacity}
-                                onPress={props.close}
-                            >
+                                onPress={props.close}>
                                 <Text style={styles.exit}>X</Text>
                             </TouchableOpacity>
                         </View>
                         {( props.showDate 
-                            ? <View style={{alignItems: "center", marginBottom: 10}}>
-                                <View style={{width: "45%", backgroundColor: "#efefef", borderRadius: 10, alignContent: "center"}}>
+                            ? <View style={styles.dateView}>
+                                <View style={styles.dateButton}>
                                     <TouchableOpacity onPress={() => setShowDatePicker(true)} >
-                                        <Text style={{padding: 10, textAlign: "center", color: props.date === "DD/MM/YY" ? "#b7b7b7" : "#03045e", fontFamily: "Nunito-Regular", fontSize: 20}}>{formatFullDate(props.date)}</Text>
+                                        <Text style={[styles.dateText, GlobalStyle.BlueRegular]}>{formatFullDate(props.date)}</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -55,8 +55,8 @@ const PopUp = (props) => {
                             onChangeText={props.onChangeText}
                         />
                         {( props.showWarning
-                        ? <Text style={{fontFamily: "Nunito-Bold", color: "#48cae4", paddingBottom: 7, paddingTop: -10, textAlign: "center"}}>{props.warningText}</Text>
-                        : null
+                            ? <Text style={styles.warningText}>{props.warningText}</Text>
+                            : null
                         )}
                         <View style={styles.updateView}>
                             <CustomButton
@@ -65,8 +65,7 @@ const PopUp = (props) => {
                             />
                         </View>
                         <View style={styles.deleteView}>
-                            <TouchableOpacity onPress={props.delete}
-                            > 
+                            <TouchableOpacity onPress={props.delete}> 
                                 <Icon name="delete" style={styles.deleteIcon}/>
                             </TouchableOpacity>
                         </View>
@@ -74,15 +73,10 @@ const PopUp = (props) => {
                 </View>
             </View>
         </Modal>
-
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
-    text: {
-        fontFamily: "Nunito-Bold",
-        color: "#03045e"
-    },
     modalView: {
         flex: 1,
         justifyContent: "center",
@@ -132,11 +126,32 @@ const styles = StyleSheet.create({
         color: "#03045e",
         padding: 5,
     },
+    dateView: {
+        alignItems: "center",
+        marginBottom: 10
+    },
     updateView: {
         alignItems: "center",
         marginTop: 20
+    },
+    warningText: {
+        fontFamily: "Nunito-Regular",
+        color: "red",
+        paddingBottom: 7,
+        textAlign: "center"
+    },
+    dateButton: {
+        width: "45%",
+        backgroundColor: "#efefef",
+        borderRadius: 10,
+        alignContent: "center"
+    },
+    dateText: {
+        padding: 10,
+        textAlign: "center",
+        fontSize: 20
     }
-})
+});
 
 export default PopUp;
 

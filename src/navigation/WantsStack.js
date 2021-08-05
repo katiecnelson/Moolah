@@ -1,15 +1,15 @@
 import React, {useContext} from "react";
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from "@react-navigation/stack";
 import Wants from "../screens/Wants";
 import History from "../screens/History";
 import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
 import GlobalStyle from "../components/GlobalStyle";
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
 const WantsStack = () => {
 
-    const categoryIncome = useContext(CategoryIncomeContext)
+    const categoryIncome = useContext(CategoryIncomeContext);
     const title = categoryIncome.state.labelTwo;
     const headerTitleStyle = GlobalStyle.headerTitleStyle;
 
@@ -38,6 +38,7 @@ const WantsStack = () => {
                 }}   
             />
         </Stack.Navigator>
-    )
-}
+    );
+};
+
 export default WantsStack;

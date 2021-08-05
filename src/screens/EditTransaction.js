@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
-import { StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import Icon from "../components/Icon";
+import React, {useContext} from "react";
+import {StyleSheet, View} from "react-native";
 import TransactionForm from "../components/TransactionForm";
 import {Context as TransactionContext} from "../context/TransactionContext";
 import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
-import { useNavigation, StackActions, CommonActions } from '@react-navigation/native';
-import {getCurrentMonth} from "../utilities/helper";
+import {useNavigation, StackActions} from "@react-navigation/native";
 
 const EditTransaction = ({route}) => {
 
@@ -22,8 +20,7 @@ const EditTransaction = ({route}) => {
         navigation.dispatch(StackActions.pop(1));
         transactions.deleteTransaction(transaction["ID"]);
         categoryIncome.categoriesDeleteTransaction(originalCategory, originalAmount);
-
-    }
+    };
 
     const handleOnSubmit = (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue) => {
         // navigation.dispatch(CommonActions.reset({
@@ -34,12 +31,17 @@ const EditTransaction = ({route}) => {
         //   })
         // );
         navigation.dispatch(StackActions.pop(1));
-        transactions.editTransaction(transaction["ID"], amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue, () => {categoryIncome.getCategoriesIncome(); transactions.getTransactions()});
-    }
+        transactions.editTransaction(
+            transaction["ID"], amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue,
+            () => {
+                categoryIncome.getCategoriesIncome();
+                transactions.getTransactions();
+        });
+    };
 
     return (
-        transaction !== undefined ? <View behavior={"padding"} style={styles.container}>
-            <View ></View>
+        transaction !== undefined
+        ? <View style={styles.container}>
             <TransactionForm 
                 onSubmit={handleOnSubmit}
                 onPress={handleOnPress}
@@ -56,24 +58,14 @@ const EditTransaction = ({route}) => {
                 }}
             />
         </View> : null
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#ffffff",
         flex: 1,
     },
-    deleteView: {
-        alignItems: "flex-end",
-    },
-    icon: {
-        fontSize: 32,
-        color: "#03045e",
-        paddingRight: 10,
-        paddingVertical: 7,
-        paddingLeft: 5
-    },
-})
+});
 
 export default EditTransaction;

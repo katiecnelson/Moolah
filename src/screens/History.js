@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import { View, StyleSheet, SectionList, Text } from "react-native";
+import React, {useContext} from "react";
+import {View, StyleSheet, SectionList, Text} from "react-native";
 import {Context as TransactionContext} from "../context/TransactionContext";
-import { formatFullDate, formatAmountString, processHistoricalData, getMonthName } from "../utilities/helper";
+import {formatFullDate, formatAmountString, processHistoricalData, getMonthName} from "../utilities/helper";
 import TransactionListDetail from "../components/TransactionListDetail";
 import GlobalStyle from "../components/GlobalStyle";
 
@@ -15,9 +15,9 @@ const History = ({navigation}) => {
                 <SectionList
                     sections={processHistoricalData(transaction.state)}
                     stickySectionHeadersEnabled={false}
-                    keyExtractor={(item, index) => item.ID.toString()}
-                    renderItem={({ item, index }) => (
-                        <View style={{backgroundColor: index % 2 === 0 ? "#efefef" : "white", borderRadius: 5}}>
+                    keyExtractor={(item) => item.ID.toString()}
+                    renderItem={({item, index}) => (
+                        <View style={{...styles.radius, backgroundColor: index % 2 === 0 ? "#efefef" : "white"}}>
                             <TransactionListDetail
                                 key={item["ID"]}
                                 ID={item["ID"]}
@@ -29,18 +29,18 @@ const History = ({navigation}) => {
                                 onPress={() => navigation.navigate("Edit Transaction", {ID: item["ID"]})}
                             />
                         </View>
-                )}
-                renderSectionHeader={({ section: { title, total} }) => (
-                    <View style={styles.headerBackground}>
-                        <Text style={[GlobalStyle.BlueBold, styles.headerText]}>{getMonthName(title)}</Text>
-                        <Text style={[GlobalStyle.BlueRegular, styles.headerSubtitle]}>TOTAL TRANSACTIONS: {formatAmountString(total)}</Text>
-                    </View>
-                )}
+                    )}
+                    renderSectionHeader={({section: {title, total}}) => (
+                        <View style={styles.headerBackground}>
+                            <Text style={[GlobalStyle.BlueBold, styles.headerText]}>{getMonthName(title)}</Text>
+                            <Text style={[GlobalStyle.BlueRegular, styles.headerSubtitle]}>TOTAL TRANSACTIONS: {formatAmountString(total)}</Text>
+                        </View>
+                    )}
                 />
             </View>
         </View>    
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -67,6 +67,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
         borderBottomWidth: 1,
         borderBottomColor: "#48cae4"
+    },
+    radius: {
+        borderRadius: 5
     }
 });
 

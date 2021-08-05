@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import { View, StyleSheet, FlatList, TouchableOpacity} from "react-native";
+import React, {useContext, useState} from "react";
+import {View, StyleSheet, FlatList, TouchableOpacity} from "react-native";
 import ReminderDetail from "../components/ReminderDetail";
-import { Context as ReminderContext } from "../context/ReminderContext";
+import {Context as ReminderContext} from "../context/ReminderContext";
 import ReminderHeader from "../components/ReminderHeader";
 import ReminderFooter from "../components/ReminderFooter";
+import {sortDescending} from "../utilities/helper";
 
 const Reminders = () => {
     const reminder = useContext(ReminderContext);
@@ -15,15 +16,13 @@ const Reminders = () => {
         } else {
             setShowCompleted(true);
         }
-        //BELOW IS FOR TESTING ONLY!
-        reminder.getReminders();
-    }
+    };
 
     return (
         <View style={styles.container}>
-            <View style={{width: "94%"}}>
+            <View style={styles.innerContainer}>
             <FlatList
-                data={reminder.state.sort((a, b) => a["Date"].localeCompare(b["Date"]))}
+                data={sortDescending(reminder.state, "Date")}
                 ListHeaderComponent={ReminderHeader}
                 ListFooterComponent={() =>
                     <TouchableOpacity onPress={handleOnPress}>
@@ -32,10 +31,11 @@ const Reminders = () => {
                         />
                     </TouchableOpacity> 
                 }
-                keyExtractor={(item, index) => item.ID.toString()}
-                renderItem={({ item }) => {
+                keyExtractor={(item) => item.ID.toString()}
+                renderItem={({item}) => {
                         return (
-                            !item["Complete"] || !showCompleted ? <ReminderDetail
+                            !item["Complete"] || !showCompleted
+                            ? <ReminderDetail
                                 key={item["ID"]}
                                 ID={item["ID"]}
                                 date={item["Date"]}
@@ -47,8 +47,8 @@ const Reminders = () => {
                 />
             </View>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         alignItems: "center"
     },
-})
+    innerContainer: {
+        width: "94%"
+    }
+});
 
 export default Reminders;

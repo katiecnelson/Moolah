@@ -1,58 +1,82 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import {View, Text, StyleSheet} from "react-native";
 import NewTransactionButton from "./NewTransactionButton";
 import {percentSpentString} from "../utilities/helper";
+import GlobalStyle from "./GlobalStyle";
 
 const NeedWantGoalHeader = (props) => {
     return (
-        <View style={{alignItems: "center"}}>
-            <View style={{width: "100%"}}>
-                <View style={{flexDirection: "row", justifyContent: "flex-end", paddingTop: 20, paddingBottom: 5}}>
+        <View style={styles.container}>
+            <View style={styles.innerContainer}>
+                <View style={styles.remainRow}>
                     <Text>
-                        <Text style={{fontFamily: "Nunito-Regular", color: "#03045e"}}>REMAINING: </Text>
-                        <Text style={{fontFamily: "Nunito-Bold", color: "#03045e"}}>{props.remaining}</Text>
+                        <Text style={GlobalStyle.BlueRegular}>REMAINING: </Text>
+                        <Text style={GlobalStyle.BlueBold}>{props.remaining}</Text>
                     </Text>
                 </View>
                 <View>
-                        <View style={{height: 50, borderRadius: 5, backgroundColor: "#efefef"}}>
-                            <View style={{width: props.percent >= 100 ? "100%" : percentSpentString(props.percent), height: 50, borderRadius: 5, backgroundColor: props.barColor}}>
-                            </View>
-                        </View>
+                    <View style={[styles.progressBar, styles.barOutter]}>
+                        <View
+                            style={{
+                            ...styles.progressBar, 
+                            backgroundColor: props.barColor, 
+                            width: props.percent >= 100 
+                            ? "100%" 
+                            : percentSpentString(props.percent)
+                            }} />
                     </View>
-                <View style={{flexDirection: "row", justifyContent: "space-between", paddingTop: 5}}>
+                </View>
+                <View style={styles.bottomRow}>
                     <View >
                         <Text>
-                            <Text style={{fontFamily: "Nunito-Regular", color: "#03045e"}}>SPENT: </Text>
-                            <Text style={{fontFamily: "Nunito-Bold", color: "#03045e"}}>{props.spent}</Text>
+                            <Text style={GlobalStyle.BlueRegular}>SPENT: </Text>
+                            <Text style={GlobalStyle.BlueBold}>{props.spent}</Text>
                         </Text>
                     </View>
                     <View >
                         <Text>
-                            <Text style={{fontFamily: "Nunito-Regular", color: "#03045e"}}>TOTAL: </Text>
-                            <Text style={{fontFamily: "Nunito-Bold", color: "#03045e"}}>{props.total}</Text>
+                            <Text style={GlobalStyle.BlueRegular}>TOTAL: </Text>
+                            <Text style={GlobalStyle.BlueBold}>{props.total}</Text>
                         </Text>
                     </View>
                 </View>
-                <View style={{width: "100%", marginTop: 15}}>
+                <View style={styles.newTransact}>
                     <NewTransactionButton onPress={props.onPress}/>
                 </View>
             </View>
         </View>
-    )
+    );
 };
 
 const styles = StyleSheet.create({
-
-    title: {
-        fontFamily: "Nunito-Regular",
-        fontSize: 24,
-        color: "#03045e"
+    container: {
+        alignItems: "center"
     },
-
-    columnHeadings: {
-        fontFamily: "Nunito-Bold",
-        color: "#03045e"
+    innerContainer: {
+        width: "100%"
     },
+    remainRow: {
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        paddingTop: 20,
+        paddingBottom: 5
+    },
+    progressBar: {
+        height: 50,
+        borderRadius: 5,
+    },
+    barOutter: {
+        backgroundColor: "#efefef"
+    },
+    bottomRow: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        paddingTop: 5
+    },
+    newTransact: {
+        width: "100%",
+        marginTop: 15
+    }
 });
 
 export default NeedWantGoalHeader;

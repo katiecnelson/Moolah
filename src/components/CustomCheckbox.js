@@ -1,12 +1,15 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
 
-export default function CustomCheckbox({doneStatus}) {
+const CustomCheckbox = ({doneStatus}) => {
 
     return (
-        <View style={{...styles.checkBox, backgroundColor: doneStatus ? "#48cae4" : "transparent"}}/>
+        <View style={{
+            ...styles.checkBox, backgroundColor: doneStatus 
+            ? "#48cae4" 
+            : "transparent"}}/>
     );
-}
+};
 
 const styles = StyleSheet.create({
     checkBox: {
@@ -16,4 +19,6 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         borderColor: "#48cae4",
       },
-})
+});
+
+export default CustomCheckbox;

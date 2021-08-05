@@ -1,7 +1,9 @@
 {
   "expo": {
     "name": "Moolah",
-    "slug": "Moolah",
+    "slug": "moolah",
+    "privacy": "public",
+    "description": "Percentage-based budgeting",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/moolah-icon.png",

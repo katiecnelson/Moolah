@@ -1,11 +1,11 @@
 import createDataContext from "./createDataContext";
-import { database } from "../db/database";
+import {database} from "../db/database";
 
 const tagReducer = (state, action) => {
   switch (action.type) {
-    case 'get_tags':
+    case "get_tags":
       return action.payload;
-    case 'update_tag':
+    case "update_tag":
       return state.map(tag => {
         return tag["ID"] === action.payload["ID"] ? action.payload : tag;
       });
@@ -17,7 +17,7 @@ const tagReducer = (state, action) => {
           "Name": action.payload["Name"],
         },
       ];
-    case 'delete_tag':
+    case "delete_tag":
       return state.filter(tag => tag["ID"] !== action.payload);
     default:
       return state;
@@ -27,23 +27,19 @@ const tagReducer = (state, action) => {
 const getTags = dispatch => {
   return async () => {
     const response = await database.getAllTags();
-    console.log("this is what response is for getTags: " + response.length)
 
-    dispatch({ type: 'get_tags', payload: response });
+    dispatch({type: "get_tags", payload: response});
   };
 };
 
 const updateTag = dispatch => {
-  return async (ID, newName, callback) => {
+  return async (ID, newName) => {
     await database.updateTag(ID, newName);
 
     dispatch({
-      type: 'update_tag',
-      payload: { "ID": ID, "Name": newName }
+      type: "update_tag",
+      payload: {"ID": ID, "Name": newName}
     });
-    if (callback) {
-      callback();
-    }
   };
 };
 
@@ -51,14 +47,13 @@ const deleteTag = dispatch => {
   return async ID => {
     await database.deleteTag(ID);
 
-    dispatch({ type: 'delete_tag', payload: ID });
+    dispatch({type: "delete_tag", payload: ID});
   };
 };
 
 const addTag = dispatch => {
   return async (name) => {
     const response = await database.addTag(name);
-    console.log("this is what response is for addTag: " + response)
 
     dispatch({
       type: "add_tag",
@@ -67,8 +62,8 @@ const addTag = dispatch => {
   };
 };
 
-export const { Context, Provider } = createDataContext(
+export const {Context, Provider} = createDataContext(
     tagReducer,
-  { getTags, updateTag, deleteTag, addTag },
+  {getTags, updateTag, deleteTag, addTag},
   []
 );
