@@ -30,7 +30,9 @@ const SettingsHeader = () => {
 
     const handleSave = () => {
         if (parseInt(percentOne) + parseInt(percentTwo) + parseInt(percentThree) !== 100
-        || income === 0 || labelOne === "" || labelTwo === "" || labelThree === "") {
+        || income === 0 || labelOne === "" || labelTwo === "" || labelThree === ""
+        || labelOne.toUpperCase() === labelTwo.toUpperCase() || labelThree.toUpperCase() === labelTwo.toUpperCase()
+        || labelOne.toUpperCase() === labelThree.toUpperCase()) {
             setShowToast(true);
         } else {
             categoryIncome.updateCategoriesIncome(
@@ -53,19 +55,22 @@ const SettingsHeader = () => {
                 show={showToast}
                 onRequestClose={() => setShowToast(false)} 
                 onPress={() => setShowToast(false)}
-                text="Please fill out income, category names, and ensure that percentage numbers total 100."
+                text="Please fill out income, unique category names, and ensure that percentage numbers total 100."
             />
             <View style={styles.container}>
                 <Text style={styles.text}>INCOME:</Text>
                 <CurrencyInput
+                    returnKeyLabel="Done"
+                    returnKeyType="done"
                     value={income}
                     onChangeValue={setIncome}
+                    prefix="£"
                     unit="£"
                     delimiter=","
                     separator="."
-                    precision={2}
+                    precision={0}
                     text={income}
-                    maxLength={9}
+                    maxLength={7}
                     textAlign={"center"}
                     keyboardType={"number-pad"}
                     style={styles.currencyInput}
@@ -103,6 +108,8 @@ const SettingsHeader = () => {
                 <View style={styles.percentContainer}>
                     <View style={styles.percentView}>
                         <TextInput
+                            returnKeyLabel="Done"
+                            returnKeyType="done"
                             value={percentOne.toString()}
                             onChangeText={setpercentOne}
                             textAlign={"center"}
@@ -114,6 +121,8 @@ const SettingsHeader = () => {
                     </View>
                     <View style={styles.percentView}>
                         <TextInput
+                            returnKeyLabel="Done"
+                            returnKeyType="done"
                             value={percentTwo.toString()}
                             onChangeText={setpercentTwo}
                             textAlign={"center"}
@@ -125,6 +134,8 @@ const SettingsHeader = () => {
                     </View>
                     <View style={styles.percentView}>
                         <TextInput
+                            returnKeyLabel="Done"
+                            returnKeyType="done"
                             value={percentThree.toString()}
                             onChangeText={setPercentThree}
                             textAlign={"center"}
@@ -178,6 +189,7 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: "#efefef",
         borderRadius: 10,
+        width: "45%",
         fontSize: 28,
         color: "#03045e",
         fontFamily: "Nunito-Regular"

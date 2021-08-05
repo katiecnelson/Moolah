@@ -3,7 +3,7 @@ import {StyleSheet, View} from "react-native";
 import TransactionForm from "../components/TransactionForm";
 import {Context as TransactionContext} from "../context/TransactionContext";
 import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
-import {useNavigation, StackActions} from "@react-navigation/native";
+import {useNavigation, StackActions, TabActions,} from "@react-navigation/native";
 
 const EditTransaction = ({route}) => {
 
@@ -18,6 +18,7 @@ const EditTransaction = ({route}) => {
 
     const handleOnPress = () => {
         navigation.dispatch(StackActions.pop(1));
+        // navigation.dispatch(TabActions.jumpTo("Dash"));
         transactions.deleteTransaction(transaction["ID"]);
         categoryIncome.categoriesDeleteTransaction(originalCategory, originalAmount);
     };
@@ -30,7 +31,8 @@ const EditTransaction = ({route}) => {
         //     ],
         //   })
         // );
-        navigation.dispatch(StackActions.pop(1));
+        navigation.dispatch(StackActions.pop(1)); // <-- i might switch back to this one
+        // navigation.dispatch(TabActions.jumpTo("Dash"));
         transactions.editTransaction(
             transaction["ID"], amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue,
             () => {

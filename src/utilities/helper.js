@@ -1,8 +1,6 @@
 export const formatAmountString = (amountInt) => {
     let result = "£";
-    result += Number(parseFloat(amountInt / 100).toFixed(2)).toLocaleString("en", {
-        minimumFractionDigits: 2
-    });
+    result += parseFloat(amountInt / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return result;
 };
 
@@ -193,12 +191,14 @@ export const getBadgeCount = (data) => {
 export const filterSortDash = (data) => {
     return data.filter(transaction => transaction["Date"]
     .substring(0,7) === getCurrentMonth())
+    .sort((a, b) => b["ID"] - a["ID"])
     .sort((a, b) => b["Date"].localeCompare(a["Date"]));
 };
 
 export const filterSortTabs = (data, category) => {
     return data.filter(transaction => transaction["CategoryValue"] === category 
     && transaction["Date"].substring(0,7) === getCurrentMonth())
+    .sort((a, b) => b["ID"] - a["ID"])
     .sort((a, b) => b["Date"].localeCompare(a["Date"]));
 };
 
