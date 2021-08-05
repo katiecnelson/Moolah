@@ -1,8 +1,6 @@
 export const formatAmountString = (amountInt) => {
     let result = "£";
-    result += Number(parseFloat(amountInt / 100).toFixed(2)).toLocaleString("en", {
-        minimumFractionDigits: 2
-    });
+    result += parseFloat(amountInt / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return result;
 };
 

@@ -109,7 +109,7 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
                     delimiter=","
                     separator="."
                     precision={2}
-                    maxLength={9}
+                    maxLength={10}
                     />
                 <TouchableOpacity onPress={() => setShowDatePicker(true)} style={styles.datePicker}>
                     <Text style={styles.dateText}>{date}</Text>  

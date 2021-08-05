@@ -70,7 +70,7 @@ const SettingsHeader = () => {
                     separator="."
                     precision={0}
                     text={income}
-                    maxLength={6}
+                    maxLength={7}
                     textAlign={"center"}
                     keyboardType={"number-pad"}
                     style={styles.currencyInput}

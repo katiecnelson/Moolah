@@ -17,8 +17,8 @@ const EditTransaction = ({route}) => {
     const originalAmount = transaction !== undefined ? transaction["Amount"] : 0;
 
     const handleOnPress = () => {
-        // navigation.dispatch(StackActions.pop(1));
-        navigation.dispatch(TabActions.jumpTo("Dash"));
+        navigation.dispatch(StackActions.pop(1));
+        // navigation.dispatch(TabActions.jumpTo("Dash"));
         transactions.deleteTransaction(transaction["ID"]);
         categoryIncome.categoriesDeleteTransaction(originalCategory, originalAmount);
     };
