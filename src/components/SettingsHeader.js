@@ -30,7 +30,9 @@ const SettingsHeader = () => {
 
     const handleSave = () => {
         if (parseInt(percentOne) + parseInt(percentTwo) + parseInt(percentThree) !== 100
-        || income === 0 || labelOne === "" || labelTwo === "" || labelThree === "") {
+        || income === 0 || labelOne === "" || labelTwo === "" || labelThree === ""
+        || labelOne.toUpperCase() === labelTwo.toUpperCase() || labelThree.toUpperCase() === labelTwo.toUpperCase()
+        || labelOne.toUpperCase() === labelThree.toUpperCase()) {
             setShowToast(true);
         } else {
             categoryIncome.updateCategoriesIncome(
@@ -53,7 +55,7 @@ const SettingsHeader = () => {
                 show={showToast}
                 onRequestClose={() => setShowToast(false)} 
                 onPress={() => setShowToast(false)}
-                text="Please fill out income, category names, and ensure that percentage numbers total 100."
+                text="Please fill out income, unique category names, and ensure that percentage numbers total 100."
             />
             <View style={styles.container}>
                 <Text style={styles.text}>INCOME:</Text>
