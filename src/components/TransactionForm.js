@@ -105,6 +105,7 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
                     value={amount}
                     onChangeValue={setAmount}
                     unit="£"
+                    prefix="£"
                     delimiter=","
                     separator="."
                     precision={2}
