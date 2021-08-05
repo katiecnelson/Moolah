@@ -8,12 +8,16 @@ import GlobalStyle from "../components/GlobalStyle";
 const History = ({navigation}) => {
 
     const transaction = useContext(TransactionContext);
+    const data = processHistoricalData(transaction.state);
+    const length = data.length;
+    console.log("THIS IS LENGTH: " + length);
 
     return (
-        <View style={styles.container}>
+        length > 0
+        ? <View style={styles.container}>
             <View style={styles.innerContainer}>
                 <SectionList
-                    sections={processHistoricalData(transaction.state)}
+                    sections={data}
                     stickySectionHeadersEnabled={false}
                     keyExtractor={(item) => item.ID.toString()}
                     renderItem={({item, index}) => (
@@ -38,7 +42,13 @@ const History = ({navigation}) => {
                     )}
                 />
             </View>
-        </View>    
+        </View> 
+        : <View style={styles.noDataView}>
+            <Text 
+                style={[GlobalStyle.BlueRegular, styles.noDataText]}>
+                No historical data yet! When you add transactions to past months, they will show up here.
+                </Text>
+        </View>   
     );
 };
 
@@ -70,6 +80,16 @@ const styles = StyleSheet.create({
     },
     radius: {
         borderRadius: 5
+    },
+    noDataView: {
+        flex: 1,
+        alignItems: "center",
+        backgroundColor: "white"
+    },
+    noDataText: {
+        textAlign: "center",
+        padding: 15,
+        paddingTop: 30
     }
 });
 

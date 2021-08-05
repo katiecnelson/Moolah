@@ -8,13 +8,13 @@ import {sortDescending} from "../utilities/helper";
 
 const Reminders = () => {
     const reminder = useContext(ReminderContext);
-    const [showCompleted, setShowCompleted] = useState(false);
+    const [hideCompleted, setHideCompleted] = useState(true);
 
     const handleOnPress = () => {
-        if (showCompleted) {
-            setShowCompleted(false);
+        if (hideCompleted) {
+            setHideCompleted(false);
         } else {
-            setShowCompleted(true);
+            setHideCompleted(true);
         }
     };
 
@@ -27,14 +27,14 @@ const Reminders = () => {
                 ListFooterComponent={() =>
                     <TouchableOpacity onPress={handleOnPress}>
                         <ReminderFooter
-                            showCompleted={showCompleted}
+                            showCompleted={hideCompleted}
                         />
                     </TouchableOpacity> 
                 }
                 keyExtractor={(item) => item.ID.toString()}
                 renderItem={({item}) => {
                         return (
-                            !item["Complete"] || !showCompleted
+                            !item["Complete"] || !hideCompleted
                             ? <ReminderDetail
                                 key={item["ID"]}
                                 ID={item["ID"]}
