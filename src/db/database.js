@@ -66,7 +66,7 @@ const setUpDatabase = async () => {
             tx.executeSql("INSERT INTO Tags (Name) VALUES (?);", ["Saving"]);
             tx.executeSql("INSERT INTO Tags (Name) VALUES (?);", ["Transportation"]);
             tx.executeSql("INSERT INTO Tags (Name) VALUES (?);", ["Utilities"]);
-            tx.executeSql("INSERT INTO Income (Amount) VALUES (?);", [100000]);
+            tx.executeSql("INSERT INTO Income (Amount) VALUES (?);", [0]);
         },
         (error) => {console.log("db error setting up Reminders"); console.log(error); resolve()},
         (success) => {console.log("Test data loaded!"); resolve(success)}

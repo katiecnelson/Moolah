@@ -5,6 +5,7 @@ import Icon from "./Icon";
 import {getTodayDateDatabase, formatFullDate, formatDateDBStyle} from "../utilities/helper";
 import {Context as ReminderContext} from "../context/ReminderContext";
 import PopUp from "./PopUp";
+import TwoButtonToast from "./TwoButtonToast";
 
 const ReminderDetail = (props) => {
     const reminder = useContext(ReminderContext);
@@ -12,6 +13,7 @@ const ReminderDetail = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [description, setDescription] = useState(props.description);
     const [date, setDate] = useState(props.date);
+    const [showToast, setShowToast] = useState(false);
 
     const handleOnPress = () => {
         if (props.done) {
@@ -33,6 +35,13 @@ const ReminderDetail = (props) => {
 
     return (
         <View style={styles.container}>
+            <TwoButtonToast
+                show={showToast}
+                onRequestClose={() => {setShowToast(false); setModalVisible(true);}}
+                cancel={() => {setShowToast(false); setModalVisible(true);}}
+                delete={handleDelete}
+                text="Permanently delete this reminder?"
+            />
             <PopUp
                 date={date}
                 showDate={true} 
@@ -43,7 +52,7 @@ const ReminderDetail = (props) => {
                 onChangeDate={value => setDate(formatDateDBStyle(value))}
                 onChangeText={text => setDescription(text)}
                 onUpdate={handleOnUpdate}
-                delete={handleDelete}
+                delete={() => {setModalVisible(false); setShowToast(true);}}
             />
             <TouchableOpacity style={styles.touchOpacity} onPress={handleOnPress}> 
                 <CustomCheckbox doneStatus={props.done} />

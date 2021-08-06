@@ -6,6 +6,7 @@ import SettingsHeader from "../components/SettingsHeader";
 import TagListDetail from "../components/TagListDetail";
 import PopUp from "../components/PopUp";
 import {sortDescending, findTag} from "../utilities/helper";
+import TwoButtonToast from "../components/TwoButtonToast";
 
 const Settings = () => {
     const tag = useContext(TagContext);
@@ -15,12 +16,7 @@ const Settings = () => {
     const [name, setName] = useState("");
     const [warning, setWarning] = useState(false);
     const [warningText, setWarningText] = useState("");
-
-    const deleteWithX = (idNum) => {
-        setID(idNum);
-        tag.deleteTag(idNum);
-        transaction.deleteTransactionTag(idNum);
-    };
+    const [showToast, setShowToast] = useState(false);
 
     const handleOnUpdate = () => {
         if (name === "") {
@@ -47,6 +43,7 @@ const Settings = () => {
         setModalVisible(false);
         transaction.deleteTransactionTag(ID);
         setWarning(false);
+        setShowToast(false);
     };
 
     const openPopUp = (name, ID) => {
@@ -57,6 +54,13 @@ const Settings = () => {
 
     return (
         <View style={styles.container}>
+            <TwoButtonToast
+                show={showToast}
+                onRequestClose={() => {setShowToast(false); setModalVisible(true);}}
+                cancel={() => {setShowToast(false); setModalVisible(true);}}
+                delete={handleDelete}
+                text="Permanently delete this tag?"
+            />
             <PopUp
                 showDate={false}
                 showWarning={warning}
@@ -67,7 +71,7 @@ const Settings = () => {
                 maxLength={15}
                 onChangeText={text => setName(text)}
                 onUpdate={handleOnUpdate}
-                delete={handleDelete}
+                delete={() => {setModalVisible(false); setShowToast(true);}}
             />
             <View style={styles.listWidth}>
                 <FlatList 
@@ -80,7 +84,6 @@ const Settings = () => {
                             <TagListDetail
                                 key={item["ID"]}
                                 name={item["Name"]}
-                                onPress={() => deleteWithX(item["ID"])}
                             />
                         </TouchableOpacity>
                     )}
