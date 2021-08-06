@@ -1,6 +1,7 @@
 import React from "react";
 import {View, StyleSheet, Text, Modal} from "react-native";
 import CustomButton from "./CustomButton";
+import GlobalStyle from "./GlobalStyle";
 
 const Toast = (props) => {
 
@@ -12,7 +13,7 @@ const Toast = (props) => {
             >
             <View style={styles.modalView}>
                 <View style={styles.innerContainer}>
-                    <Text style={styles.text}>{props.text}</Text>
+                    <Text style={[GlobalStyle.BlueRegular, styles.text]}>{props.text}</Text>
                     <View style={styles.view}>
                         <CustomButton text="OK" onPress={props.onPress}/>
                     </View>
@@ -36,8 +37,6 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 18,
-        color: "#03045e",
-        fontFamily: "Nunito-Regular",
         marginVertical: 15,
         marginHorizontal: 15,
         textAlign: "center"

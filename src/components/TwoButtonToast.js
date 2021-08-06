@@ -1,6 +1,7 @@
 import React from "react";
 import {View, StyleSheet, Text, Modal} from "react-native";
 import CustomButton from "./CustomButton";
+import GlobalStyle from "./GlobalStyle";
 
 const TwoButtonToast = (props) => {
 
@@ -12,7 +13,7 @@ const TwoButtonToast = (props) => {
             >
             <View style={styles.modalView}>
                 <View style={styles.innerContainer}>
-                    <Text style={styles.text}>{props.text}</Text>
+                    <Text style={[GlobalStyle.BlueRegular, styles.text]}>{props.text}</Text>
                     <View style={styles.view}>
                         <CustomButton text="CANCEL" onPress={props.cancel}/>
                         <CustomButton text="YES, DELETE" onPress={props.delete}/>
@@ -37,8 +38,6 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 18,
-        color: "#03045e",
-        fontFamily: "Nunito-Regular",
         marginVertical: 15,
         marginHorizontal: 15,
         textAlign: "center"

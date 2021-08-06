@@ -6,6 +6,7 @@ import {getTodayDateDatabase, formatFullDate, formatDateDBStyle} from "../utilit
 import {Context as ReminderContext} from "../context/ReminderContext";
 import PopUp from "./PopUp";
 import TwoButtonToast from "./TwoButtonToast";
+import GlobalStyle from "./GlobalStyle";
 
 const ReminderDetail = (props) => {
     const reminder = useContext(ReminderContext);
@@ -74,6 +75,7 @@ const ReminderDetail = (props) => {
                     }</Text>
                 <Text style={{
                     ...styles.text,
+                    ...GlobalStyle.BlueRegular,
                     textDecorationLine: !props.done
                     ? "none"
                     : "line-through"
@@ -112,8 +114,6 @@ const styles = StyleSheet.create({
     text: {
         flex: 3,
         lineHeight: 24,
-        fontFamily: "Nunito-Regular",
-        color: "#03045e"
     }
 });
 

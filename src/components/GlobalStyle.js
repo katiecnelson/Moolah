@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+    Regular: {
+        fontFamily: "Nunito-Regular",
+    },
     BlueRegular: {
         fontFamily: "Nunito-Regular",
         color: "#03045e",
@@ -16,6 +19,18 @@ export default StyleSheet.create({
     WhiteBold: {
         fontFamily: "Nunito-Bold",
         color: "white",
+    },
+    BlueBlack: {
+        fontFamily: "Nunito-Black",
+        color: "#03045e",
+    },
+    RegularRed: {
+        fontFamily: "Nunito-Regular",
+        color: "red",
+    },
+    TealBold: {
+        color: "#48cae4",
+        fontFamily: "Nunito-Bold"
     },
     headerTitleStyle: {
         fontFamily: "Nunito-Regular",

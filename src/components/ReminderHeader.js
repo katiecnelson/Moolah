@@ -5,6 +5,7 @@ import {Context} from "../context/ReminderContext"
 import {formatDate, formatDateForDatabase} from "../utilities/helper";
 import {DateTimePickerModal} from "react-native-modal-datetime-picker";
 import Toast from "../components/Toast";
+import GlobalStyle from "./GlobalStyle";
 
 const ReminderHeader = () => {
     const {addReminder} = useContext(Context);
@@ -47,7 +48,7 @@ const ReminderHeader = () => {
             <View style={styles.innerContainer}>
                 <View style={styles.dateView}>
                     <TouchableOpacity onPress={() => setShowDatePicker(true)} >
-                        <Text style={{...styles.dateButton, color: date === "DD/MM/YY" ? "#b7b7b7" : "#03045e"}}>{date}</Text>
+                        <Text style={{...styles.dateButton, ...GlobalStyle.Regular, color: date === "DD/MM/YY" ? "#b7b7b7" : "#03045e"}}>{date}</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{width: "50%"}}>
@@ -57,7 +58,7 @@ const ReminderHeader = () => {
                         maxLength={75}
                         value={newDescription}
                         onChangeText={text => setNewDescription(text)}
-                        style={styles.reminderInput}              
+                        style={[GlobalStyle.BlueRegular, styles.reminderInput]}              
                     />
                 </View>
                 <View style={styles.buttonView}>
@@ -88,15 +89,12 @@ const styles = StyleSheet.create({
     dateButton: {
         padding: 10,
         textAlign: "center",
-        fontFamily: "Nunito-Regular"
     },
     reminderInput: {
         paddingHorizontal: 5,
         paddingVertical: 10,
         backgroundColor: "#efefef",
         borderRadius: 10,
-        fontFamily: "Nunito-Regular",
-        color: "#03045e",
         height: 39
     },
     buttonView: {

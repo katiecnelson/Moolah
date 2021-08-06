@@ -9,6 +9,7 @@ import {useNavigation} from "@react-navigation/native";
 import CurrencyInput from "react-native-currency-input";
 import Toast from "../components/Toast";
 import TagModal from "./TagModal";
+import GlobalStyle from "./GlobalStyle";
 import {
     formatAmountNum,
     formatDateForDatabase,
@@ -91,7 +92,7 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
                     onPress={() => navigation.navigate("Settings")}
                 >
                     <Icon name="edit" style={styles.incomeIcon}/>
-                    <Text style={styles.incomeText}>EDIT INCOME</Text>
+                    <Text style={[GlobalStyle.TealBold, styles.incomeText]}>EDIT INCOME</Text>
                 </TouchableOpacity>
             : <View style={styles.topView}/>
             )}
@@ -101,7 +102,7 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
                     returnKeyType="done"
                     textAlign={"center"}
                     keyboardType={"number-pad"}
-                    style={styles.currencyIn}
+                    style={[GlobalStyle.BlueRegular, styles.currencyIn]}
                     value={amount}
                     onChangeValue={setAmount}
                     unit="£"
@@ -112,7 +113,7 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
                     maxLength={10}
                     />
                 <TouchableOpacity onPress={() => setShowDatePicker(true)} style={styles.datePicker}>
-                    <Text style={styles.dateText}>{date}</Text>  
+                    <Text style={[GlobalStyle.BlueRegular, styles.dateText]}>{date}</Text>  
                 </TouchableOpacity>
             </View>
             <DateTimePickerModal
@@ -131,7 +132,7 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
                     <View style={{...styles.radius, backgroundColor: categoryID === 1 ? "#efefef" : "white"}}>
                         <Icon name="needs" style={{...styles.icon, color: "#9ce0ff"}} />
                     </View>
-                    <Text style={styles.textBold}>{categoryIncome.state.labelOne}</Text>
+                    <Text style={GlobalStyle.BlueBold}>{categoryIncome.state.labelOne}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={.8}
@@ -140,7 +141,7 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
                     <View style={{...styles.radius, backgroundColor: categoryID === 2 ? "#efefef" : "white"}}>
                         <Icon name="wants" style={{...styles.icon, color: "#1489cc"}} />
                     </View>
-                    <Text style={styles.textBold}>{categoryIncome.state.labelTwo}</Text>
+                    <Text style={GlobalStyle.BlueBold}>{categoryIncome.state.labelTwo}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={.8}
@@ -149,13 +150,14 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
                     <View style={{...styles.radius, backgroundColor: categoryID === 3 ? "#efefef" : "white"}}>
                         <Icon name="goals" style={{...styles.icon, color: "#024f86"}} />
                     </View>
-                    <Text style={styles.textBold}>{categoryIncome.state.labelThree}</Text>
+                    <Text style={GlobalStyle.BlueBold}>{categoryIncome.state.labelThree}</Text>
                 </TouchableOpacity>
             </View>
             <TouchableOpacity onPress={() => setOpenDropdown(true)} style={styles.tagOpacity}>
                 <View style={styles.tagView}>
                     <Text style={{
                         ...styles.descriptionText,
+                        ...GlobalStyle.Regular,
                         color: tagLabel === "TAG (OPTIONAL)"
                         || tagLabel === null 
                         ? "#b7b7b7"
@@ -172,7 +174,7 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
                 value={description}
                 placeholderTextColor="#b7b7b7"
                 onChangeText={text => setDescription(text)}
-                style={styles.descriptionIn}
+                style={[GlobalStyle.BlueRegular, styles.descriptionIn]}
             />
             <TagModal 
                 open={openDropdown}
@@ -227,18 +229,12 @@ const styles = StyleSheet.create({
         padding: 7,
     },
     incomeText: {
-        fontFamily: "Nunito-Bold",
-        color: "#48cae4",
         lineHeight: 32
     },
     incomeIcon: {
         fontSize: 32,
         color: "#48cae4",
         paddingRight: 10
-    },
-    textBold: {
-        fontFamily: "Nunito-Bold",
-        color: "#03045e"
     },
     containerIcons: {
         justifyContent: "center",
@@ -267,9 +263,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#efefef",
         borderRadius: 10,
         fontSize: 28,
-        color: "#03045e",
         width: "48%",
-        fontFamily: "Nunito-Regular"
     },
     radius: {
         borderRadius: 10
@@ -290,9 +284,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#efefef",
         borderRadius: 10,
         fontSize: 18,
-        color: "#03045e",
         width: "94%",
-        fontFamily: "Nunito-Regular"
     },
     bottomView: {
         flex: 1,
@@ -303,7 +295,6 @@ const styles = StyleSheet.create({
     descriptionText: {
         fontSize: 18,
         padding: 15,
-        fontFamily: "Nunito-Regular"
     },
     arrow: {
         fontSize: 20,
@@ -320,8 +311,6 @@ const styles = StyleSheet.create({
     dateText: {
         padding: 15,
         fontSize: 28,
-        color: "#03045e",
-        fontFamily: "Nunito-Regular"
     },
     currencyView: {
         flexDirection: "row",

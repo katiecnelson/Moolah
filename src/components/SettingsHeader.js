@@ -58,7 +58,7 @@ const SettingsHeader = () => {
                 text="Please fill out income, unique category names, and ensure that percentage numbers total 100."
             />
             <View style={styles.container}>
-                <Text style={styles.text}>INCOME:</Text>
+                <Text style={[GlobalStyle.BlueBold, styles.text]}>INCOME:</Text>
                 <CurrencyInput
                     returnKeyLabel="Done"
                     returnKeyType="done"
@@ -73,7 +73,7 @@ const SettingsHeader = () => {
                     maxLength={7}
                     textAlign={"center"}
                     keyboardType={"number-pad"}
-                    style={styles.currencyInput}
+                    style={[GlobalStyle.BlueRegular, styles.currencyInput]}
                 />
             </View>
             <View style={styles.labelContainer}>
@@ -83,21 +83,21 @@ const SettingsHeader = () => {
                         onChangeText={setLabelOne}
                         textAlign={"center"}
                         maxLength={8}
-                        style={styles.labelInput}
+                        style={[GlobalStyle.BlueBold, styles.labelInput]}
                     />
                     <TextInput
                         value={labelTwo.toUpperCase()}
                         onChangeText={setLabelTwo}
                         textAlign={"center"}
                         maxLength={8}
-                        style={styles.labelInput}
+                        style={[GlobalStyle.BlueBold, styles.labelInput]}
                     />
                     <TextInput
                         value={labelThree.toUpperCase()}
                         onChangeText={setLabelThree}
                         textAlign={"center"}
                         maxLength={8}
-                        style={styles.labelInput}
+                        style={[GlobalStyle.BlueBold, styles.labelInput]}
                     />
                 </View>
                 <View style={styles.iconView}>
@@ -115,7 +115,7 @@ const SettingsHeader = () => {
                             textAlign={"center"}
                             maxLength={2}
                             keyboardType={"number-pad"}
-                            style={styles.percentInput}
+                            style={[GlobalStyle.BlueBold, styles.percentInput]}
                         />
                         <Text style={[GlobalStyle.BlueRegular, styles.percent]}>%</Text>
                     </View>
@@ -128,7 +128,7 @@ const SettingsHeader = () => {
                             textAlign={"center"}
                             maxLength={2}
                             keyboardType={"number-pad"}
-                            style={styles.percentInput}
+                            style={[GlobalStyle.BlueBold, styles.percentInput]}
                         />
                         <Text style={[GlobalStyle.BlueRegular, styles.percent]}>%</Text>
                     </View>
@@ -141,7 +141,7 @@ const SettingsHeader = () => {
                             textAlign={"center"}
                             maxLength={2}
                             keyboardType={"number-pad"}
-                            style={styles.percentInput}
+                            style={[GlobalStyle.BlueBold, styles.percentInput]}
                         />
                         <Text style={[GlobalStyle.BlueRegular, styles.percent]}>%</Text>
                     </View>
@@ -150,7 +150,7 @@ const SettingsHeader = () => {
                     <CustomButton text="save" onPress={handleSave} />
                 </View>
                 <View style={styles.lowerTitle}>
-                    <Text style={styles.title}>TAGS</Text>
+                    <Text style={[GlobalStyle.BlueRegular, styles.title]}>TAGS</Text>
                 </View>
                 <AddTag
                     text="Your tag here ..."
@@ -170,8 +170,6 @@ const styles = StyleSheet.create({
         marginVertical: 20
     },
     text: {
-        fontFamily: "Nunito-Bold",
-        color: "#03045e",
         lineHeight: 55,
         paddingRight: 10
     },
@@ -180,9 +178,7 @@ const styles = StyleSheet.create({
         lineHeight: 42
     },
     title: {
-        fontFamily: "Nunito-Regular",
         fontSize: 24,
-        color: "#03045e",
         marginTop: 25,
     },
     currencyInput: {
@@ -191,17 +187,13 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: "45%",
         fontSize: 28,
-        color: "#03045e",
-        fontFamily: "Nunito-Regular"
     },
     labelInput: {
-        fontFamily: "Nunito-Bold",
         flex: 1,
         marginHorizontal: 5,
         padding: 10,
         backgroundColor: "#efefef",
         borderRadius: 10,
-        color: "#03045e",
         height: 40
     },
     icon: {
@@ -215,14 +207,12 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     percentInput: {
-        fontFamily: "Nunito-Bold",
         marginHorizontal: 5,
         paddingVertical: 10,
         paddingHorizontal: 15,
         backgroundColor: "#efefef",
         borderRadius: 10,
         fontSize: 16,
-        color: "#03045e",
         height: 40
     },
     percentContainer: {

@@ -7,6 +7,7 @@ import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext
 import {formatAmountString} from "../utilities/helper";
 import NewTransactionButton from "./NewTransactionButton";
 import {TabActions, useNavigation} from "@react-navigation/native";
+import GlobalStyle from "./GlobalStyle";
 
 const DashboardHeader = () => {
     const categoryIncome = useContext(CategoryIncomeContext);
@@ -23,8 +24,8 @@ const DashboardHeader = () => {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate("Settings")} style={styles.opacity}>
-                <Text style={styles.smallTitle}>INCOME:</Text>
-                <Text style={styles.income}>{formatAmountString(categoryIncome.state.income)}</Text>
+                <Text style={[GlobalStyle.BlueBold ,styles.smallTitle]}>INCOME:</Text>
+                <Text style={[GlobalStyle.BlueBold, styles.largeFont]}>{formatAmountString(categoryIncome.state.income)}</Text>
                 <Icon name="edit" style={styles.editIcon} />
             </TouchableOpacity>
             <View style={styles.needWantGoalIcons}>
@@ -86,7 +87,7 @@ const DashboardHeader = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.lowerTitle}>
-                <Text style={styles.title}>TRANSACTIONS</Text>
+                <Text style={[GlobalStyle.BlueRegular, styles.largeFont]}>TRANSACTIONS</Text>
             </View>
             <View style={styles.newTransact}>
                 <NewTransactionButton onPress={() => jumpTabs("New")} />
@@ -99,21 +100,12 @@ const styles = StyleSheet.create({
     container: {
         alignItems: "center"
     },
-    title: {
-        fontFamily: "Nunito-Regular",
+    largeFont: {
         fontSize: 24,
-        color: "#03045e"
     },
     smallTitle: {
-        fontFamily: "Nunito-Bold",
         paddingTop: 15,
         fontSize: 14,
-        color: "#03045e"
-    },
-    income: {
-        fontFamily: "Nunito-Bold",
-        fontSize: 24,
-        color: "#03045e"
     },
     needWantGoalIcons: {
         paddingTop: 15,
