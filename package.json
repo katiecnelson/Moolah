@@ -27,7 +27,6 @@
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
     "react-native-currency-input": "^1.0.1",
-    "react-native-dropdown-picker": "^5.1.21",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-keyboard-aware-scroll-view": "^0.9.4",
     "react-native-modal-datetime-picker": "^10.2.0",
@@ -42,7 +41,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
-    "jest-expo": "^42.0.1"
+    "jest-expo": "^42.1.0",
+    "mockdate": "^3.0.5"
   },
   "private": true
 }

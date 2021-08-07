@@ -1,3 +1,9 @@
+/**
+ * This code comes from Stephen Grider's Udemy course: 
+ * The Complete React Native + Hooks Course, 138. More Automatic Context Creation
+ * https://www.udemy.com/course/the-complete-react-native-and-redux-course/
+ */
+
 import React, {useReducer} from "react";
 
 export default (reducer, actions, initialState) => {

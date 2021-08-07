@@ -41,8 +41,8 @@ const AddTag = (props) => {
                 </TouchableOpacity>
             </View>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     flex: {
@@ -62,6 +62,6 @@ const styles = StyleSheet.create({
         color: "#48cae4",
         lineHeight: 45,
     },
-})
+});
 
 export default AddTag;

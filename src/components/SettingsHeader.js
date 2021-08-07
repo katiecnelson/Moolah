@@ -147,7 +147,7 @@ const SettingsHeader = () => {
                     </View>
                 </View>
                 <View style={styles.saveView}>
-                    <CustomButton text="save" onPress={handleSave} />
+                    <CustomButton text="SAVE" onPress={handleSave} />
                 </View>
                 <View style={styles.lowerTitle}>
                     <Text style={[GlobalStyle.BlueRegular, styles.title]}>TAGS</Text>

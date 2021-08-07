@@ -5,7 +5,7 @@ import {Context as TransactionContext} from "../context/TransactionContext";
 import SettingsHeader from "../components/SettingsHeader";
 import TagListDetail from "../components/TagListDetail";
 import PopUp from "../components/PopUp";
-import {sortDescending, findTag} from "../utilities/helper";
+import {sortAscending, findTag} from "../utilities/helper";
 import TwoButtonToast from "../components/TwoButtonToast";
 
 const Settings = () => {
@@ -75,7 +75,7 @@ const Settings = () => {
             />
             <View style={styles.listWidth}>
                 <FlatList 
-                    data={sortDescending(tag.state, "Name")}
+                    data={sortAscending(tag.state, "Name")}
                     ListHeaderComponent={SettingsHeader}
                     contentContainerStyle={styles.flatList}
                     keyExtractor={(item) => item.ID.toString()}
