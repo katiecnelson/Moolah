@@ -4,7 +4,7 @@ import TransactionForm from "../components/TransactionForm";
 import TwoButtonToast from "../components/TwoButtonToast";
 import {Context as TransactionContext} from "../context/TransactionContext";
 import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
-import {useNavigation, StackActions, TabActions} from "@react-navigation/native";
+import {useNavigation, StackActions} from "@react-navigation/native";
 
 const EditTransaction = ({route}) => {
 
@@ -21,21 +21,12 @@ const EditTransaction = ({route}) => {
 
     const handleOnDelete = () => {
         navigation.dispatch(StackActions.pop(1));
-        // navigation.dispatch(TabActions.jumpTo("Dash"));
         transactions.deleteTransaction(transaction["ID"]);
         categoryIncome.categoriesDeleteTransaction(originalCategory, originalAmount);
     };
 
     const handleOnSubmit = (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue) => {
-        // navigation.dispatch(CommonActions.reset({
-        //     index: 0,
-        //     routes: [
-        //       {name: "Dashboard"},
-        //     ],
-        //   })
-        // );
-        navigation.dispatch(StackActions.pop(1)); // <-- i might switch back to this one
-        // navigation.dispatch(TabActions.jumpTo("Dash"));
+        navigation.dispatch(StackActions.pop(1));
         transactions.editTransaction(
             transaction["ID"], amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue,
             () => {

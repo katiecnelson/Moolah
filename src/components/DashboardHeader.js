@@ -29,7 +29,7 @@ const DashboardHeader = () => {
                 <Icon name="edit" style={styles.editIcon} />
             </TouchableOpacity>
             <View style={styles.needWantGoalIcons}>
-                <TouchableOpacity onPress={() => jumpTabs("Needs")}>
+                <TouchableOpacity style={styles.detail} onPress={() => jumpTabs("Needs")}>
                     <NeedWantGoalDetail
                         title={categoryIncome.state.labelOne}
                         iconName="needs"
@@ -37,7 +37,7 @@ const DashboardHeader = () => {
                         amount={formatAmountString(categoryIncome.state.toSpendOne)}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => jumpTabs("Wants")}>
+                <TouchableOpacity style={styles.detail} onPress={() => jumpTabs("Wants")}>
                     <NeedWantGoalDetail
                         title={categoryIncome.state.labelTwo}
                         iconName="wants"
@@ -45,7 +45,7 @@ const DashboardHeader = () => {
                         amount={formatAmountString(categoryIncome.state.toSpendTwo)}
                     />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => jumpTabs("Goals")}>
+                <TouchableOpacity style={styles.detail} onPress={() => jumpTabs("Goals")}>
                     <NeedWantGoalDetail
                         title={categoryIncome.state.labelThree}
                         iconName="goals"
@@ -145,6 +145,9 @@ const styles = StyleSheet.create({
     },
     newTransact: {
         width: "100%"
+    },
+    detail: {
+        width: "28%"
     }
 });
 
