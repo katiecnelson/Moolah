@@ -16,7 +16,7 @@ const NeedWantGoalHeader = (props) => {
                 </View>
                 <View>
                     <View style={[styles.progressBar, styles.barOutter]}>
-                        {( props.percentSpent > 0 ?
+                        {( props.percent > 0 ?
                         <View
                             style={{
                             ...styles.progressBar, 
