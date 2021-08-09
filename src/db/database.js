@@ -144,7 +144,7 @@ const getAllTransactions = async () => {
             tx.executeSql(
                 "SELECT Transactions.ID AS ID, Date, Description, Amount, Categories.Label AS CategoryLabel, Categories.Value AS CategoryValue, Tag AS TagID, Tags.Name AS Tag FROM Transactions LEFT OUTER JOIN Categories ON Transactions.Category = Categories.ID LEFT OUTER JOIN Tags ON Transactions.Tag = Tags.ID",
                 [],
-                (_, result) => {resolve(result.rows._array); console.log(result.rows._array)},
+                (_, result) => resolve(result.rows._array),
                 (_, error) => {console.log("Error getting all transactions from the database"); reject(console.log(error));},
             );
         });
