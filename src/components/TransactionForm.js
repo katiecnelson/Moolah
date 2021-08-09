@@ -132,7 +132,7 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
                     <View style={{...styles.radius, backgroundColor: categoryID === 1 ? "#efefef" : "white"}}>
                         <Icon name="needs" style={{...styles.icon, color: "#9ce0ff"}} />
                     </View>
-                    <Text style={GlobalStyle.BlueBold}>{categoryIncome.state.labelOne}</Text>
+                    <Text numberOfLines={1} style={GlobalStyle.BlueBold}>{categoryIncome.state.labelOne}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={.8}
@@ -141,7 +141,7 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
                     <View style={{...styles.radius, backgroundColor: categoryID === 2 ? "#efefef" : "white"}}>
                         <Icon name="wants" style={{...styles.icon, color: "#1489cc"}} />
                     </View>
-                    <Text style={GlobalStyle.BlueBold}>{categoryIncome.state.labelTwo}</Text>
+                    <Text numberOfLines={1} style={GlobalStyle.BlueBold}>{categoryIncome.state.labelTwo}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={.8}
@@ -150,7 +150,7 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
                     <View style={{...styles.radius, backgroundColor: categoryID === 3 ? "#efefef" : "white"}}>
                         <Icon name="goals" style={{...styles.icon, color: "#024f86"}} />
                     </View>
-                    <Text style={GlobalStyle.BlueBold}>{categoryIncome.state.labelThree}</Text>
+                    <Text numberOfLines={1} style={GlobalStyle.BlueBold}>{categoryIncome.state.labelThree}</Text>
                 </TouchableOpacity>
             </View>
             <TouchableOpacity onPress={() => setOpenDropdown(true)} style={styles.tagOpacity}>
@@ -172,6 +172,7 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
                 returnKeyType="done"
                 placeholder="DESCRIPTION (OPTIONAL)" 
                 value={description}
+                maxLength={20}
                 placeholderTextColor="#b7b7b7"
                 onChangeText={text => setDescription(text)}
                 style={[GlobalStyle.BlueRegular, styles.descriptionIn]}
@@ -239,6 +240,7 @@ const styles = StyleSheet.create({
     containerIcons: {
         justifyContent: "center",
         alignItems: "center",
+        flex: 1
     },
     editIncomeOpacity: {
         flexDirection: "row",
@@ -259,10 +261,11 @@ const styles = StyleSheet.create({
         height: 40
     },
     currencyIn: {
-        padding: 10,
+        paddingHorizontal: 5,
+        paddingVertical: 15,
         backgroundColor: "#efefef",
         borderRadius: 10,
-        fontSize: 28,
+        fontSize: 24,
         width: "48%",
     },
     radius: {
@@ -309,8 +312,9 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     dateText: {
-        padding: 15,
-        fontSize: 28,
+        paddingVertical: 15,
+        paddingHorizontal: 5,
+        fontSize: 24,
     },
     currencyView: {
         flexDirection: "row",

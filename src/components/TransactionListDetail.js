@@ -8,20 +8,20 @@ const TransactionListDetail = (props) => {
         <View>
             <View style={styles.container}>
                 <View style={styles.topView}>
-                    <Text style={[GlobalStyle.BlueRegular, styles.text]}>{props.date}</Text>
+                    <Text numberOfLines={1} style={[GlobalStyle.BlueRegular, styles.leftColumn]}>{props.date}</Text>
                     <Text numberOfLines={1} style={[GlobalStyle.BlueRegular, styles.textTwo]}>{props.description}</Text>
-                    <View style={styles.leftColumn}>
-                        <Text style={[GlobalStyle.BlueBold, styles.lineHeight]}>{props.amount}</Text>
+                    <View style={styles.rightColumn}>
+                        <Text numberOfLines={1} style={[GlobalStyle.BlueBold, styles.lineHeight]}>{props.amount}</Text>
                     </View>
                 </View>
                 <View style={styles.rowTwo}>
-                    <Text style={[GlobalStyle.BlueRegular, styles.text]}>{props.category}</Text>
+                    <Text numberOfLines={1} style={[GlobalStyle.BlueRegular, styles.leftColumn]}>{props.category}</Text>
                     <View style={styles.flexTwo}>
                     <View style={{...styles.tagBack, backgroundColor: props.tag === null ? "rgba(0, 0, 0, 0)" : "#48cae4"}}>
-                            <Text style={[GlobalStyle.WhiteBold, styles.tagText]}>{props.tag}</Text>
+                            <Text numberOfLines={1} style={[GlobalStyle.WhiteBold, styles.tagText]}>{props.tag}</Text>
                         </View>
                     </View>
-                    <TouchableOpacity style={styles.leftColumn} onPress={props.onPress}>
+                    <TouchableOpacity style={styles.rightColumn} onPress={props.onPress}>
                         <Icon name="edit" style={styles.edit} />
                     </TouchableOpacity>
                 </View>
@@ -34,12 +34,8 @@ const styles = StyleSheet.create({
     container: {
         padding: 5
     },
-    text: {
-        flex: 1.4,
-        lineHeight: 28
-    },
-    textTwo: {
-        flex: 2,
+    leftColumn: {
+        flex: 1.25,
         lineHeight: 28
     },
     lineHeight: {
@@ -49,8 +45,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-around"
     },
-    leftColumn: {
-        flex: 1,
+    rightColumn: {
+        flex: 1.25,
         alignItems: "flex-end"
     },
     rowTwo: {
@@ -64,6 +60,10 @@ const styles = StyleSheet.create({
     tagBack: {
         borderRadius: 5,
         alignSelf: "flex-start"
+    },
+    textTwo: {
+        flex: 2,
+        lineHeight: 28
     },
     tagText: {
         padding: 3,
