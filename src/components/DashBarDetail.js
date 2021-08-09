@@ -16,7 +16,8 @@ const DashBarDetail = (props) => {
             <View style={styles.barView}>
                 <View>
                     <View style={styles.barBackground}>
-                        <View
+                       {( props.percentSpent > 0 ?
+                       <View
                             style={{
                             ...styles.barColor, 
                             width: props.percentSpent >= 100 
@@ -25,6 +26,8 @@ const DashBarDetail = (props) => {
                             backgroundColor: props.color
                             }}>
                         </View>
+                        : null
+                        )}
                     </View>
                 </View>
                 <View >

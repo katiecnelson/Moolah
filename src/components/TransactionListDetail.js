@@ -18,7 +18,7 @@ const TransactionListDetail = (props) => {
                     <Text style={[GlobalStyle.BlueRegular, styles.text]}>{props.category}</Text>
                     <View style={styles.flexTwo}>
                     <View style={{...styles.tagBack, backgroundColor: props.tag === null ? "rgba(0, 0, 0, 0)" : "#48cae4"}}>
-                            <Text style={styles.tagText}>{props.tag}</Text>
+                            <Text style={[GlobalStyle.WhiteBold, styles.tagText]}>{props.tag}</Text>
                         </View>
                     </View>
                     <TouchableOpacity style={styles.leftColumn} onPress={props.onPress}>
@@ -66,8 +66,6 @@ const styles = StyleSheet.create({
         alignSelf: "flex-start"
     },
     tagText: {
-        fontFamily: "Nunito-Bold",
-        color: "white",
         padding: 3,
         alignSelf: "center"
     },

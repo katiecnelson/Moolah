@@ -1,11 +1,12 @@
 import React from "react";
 import {View, StyleSheet, Text} from "react-native";
+import GlobalStyle from "./GlobalStyle";
 
 const ReminderFooter = (props) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>{props.showCompleted ? "SHOW COMPLETED" : "HIDE COMPLETED"}</Text>
+            <Text style={[GlobalStyle.TealBold, styles.text]}>{props.showCompleted ? "SHOW COMPLETED" : "HIDE COMPLETED"}</Text>
         </View>
     );
 };
@@ -17,9 +18,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     text: {
-        fontFamily: "Nunito-Bold",
         fontSize: 16,
-        color: "#48cae4"
     }
 });
 

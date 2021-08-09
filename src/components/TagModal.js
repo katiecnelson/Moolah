@@ -16,7 +16,7 @@ const TagModal = (props) => {
             <View style={styles.modalView}>
                 <View style={styles.innerContainer}>
                     <TouchableOpacity style={styles.exitOpacity} onPress={props.press}> 
-                        <Text style={styles.exit}>X</Text>
+                        <Text style={[GlobalStyle.BlueBlack, styles.exit]}>X</Text>
                     </TouchableOpacity>
                     <FlatList
                         data={tags.state.sort((a, b) => a["Name"].localeCompare(b["Name"]))}
@@ -27,7 +27,7 @@ const TagModal = (props) => {
                             color="#fcfcfc"
                         />
                         <TouchableOpacity onPress={() => props.done("TAG (OPTIONAL)", null)}>
-                            <Text style={styles.none}>None</Text>
+                            <Text style={[GlobalStyle.TealBold, styles.none]}>None</Text>
                         </TouchableOpacity>
                         </View>
                         }
@@ -57,8 +57,6 @@ const styles = StyleSheet.create({
         width: 50,
     },
     exit: {
-        fontFamily: "Nunito-Black",
-        color: "#03045e",
         fontSize: 24,
         paddingLeft: 10,
         paddingVertical: 7
@@ -74,8 +72,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1
     },
     none: {
-        fontFamily: "Nunito-Bold",
-        color: "#48cae4",
         fontSize: 18,
         padding: 15
     },

@@ -10,7 +10,6 @@ const History = ({navigation}) => {
     const transaction = useContext(TransactionContext);
     const data = processHistoricalData(transaction.state);
     const length = data.length;
-    console.log("THIS IS LENGTH: " + length);
 
     return (
         length > 0

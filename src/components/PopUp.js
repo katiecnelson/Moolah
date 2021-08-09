@@ -25,7 +25,7 @@ const PopUp = (props) => {
                 mode="date"
                 onCancel={() => {setShowDatePicker(false)}}
                 onConfirm={handleOnConfirm}
-                maximumDate={new Date(2025, 11, 31)}
+                maximumDate={new Date(2050, 11, 31)}
                 minimumDate={new Date()}
                 />
             <View style={styles.modalView}>
@@ -35,7 +35,7 @@ const PopUp = (props) => {
                             <TouchableOpacity
                                 style={styles.exitOpacity}
                                 onPress={props.close}>
-                                <Text style={styles.exit}>X</Text>
+                                <Text style={[GlobalStyle.BlueBlack, styles.exit]}>X</Text>
                             </TouchableOpacity>
                         </View>
                         {( props.showDate 
@@ -55,7 +55,7 @@ const PopUp = (props) => {
                             onChangeText={props.onChangeText}
                         />
                         {( props.showWarning
-                            ? <Text style={styles.warningText}>{props.warningText}</Text>
+                            ? <Text style={[GlobalStyle.RegularRed, styles.warningText]}>{props.warningText}</Text>
                             : null
                         )}
                         <View style={styles.updateView}>
@@ -103,8 +103,6 @@ const styles = StyleSheet.create({
         width: 20,
     },
     exit: {
-        fontFamily: "Nunito-Black",
-        color: "#03045e",
         fontSize: 24,
     },
     textInput: {
@@ -135,8 +133,7 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     warningText: {
-        fontFamily: "Nunito-Regular",
-        color: "red",
+
         paddingBottom: 7,
         textAlign: "center"
     },

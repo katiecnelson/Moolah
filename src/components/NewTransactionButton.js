@@ -1,13 +1,14 @@
 import React from "react";
 import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import Icon from "./Icon";
+import GlobalStyle from "./GlobalStyle";
 
 const NewTransactionButton = (props) => {
     return (
         <View style={styles.container} >
             <TouchableOpacity style={styles.opacity} onPress={props.onPress}>
                 <Icon name="new" style={styles.icon}/>
-                <Text style={styles.text}>NEW TRANSACTION</Text>
+                <Text style={[GlobalStyle.TealBold, styles.text]}>NEW TRANSACTION</Text>
             </TouchableOpacity>
         </View>
     );
@@ -29,9 +30,7 @@ const styles = StyleSheet.create({
         paddingRight: 7
     },
     text: {
-        color: "#48cae4",
         lineHeight: 28,
-        fontFamily: "Nunito-Bold"
     },
 });
 

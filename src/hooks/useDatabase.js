@@ -1,3 +1,8 @@
+/**
+ * This custom hook was inspired by code written by Jake Sparling and can be found here:
+ * https://www.jsparling.com/using-hooks-and-context-with-sqlite-for-expo-in-react-native/
+ */
+
 import React, {useEffect} from "react";
 import {database} from "../db/database";
 
@@ -7,9 +12,6 @@ export default function useDatabase() {
   useEffect(() => {
     async function loadDataAsync() {
       try {
-        // await database.dropDatabaseTables();
-        // await database.setUpTestData();
-        // await database.setUpData();
         await database.setUpDatabase();
         const response = await database.getAllCategories();
         if (response.length === 0) {

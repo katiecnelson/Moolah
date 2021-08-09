@@ -25,7 +25,7 @@ export const calculateRemaining = (income, spent) => {
 };
 
 export const percentSpent = (toSpend, spent) => {
-    return (spent/toSpend) * 100;
+    return parseFloat(((spent/toSpend) * 100).toFixed(2));
 };
 
 export const percentSpentString = (percentSpent) => {
@@ -177,6 +177,8 @@ export const processHistoricalData = (data) => {
     return result; 
 };
 
+// 
+
 export const getBadgeCount = (data) => {
     const today = getTodayDateDatabase();
     let count = 0;
@@ -202,7 +204,7 @@ export const filterSortTabs = (data, category) => {
     .sort((a, b) => b["Date"].localeCompare(a["Date"]));
 };
 
-export const sortDescending = (data, sortBy) => {
+export const sortAscending = (data, sortBy) => {
     return data.sort((a, b) => a[sortBy].localeCompare(b[sortBy]));
 };
 

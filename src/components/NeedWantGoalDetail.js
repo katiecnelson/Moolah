@@ -1,14 +1,15 @@
 import React from "react";
 import { View, Text, StyleSheet} from "react-native";
 import Icon from "./Icon";
+import GlobalStyle from "./GlobalStyle";
 
 const NeedWantGoalDetail = (props) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>{props.title}</Text>
+            <Text style={[GlobalStyle.BlueBold ,styles.text]}>{props.title}</Text>
             <Icon name={props.iconName} style={{...styles.icon, color: props.color}} />
-            <Text style={styles.text}>{props.amount}</Text>
+            <Text style={[GlobalStyle.BlueBold ,styles.text]}>{props.amount}</Text>
         </View>
     );
 };
@@ -19,9 +20,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     text: {
-        fontFamily: "Nunito-Bold",
         fontSize: 14,
-        color: "#03045e"
     },
     icon: {
         fontSize: 32,

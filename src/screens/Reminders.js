@@ -4,7 +4,7 @@ import ReminderDetail from "../components/ReminderDetail";
 import {Context as ReminderContext} from "../context/ReminderContext";
 import ReminderHeader from "../components/ReminderHeader";
 import ReminderFooter from "../components/ReminderFooter";
-import {sortDescending} from "../utilities/helper";
+import {sortAscending} from "../utilities/helper";
 
 const Reminders = () => {
     const reminder = useContext(ReminderContext);
@@ -22,7 +22,7 @@ const Reminders = () => {
         <View style={styles.container}>
             <View style={styles.innerContainer}>
             <FlatList
-                data={sortDescending(reminder.state, "Date")}
+                data={sortAscending(reminder.state, "Date")}
                 ListHeaderComponent={ReminderHeader}
                 ListFooterComponent={() =>
                     <TouchableOpacity onPress={handleOnPress}>

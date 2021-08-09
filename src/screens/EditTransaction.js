@@ -1,9 +1,11 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {StyleSheet, View} from "react-native";
 import TransactionForm from "../components/TransactionForm";
+import TwoButtonToast from "../components/TwoButtonToast";
 import {Context as TransactionContext} from "../context/TransactionContext";
 import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
-import {useNavigation, StackActions, TabActions,} from "@react-navigation/native";
+import {useNavigation, StackActions} from "@react-navigation/native";
+import {getCurrentMonth} from "../utilities/helper";
 
 const EditTransaction = ({route}) => {
 
@@ -12,27 +14,25 @@ const EditTransaction = ({route}) => {
     const transactions = useContext(TransactionContext);
     const transaction = transactions.state.find(transaction => transaction["ID"] === route.params.ID);
 
+    const currentMonth = getCurrentMonth();
+
     const categoryIncome = useContext(CategoryIncomeContext);
     const originalCategory = transaction !== undefined ? transaction["CategoryValue"] : "zero";
     const originalAmount = transaction !== undefined ? transaction["Amount"] : 0;
+    const originalDate = transaction !== undefined ? transaction["Date"] : "";
 
-    const handleOnPress = () => {
+    const [showToast, setShowToast] = useState(false)
+
+    const handleOnDelete = () => {
         navigation.dispatch(StackActions.pop(1));
-        // navigation.dispatch(TabActions.jumpTo("Dash"));
         transactions.deleteTransaction(transaction["ID"]);
-        categoryIncome.categoriesDeleteTransaction(originalCategory, originalAmount);
+        if(originalDate.substring(0, 7) === currentMonth) {
+            categoryIncome.categoriesDeleteTransaction(originalCategory, originalAmount);
+        }
     };
 
     const handleOnSubmit = (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue) => {
-        // navigation.dispatch(CommonActions.reset({
-        //     index: 0,
-        //     routes: [
-        //       {name: "Dashboard"},
-        //     ],
-        //   })
-        // );
-        navigation.dispatch(StackActions.pop(1)); // <-- i might switch back to this one
-        // navigation.dispatch(TabActions.jumpTo("Dash"));
+        navigation.dispatch(StackActions.pop(1));
         transactions.editTransaction(
             transaction["ID"], amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue,
             () => {
@@ -44,9 +44,16 @@ const EditTransaction = ({route}) => {
     return (
         transaction !== undefined
         ? <View style={styles.container}>
+            <TwoButtonToast
+                show={showToast}
+                onRequestClose={() => setShowToast(false)}
+                cancel={() => setShowToast(false)}
+                delete={handleOnDelete}
+                text="Permanently delete this transaction?"
+            />
             <TransactionForm 
                 onSubmit={handleOnSubmit}
-                onPress={handleOnPress}
+                onPress={() => setShowToast(true)}
                 showDelete
                 showIncome={false}
                 initialValues= {{
