@@ -5,6 +5,7 @@ import TwoButtonToast from "../components/TwoButtonToast";
 import {Context as TransactionContext} from "../context/TransactionContext";
 import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext";
 import {useNavigation, StackActions} from "@react-navigation/native";
+import {getCurrentMonth} from "../utilities/helper";
 
 const EditTransaction = ({route}) => {
 
@@ -13,16 +14,21 @@ const EditTransaction = ({route}) => {
     const transactions = useContext(TransactionContext);
     const transaction = transactions.state.find(transaction => transaction["ID"] === route.params.ID);
 
+    const currentMonth = getCurrentMonth();
+
     const categoryIncome = useContext(CategoryIncomeContext);
     const originalCategory = transaction !== undefined ? transaction["CategoryValue"] : "zero";
     const originalAmount = transaction !== undefined ? transaction["Amount"] : 0;
+    const originalDate = transaction !== undefined ? transaction["Date"] : "";
 
     const [showToast, setShowToast] = useState(false)
 
     const handleOnDelete = () => {
         navigation.dispatch(StackActions.pop(1));
         transactions.deleteTransaction(transaction["ID"]);
-        categoryIncome.categoriesDeleteTransaction(originalCategory, originalAmount);
+        if(originalDate.substring(0, 7) === currentMonth) {
+            categoryIncome.categoriesDeleteTransaction(originalCategory, originalAmount);
+        }
     };
 
     const handleOnSubmit = (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue) => {

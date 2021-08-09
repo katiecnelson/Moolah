@@ -16,9 +16,9 @@ const NewTransaction = () => {
 
     const handleOnSubmit = (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue) => {
         transactions.addTransaction(amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue);
-        categoryIncome.categoriesAddTransaction(categoryValue, amount);
-
+        
         if(date.substring(0, 7) === currentMonth) {
+            categoryIncome.categoriesAddTransaction(categoryValue, amount);
             navigation.navigate("Dash", {screen: "Dashboard"});
         } else {
             navigation.navigate("Dash", {screen: "History"});
