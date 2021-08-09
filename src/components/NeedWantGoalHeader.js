@@ -16,6 +16,7 @@ const NeedWantGoalHeader = (props) => {
                 </View>
                 <View>
                     <View style={[styles.progressBar, styles.barOutter]}>
+                        {( props.percentSpent > 0 ?
                         <View
                             style={{
                             ...styles.progressBar, 
@@ -24,6 +25,8 @@ const NeedWantGoalHeader = (props) => {
                             ? "100%" 
                             : percentSpentString(props.percent)
                             }} />
+                            : null
+                        )}
                     </View>
                 </View>
                 <View style={styles.bottomRow}>
