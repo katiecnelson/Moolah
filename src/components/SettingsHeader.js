@@ -79,21 +79,21 @@ const SettingsHeader = () => {
             <View style={styles.labelContainer}>
                 <View style={styles.labelView}>
                     <TextInput
-                        value={labelOne.toUpperCase()}
+                        value={labelOne}
                         onChangeText={setLabelOne}
                         textAlign={"center"}
                         maxLength={8}
                         style={[GlobalStyle.BlueBold, styles.labelInput]}
                     />
                     <TextInput
-                        value={labelTwo.toUpperCase()}
+                        value={labelTwo}
                         onChangeText={setLabelTwo}
                         textAlign={"center"}
                         maxLength={8}
                         style={[GlobalStyle.BlueBold, styles.labelInput]}
                     />
                     <TextInput
-                        value={labelThree.toUpperCase()}
+                        value={labelThree}
                         onChangeText={setLabelThree}
                         textAlign={"center"}
                         maxLength={8}
