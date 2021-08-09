@@ -25,7 +25,7 @@ const PopUp = (props) => {
                 mode="date"
                 onCancel={() => {setShowDatePicker(false)}}
                 onConfirm={handleOnConfirm}
-                maximumDate={new Date(2025, 11, 31)}
+                maximumDate={new Date(2050, 11, 31)}
                 minimumDate={new Date()}
                 />
             <View style={styles.modalView}>
