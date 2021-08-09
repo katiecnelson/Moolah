@@ -7,9 +7,9 @@ const NeedWantGoalDetail = (props) => {
 
     return (
         <View style={styles.container}>
-            <Text style={[GlobalStyle.BlueBold ,styles.text]}>{props.title}</Text>
+            <Text numberOfLines={1} style={[GlobalStyle.BlueBold ,styles.text]}>{props.title}</Text>
             <Icon name={props.iconName} style={{...styles.icon, color: props.color}} />
-            <Text style={[GlobalStyle.BlueBold ,styles.text]}>{props.amount}</Text>
+            <Text numberOfLines={1} style={[GlobalStyle.BlueBold ,styles.text]}>{props.amount}</Text>
         </View>
     );
 };
