@@ -44,6 +44,7 @@ const ReminderHeader = () => {
                     onConfirm={handleOnConfirm}
                     maximumDate={new Date(2050, 11, 31)}
                     minimumDate={new Date()}
+                    themeVariant="light"
                     />
             <View style={styles.innerContainer}>
                 <View style={styles.dateView}>

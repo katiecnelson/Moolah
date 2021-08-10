@@ -27,6 +27,7 @@ const PopUp = (props) => {
                 onConfirm={handleOnConfirm}
                 maximumDate={new Date(2050, 11, 31)}
                 minimumDate={new Date()}
+                themeVariant="light"
                 />
             <View style={styles.modalView}>
                 <View style={styles.width} >
