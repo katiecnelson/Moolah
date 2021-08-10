@@ -123,6 +123,7 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
                     onConfirm={handleOnConfirm}
                     minimumDate={new Date(2021, 0, 1)}
                     maximumDate={new Date()}
+                    themeVariant="light"
                 />
             <View style={styles.needsWantsGoals}>
                 <TouchableOpacity
