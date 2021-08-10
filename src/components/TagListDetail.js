@@ -2,6 +2,8 @@ import React from "react";
 import {StyleSheet, Text, View} from "react-native";
 import GlobalStyle from "./GlobalStyle";
 
+// A reusable component that shows a single tag
+
 const TagListDetail = (props) => {
     return (
         <View style={styles.tagBackground}>

@@ -6,6 +6,11 @@ import {formatAmountString, filterSortTabs} from "../utilities/helper"
 import {TabActions, useNavigation} from "@react-navigation/native";
 import NeedWantGoalPages from "../components/NeedWantGoalPages";
 
+/*
+ * Sends the goals data to NeedWantGoalPages component
+ * Exists in the tab and stack navigator
+ */
+
 const Goals = () => {
     const transactions = useContext(TransactionContext);
     const categoryIncome = useContext(CategoryIncomeContext);

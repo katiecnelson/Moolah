@@ -188,10 +188,6 @@ test("returns an integer in place of string for 1, 2, 3", () => {
     expect(helper.categoryNameToID("HELLO")).toBe(0);
 });
 
-test("returns a string of today's date formated as YYYY-MM-DD", () => {
-    expect(helper.getDateDatabaseFormat()).toBe("2021-07-04");
-});
-
 test("returns a string of the current month as numbers", () => {
     expect(helper.getCurrentMonth()).toBe("2021-07");
 });
@@ -212,15 +208,15 @@ test("returns a string of a date written as the month ex: January 2021", () => {
     expect(helper.getMonthName("2021-15-01")).toBe("MONTH 2021");
 });
 
-test("Returns a string of today's date formated as dd/mm/yy", () => {
+test("returns a string of a date object formated as dd/mm/yy", () => {
     expect(helper.formatDate(new Date())).toBe("04/07/21");
 });
 
-test("Returns a string of today's date in the format yyyy-mm-dd", () => {
+test("returns a string of today's date in the format yyyy-mm-dd", () => {
     expect(helper.formatDateDBStyle(new Date())).toBe("2021-07-04");
 });
 
-test("Sorts past transactions into a section list format", () => {
+test("sorts past transactions into a section list format", () => {
     const dataOne = [
         {
             "Amount": 1000,
@@ -302,7 +298,7 @@ test("Sorts past transactions into a section list format", () => {
     expect(helper.processHistoricalData(dataOne)).toEqual(dataOneProcessed);
 });
 
-test("Returns a number that counts the amount of overdue, non-completed reminders", () => {
+test("returns a number that counts the amount of overdue, non-completed reminders", () => {
     
     const remindersThree = [
         {"Complete": 1, "Date": "2021-07-01", "Description": "Test1", "ID": 1},
@@ -316,7 +312,7 @@ test("Returns a number that counts the amount of overdue, non-completed reminder
     expect(helper.getBadgeCount(remindersThree)).toBe(0);
 });
 
-test("Returns list of transactions filtered by current month sorted descending", () => {
+test("returns list of transactions filtered by current month sorted descending", () => {
 
     const transactionsDash = [
         {
@@ -373,7 +369,7 @@ test("Returns list of transactions filtered by current month sorted descending",
     expect(helper.filterSortDash(transactions)).toEqual(transactionsDash);
 });
 
-test("Returns transactions filtered by current month and individual category, sorted descending", () => {
+test("returns transactions filtered by current month and individual category sorted descending", () => {
 
     const transactionsOne = [
         {
@@ -439,7 +435,7 @@ test("Returns transactions filtered by current month and individual category, so
     expect(helper.filterSortTabs(transactions, "three")).toEqual(transactionsThree);
 });
 
-test("Returns objects in an array in ascending order by 'sortBy' property", () => {
+test("returns objects in an array in ascending order by 'sortBy' property", () => {
     const tagsSorted = [
         {"ID": 21, "Name": "Holiday"},
         {"ID": 9, "Name": "Investing"},
@@ -466,7 +462,7 @@ test("Returns objects in an array in ascending order by 'sortBy' property", () =
     expect(helper.sortAscending(remindersTwo, "Date")).toEqual(remindersTwoSorted);
 });
 
-test("Returns a tag object if it exists in the tags array", () => {
+test("returns a tag object if it exists in the tags array", () => {
     expect(helper.findTag(tags, "Rent")).toEqual({"ID": 12, "Name": "Rent"});
     expect(helper.findTag(tags, "Tuition")).toEqual({"ID": 15, "Name": "Tuition"});
     expect(helper.findTag(tags, "Entertainment")).toBe(undefined);

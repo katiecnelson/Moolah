@@ -1,16 +1,22 @@
 import createDataContext from "./createDataContext";
 import {database} from "../db/database";
 
+// Helper function to remove deleted tags from transactions
 const mapTagsDelete = transaction => {
   transaction["TagID"] = null;
   transaction["Tag"] = null;
   return transaction;
 };
-
+// Helper function to update edited tags on a transaction
 const mapTagsEdit = (transaction, name) => {
   transaction["Tag"] = name;
   return transaction;
 };
+
+/*
+ * Reducer that takes actions and data and updates the global state of
+ * transactions data accordingly
+ */
 
 const transactionReducer = (state, action) => {
   switch (action.type) {
@@ -62,6 +68,11 @@ const transactionReducer = (state, action) => {
   }
 };
 
+/*
+ * Fetches all transaction data from the database and sends the
+ * information to the reducer (above) to update the global state
+ */
+
 const getTransactions = dispatch => {
   return async () => {
     const response = await database.getAllTransactions();
@@ -69,6 +80,11 @@ const getTransactions = dispatch => {
     dispatch({type: "get_transactions", payload: response});
   };
 };
+
+/*
+ * Adds a transaction to the database and sends the
+ * information to the reducer (above) to update the global state
+ */
 
 const addTransaction = dispatch => {
   return async (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue) => {
@@ -90,12 +106,24 @@ const addTransaction = dispatch => {
   };
 };
 
+/*
+ * Edits a transaction's data in the database.
+ * This function does not update the state in the global context
+ * because the data can be complicated. Instead, the data is re-fetched
+ * from the database to update the state when transactions are edited
+ */
+
 const editTransaction = () => {
   return async (ID, amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue, callback) => {
     await database.updateTransaction(ID, amount, categoryID, date, description, tag);
       callback();
   };
 };
+
+/*
+ * Deletes a transaction from the database and sends the
+ * information to the reducer (above) to update the global state
+ */
 
 const deleteTransaction = dispatch => {
   return async ID => {
@@ -105,6 +133,7 @@ const deleteTransaction = dispatch => {
   };
 };
 
+// Updates the global state for transactions when a tag is deleted
 const deleteTransactionTag = dispatch => {
   return ID => {
 
@@ -112,6 +141,7 @@ const deleteTransactionTag = dispatch => {
   };
 };
 
+// Updates the global state for transactions when a tag is edited
 const editTransactionTag = dispatch => {
   return (ID, name) => {
 
@@ -119,6 +149,7 @@ const editTransactionTag = dispatch => {
   };
 };
 
+// Updates the global state for transactions when a category is edited
 const editCategoryName = dispatch => {
   return (labelOne, labelTwo, labelThree) => {
 

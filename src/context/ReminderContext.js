@@ -6,6 +6,11 @@ const mapDoneReminder = (reminder, bool) => {
   return reminder;
 };
 
+/*
+ * Reducer that takes actions and data and updates the global state of
+ * reminders data accordingly
+ */
+
 const reminderReducer = (state, action) => {
   switch (action.type) {
     case "get_reminders":
@@ -36,6 +41,11 @@ const reminderReducer = (state, action) => {
   }
 };
 
+/*
+ * Fetches all reminder data from the database and sends the
+ * information to the reducer (above) to update the global state
+ */
+
 const getReminders = dispatch => {
   return async () => {
     const response = await database.getAllReminders();
@@ -43,6 +53,11 @@ const getReminders = dispatch => {
     dispatch({type: "get_reminders", payload: response});
   };
 };
+
+/*
+ * Adds the new reminder with all information to the database
+ * then sends the data to the reducer (above) to update global state for reminders
+ */
 
 const addReminder = dispatch => {
   return async (description, date) => {
@@ -55,6 +70,11 @@ const addReminder = dispatch => {
   };
 };
 
+/*
+ * Sets a reminder as done in the database and then sends the data
+ * to the reducer (above) to update global state for reminders
+ */
+
 const doneReminder = dispatch => {
   return async (bool, ID) => {
     await database.doneReminder(bool, ID);
@@ -66,6 +86,11 @@ const doneReminder = dispatch => {
   };
 };
 
+/*
+ * Deletes a reminder from the database and then sends the data
+ * to the reducer (above) to update global state for reminders
+ */
+
 const deleteReminder = dispatch => {
   return async ID => {
     await database.deleteReminder(ID);
@@ -73,6 +98,11 @@ const deleteReminder = dispatch => {
     dispatch({type: "delete_reminder", payload: ID});
   };
 };
+
+/*
+ * Sets a reminder as done in the database and then sends the data
+ * to the reducer (above) to update global state for reminders
+ */
 
 const updateReminder = dispatch => {
   return async (ID, newDescription, newDate, newComplete) => {

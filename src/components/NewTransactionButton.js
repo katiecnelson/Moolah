@@ -3,6 +3,8 @@ import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import Icon from "./Icon";
 import GlobalStyle from "./GlobalStyle";
 
+// Reusable component couples New Transaction icon with words to make a button
+
 const NewTransactionButton = (props) => {
     return (
         <View style={styles.container} >

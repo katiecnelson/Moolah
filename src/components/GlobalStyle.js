@@ -1,4 +1,9 @@
-import { StyleSheet } from "react-native";
+import {StyleSheet} from "react-native";
+
+/*
+ * Global stylesheet elements used around the app
+ * Focused mainly on font family and font colours
+ */
 
 export default StyleSheet.create({
     Regular: {

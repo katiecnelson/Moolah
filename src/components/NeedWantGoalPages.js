@@ -5,6 +5,8 @@ import TransactionListDetail from "../components/TransactionListDetail";
 import {formatFullDate, formatAmountString} from "../utilities/helper"
 import {useNavigation} from "@react-navigation/native";
 
+// Component returns JSX for category (Needs, Wants, Goals) transaction lists
+
 const NeedWantGoalPages = (props) => {
     const navigation = useNavigation();
 

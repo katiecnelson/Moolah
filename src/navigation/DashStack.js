@@ -12,7 +12,9 @@ import GlobalStyle from "../components/GlobalStyle";
 import {Context as ReminderContext} from "../context/ReminderContext";
 import {getBadgeCount} from "../utilities/helper";
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
+
+// Returns the stack navigator used by the Dashboard
 
 const DashStack = () => {
 
@@ -21,6 +23,7 @@ const DashStack = () => {
 
     const badgeCount = getBadgeCount(reminder.state);
 
+    // Loads reminders data into global state to count unfinished/overdue reminders
     useEffect(() => {
         reminder.getReminders();
       }, []);

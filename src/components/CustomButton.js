@@ -2,6 +2,9 @@ import React from "react";
 import {TouchableOpacity, View, Text, StyleSheet} from "react-native";
 import GlobalStyle from "./GlobalStyle";
 
+ 
+ // Reusable button component with customisable text
+
 const CustomButton = (props) => {
     return (
         <TouchableOpacity style={styles.opacity} onPress={props.onPress}>

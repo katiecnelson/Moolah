@@ -8,6 +8,8 @@ import EditTransaction from "../screens/EditTransaction";
 
 const Stack = createStackNavigator();
 
+// Returns the stack navigator used by the Wants screen
+
 const WantsStack = () => {
 
     const categoryIncome = useContext(CategoryIncomeContext);

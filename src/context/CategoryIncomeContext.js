@@ -2,6 +2,10 @@ import createDataContext from "./createDataContext";
 import {database} from "../db/database";
 import {getToSpend, calculateRemaining, percentSpent} from "../utilities/helper";
 
+/*
+ * Reducer that takes actions and data and updates the global state of
+ * income and category data accordingly
+ */
 
 const CategoryIncomeReducer = (state, action) => {
   switch (action.type) {
@@ -86,6 +90,11 @@ const CategoryIncomeReducer = (state, action) => {
   }
 };
 
+/*
+ * Fetches all category and income data from the database and sends the
+ * information to the reducer (above) to update the global state
+ */
+
 const getCategoriesIncome = dispatch => {
   return async () => {
     const categories = await database.getAllCategories();
@@ -130,6 +139,11 @@ const getCategoriesIncome = dispatch => {
   };
 };
 
+/*
+ * Takes in changes to categories and income data from the UI and sends these changes
+ * to the global state reducer (above) and to the database
+ */
+
 const updateCategoriesIncome = dispatch => {
   return async (income, newAliasOne, newPercentOne, newAliasTwo, newPercentTwo, newAliasThree, newPercentThree) => {
     await database.updateIncome(income);
@@ -157,12 +171,14 @@ const updateCategoriesIncome = dispatch => {
   };
 };
 
+// Updates changes to category state brought about by transactions being deleted
 const categoriesDeleteTransaction = dispatch => {
   return (category, amount) => {
     dispatch({type: "categories_delete_transaction", payload: {category, amount}});
   };
 };
 
+// Updates changes to category state brought about by transactions being added
 const categoriesAddTransaction = dispatch => {
   return (category, amount) => {
     dispatch({type: "categories_add_transaction", payload: {category, amount}});

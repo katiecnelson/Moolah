@@ -8,6 +8,8 @@ import EditTransaction from "../screens/EditTransaction";
 
 const Stack = createStackNavigator();
 
+// Returns the stack navigator used by the Goals screen
+
 const GoalsStack = () => {
     const categoryIncome = useContext(CategoryIncomeContext);
     const title = categoryIncome.state.labelThree;

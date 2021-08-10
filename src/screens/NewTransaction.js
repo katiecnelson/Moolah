@@ -6,6 +6,11 @@ import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext
 import {useNavigation} from "@react-navigation/native";
 import {getCurrentMonth} from "../utilities/helper";
 
+/*
+ * Formats the TransactionForm for new transactions and 
+ * handles the button for the NewTransaction screen
+ */
+
 const NewTransaction = () => {
 
     const currentMonth = getCurrentMonth();
@@ -14,6 +19,7 @@ const NewTransaction = () => {
     const categoryIncome = useContext(CategoryIncomeContext);
     const navigation = useNavigation();
 
+    // Adds the transaction into the global store
     const handleOnSubmit = (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue) => {
         transactions.addTransaction(amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue);
         

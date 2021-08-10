@@ -9,6 +9,8 @@ import NewTransactionStack from "./NewTransactionStack";
 
 const Tab = createBottomTabNavigator();
 
+// Returns the tab navigator used by the bottom navigation bar
+
 const TabNavigator = () => {
 
     return (

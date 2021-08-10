@@ -6,11 +6,17 @@ import {Context as TransactionContext} from "../context/TransactionContext";
 import {Context as TagContext} from "../context/TagContext";
 import {formatAmountString, formatFullDate, filterSortDash} from "../utilities/helper";
 
+/*
+ * Returns JSX for the FlatList on the dashboard and uses a header and footer to make
+ * up the rest of the Dashboard screen
+ */
+
 const Dashboard = ({navigation}) => {
 
     const {state, getTransactions} = useContext(TransactionContext);
     const tag = useContext(TagContext);
 
+    // Loads the transactions and tags data into global state
     useEffect(() => {
         getTransactions();
         tag.getTags();

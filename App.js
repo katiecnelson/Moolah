@@ -9,6 +9,11 @@ import {Provider as CategoryIncomeProvider} from "./src/context/CategoryIncomeCo
 import {Provider as TagProvider} from "./src/context/TagContext";
 import useDatabase from "./src/hooks/useDatabase";
 
+/**
+ * Returns the app after fonts and database have loaded
+ * The app is wrapped in context providers for global data store
+ */
+
 export default function App() {
 
   const [loaded] = useFonts({

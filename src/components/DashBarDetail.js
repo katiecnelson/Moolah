@@ -3,6 +3,11 @@ import {View, Text, StyleSheet} from "react-native";
 import GlobalStyle from "./GlobalStyle";
 import {percentSpentString} from "../utilities/helper";
 
+/*
+ * Progress bars for the dashboard that fill according to percentSpent prop
+ * Component returns null until it props is no longer undefined
+ */
+
 const DashBarDetail = (props) => {
     
     return (

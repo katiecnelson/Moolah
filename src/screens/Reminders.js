@@ -6,10 +6,13 @@ import ReminderHeader from "../components/ReminderHeader";
 import ReminderFooter from "../components/ReminderFooter";
 import {sortAscending} from "../utilities/helper";
 
+// Returns JSX for the Reminders screen and handles show/hide button
+
 const Reminders = () => {
     const reminder = useContext(ReminderContext);
     const [hideCompleted, setHideCompleted] = useState(true);
 
+    // Toggles showing/hiding the completed reminders
     const handleOnPress = () => {
         if (hideCompleted) {
             setHideCompleted(false);

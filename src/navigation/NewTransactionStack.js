@@ -6,6 +6,8 @@ import GlobalStyle from "../components/GlobalStyle";
 
 const Stack = createStackNavigator();
 
+// Returns the stack navigator used by the NewTransaction screen
+
 const NewTransactionStack = () => {
 
     const headerTitleStyle = GlobalStyle.headerTitleStyle;

@@ -3,6 +3,8 @@ import {View, StyleSheet, Text, Modal} from "react-native";
 import CustomButton from "./CustomButton";
 import GlobalStyle from "./GlobalStyle";
 
+// Custom toast modal with one button used to tell users when input is invalid
+
 const Toast = (props) => {
 
     return (

@@ -5,6 +5,8 @@ import {formatFullDate, formatAmountString, processHistoricalData, getMonthName}
 import TransactionListDetail from "../components/TransactionListDetail";
 import GlobalStyle from "../components/GlobalStyle";
 
+// Returns a section list of historical data, or a message if no data exists
+
 const History = ({navigation}) => {
 
     const transaction = useContext(TransactionContext);

@@ -8,6 +8,11 @@ import PopUp from "./PopUp";
 import TwoButtonToast from "./TwoButtonToast";
 import GlobalStyle from "./GlobalStyle";
 
+/*
+ * Returns JSX to show a reminder with a checkbox and makes it editable
+ * using the included PopUp and error-checking TwoButtonToast 
+ */
+
 const ReminderDetail = (props) => {
     const reminder = useContext(ReminderContext);
     const today = getTodayDateDatabase();
@@ -16,6 +21,7 @@ const ReminderDetail = (props) => {
     const [date, setDate] = useState(props.date);
     const [showToast, setShowToast] = useState(false);
 
+    // Toggles a reminder done/not done in the data store
     const handleOnPress = () => {
         if (props.done) {
             reminder.doneReminder(0, props.ID);
@@ -23,12 +29,14 @@ const ReminderDetail = (props) => {
             reminder.doneReminder(1, props.ID);
         }
     };
-
+    
+    // Sends the edited reminders to the data store
     const handleOnUpdate = () => {
         reminder.updateReminder(props.ID, description, date, props.done);
         setModalVisible(false);
     };
 
+    // Sends the ID of the deleted reminder to the data store
     const handleDelete = () => {
         reminder.deleteReminder(props.ID);
         setModalVisible(false);

@@ -1,7 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet} from "react-native";
+import {View, Text, StyleSheet} from "react-native";
 import Icon from "./Icon";
 import GlobalStyle from "./GlobalStyle";
+
+// Reusable component for showing category titles, icons, and amounts
 
 const NeedWantGoalDetail = (props) => {
 

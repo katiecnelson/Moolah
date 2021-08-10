@@ -8,6 +8,11 @@ import PopUp from "../components/PopUp";
 import {sortAscending, findTag} from "../utilities/helper";
 import TwoButtonToast from "../components/TwoButtonToast";
 
+/*
+ * Returns settings screen JSX for the tags list and sets the FlatList header
+ * Also handles the warnings and pop-ups associated with editing/deleting tags
+ */
+
 const Settings = () => {
     const tag = useContext(TagContext);
     const transaction = useContext(TransactionContext);
@@ -18,6 +23,7 @@ const Settings = () => {
     const [warningText, setWarningText] = useState("");
     const [showToast, setShowToast] = useState(false);
 
+    // Edits tag in global store after verifying user input
     const handleOnUpdate = () => {
         if (name === "") {
             setWarningText("Tags must contain at least one character!");
@@ -33,11 +39,13 @@ const Settings = () => {
         }
     };
 
+    // Closes the tag details and options pop-up
     const handleClose = () => {
         setModalVisible(false);
         setWarning(false);
     };
 
+    // Deletes a tag from the global store
     const handleDelete = () => {
         tag.deleteTag(ID);
         setModalVisible(false);
@@ -46,6 +54,7 @@ const Settings = () => {
         setShowToast(false);
     };
 
+    // Opens pop up that displays tag info and options
     const openPopUp = (name, ID) => {
         setModalVisible(true);
         setName(name);
