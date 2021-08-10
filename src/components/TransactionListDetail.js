@@ -3,6 +3,8 @@ import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import Icon from "./Icon";
 import GlobalStyle from "./GlobalStyle";
 
+// A reusable component that shows all of the details of a transaction on a card
+
 const TransactionListDetail = (props) => {
     return (
         <View>

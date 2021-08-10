@@ -12,6 +12,10 @@ import {StackActions, useNavigation} from "@react-navigation/native";
 import {amountToDatabase} from "../utilities/helper";
 import AddTag from "./AddTag";
 
+/*
+ * Returns JSX for the Settings page from the top down to the
+ * add new tag functionality
+ */
 
 const SettingsHeader = () => {
     const categoryIncome = useContext(CategoryIncomeContext);
@@ -28,6 +32,7 @@ const SettingsHeader = () => {
 
     const navigation = useNavigation();
 
+    // Updates category and income changes in the data store after validating input
     const handleSave = () => {
         if (parseInt(percentOne) + parseInt(percentTwo) + parseInt(percentThree) !== 100
         || income === 0 || labelOne === "" || labelTwo === "" || labelThree === ""

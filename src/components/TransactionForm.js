@@ -17,34 +17,43 @@ import {
     categoryNameToID,
     formatDate,
     formatFullDate,
-    getDateDatabaseFormat
+    getTodayDateDatabase
     } from "../utilities/helper";
+
+
+// Returns JSX used to gather user input for New/Edit Transaction screens
+ 
 
 const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPress}) => {
     const categoryIncome = useContext(CategoryIncomeContext);
     const navigation = useNavigation();
 
     const [showToast, setShowToast] = useState(false);
+
     const [amount, setAmount] = useState(formatAmountNum(initialValues.amount));
     const [description, setDescription] = useState(initialValues.description);
 
-    //Buttons to choose category
+    // Buttons to choose category
     const [categoryID, setCategoryID] = useState(categoryNameToID(initialValues.categoryValue));
     const [categoryValue, setCategoryValue] = useState(initialValues.categoryValue);
     const [categoryLabel, setCategoryLabel] = useState(initialValues.categoryLabel);
-    //Date picker state
+
+    // Date picker state
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [date, setDate] = useState(formatFullDate(initialValues.date));
-    //Drop down list state
+
+    // Dropdown list state
     const [openDropdown, setOpenDropdown] = useState(false);
     const [tagLabel, setTagLabel] = useState(initialValues.tag);
     const [tag, setTag] = useState(initialValues.tagID);
 
+    // Sets the date chosen in the date picker
     const handleOnConfirm = (value) => {
         setDate(formatDate(value));
         setShowDatePicker(false);
       };
     
+    // Sends the transaction information to the data store after validating it
     const addTransaction = () => {
         if (amount === 0 || amount === null || categoryValue === null) {
             setShowToast(true);
@@ -63,12 +72,14 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
         }
     };
 
+    // Sets the user's selected category into local state
     const chooseCategory = (ID, value, label) => {
         setCategoryID(ID);
         setCategoryValue(value);
         setCategoryLabel(label);
     };
 
+    // Sets the user's tag select into local state hook
     const tagDone = (name, ID) => {
         setOpenDropdown(false);
         setTagLabel(name);
@@ -203,7 +214,7 @@ const TransactionForm = ({initialValues, onSubmit, showDelete, showIncome, onPre
 TransactionForm.defaultProps = {
     initialValues: {
         amount: 0,
-        date: getDateDatabaseFormat(),
+        date: getTodayDateDatabase(),
         categoryValue: null,
         categoryLabel: "",
         description: null,

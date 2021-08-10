@@ -4,6 +4,11 @@ import NewTransactionButton from "./NewTransactionButton";
 import {percentSpentString} from "../utilities/helper";
 import GlobalStyle from "./GlobalStyle";
 
+/*
+ * Component returns JSX for everything on the category 
+ * pages (Needs, Wants, Goals) from the top to the "NEW TRANSACTION" button
+ */
+
 const NeedWantGoalHeader = (props) => {
     return (
         <View style={styles.container}>

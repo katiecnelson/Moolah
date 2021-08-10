@@ -7,22 +7,28 @@ import {Context as CategoryIncomeContext} from "../context/CategoryIncomeContext
 import {useNavigation, StackActions} from "@react-navigation/native";
 import {getCurrentMonth} from "../utilities/helper";
 
+/*
+ * Formats the TransactionForm for editing transaction and 
+ * handles the buttons for the EditTransaction screen
+ */
+
 const EditTransaction = ({route}) => {
 
     const navigation = useNavigation();
     
     const transactions = useContext(TransactionContext);
-    const transaction = transactions.state.find(transaction => transaction["ID"] === route.params.ID);
-
-    const currentMonth = getCurrentMonth();
-
     const categoryIncome = useContext(CategoryIncomeContext);
+    const transaction = transactions.state.find(transaction => transaction["ID"] === route.params.ID);
+    
     const originalCategory = transaction !== undefined ? transaction["CategoryValue"] : "zero";
     const originalAmount = transaction !== undefined ? transaction["Amount"] : 0;
     const originalDate = transaction !== undefined ? transaction["Date"] : "";
 
-    const [showToast, setShowToast] = useState(false)
+    const [showToast, setShowToast] = useState(false);
 
+    const currentMonth = getCurrentMonth();
+
+    // Deletes a transaction from global store
     const handleOnDelete = () => {
         navigation.dispatch(StackActions.pop(1));
         transactions.deleteTransaction(transaction["ID"]);
@@ -31,6 +37,11 @@ const EditTransaction = ({route}) => {
         }
     };
 
+    /*
+     * Calls the context function that edits a transaction in the database
+     * Then reloads categories and transactions into state from the database
+     */
+    
     const handleOnSubmit = (amount, date, description, tag, tagLabel, categoryID, categoryLabel, categoryValue) => {
         navigation.dispatch(StackActions.pop(1));
         transactions.editTransaction(

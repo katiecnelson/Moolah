@@ -6,9 +6,15 @@ import {DateTimePickerModal} from "react-native-modal-datetime-picker";
 import {formatFullDate} from "../utilities/helper";
 import GlobalStyle from "./GlobalStyle";
 
+/*
+ * Reusable component returns JSX of custom modal that can be used to edit
+ * or delete small pieces of data such as tags or reminders
+ */
+
 const PopUp = (props) => {
     const [showDatePicker, setShowDatePicker] = useState(false);
 
+    // Handles changing the date using the DateTimePickerModal
     const handleOnConfirm = (value) => {
         props.onChangeDate(value);
         setShowDatePicker(false);
@@ -134,7 +140,6 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     warningText: {
-
         paddingBottom: 7,
         textAlign: "center"
     },
@@ -152,5 +157,3 @@ const styles = StyleSheet.create({
 });
 
 export default PopUp;
-
-

@@ -9,14 +9,21 @@ import NewTransactionButton from "./NewTransactionButton";
 import {TabActions, useNavigation} from "@react-navigation/native";
 import GlobalStyle from "./GlobalStyle";
 
+/*
+ * Component returns JSX for everything on the dashboard from the top
+ * to the "NEW TRANSACTION" button
+ */
+
 const DashboardHeader = () => {
     const categoryIncome = useContext(CategoryIncomeContext);
     const navigation = useNavigation();
 
+    // Loads categories into data store
     useEffect(() => {
         categoryIncome.getCategoriesIncome();
       }, []);
-
+    
+    // Handles all buttons on dashboard that link to other tabs in bottom nav
     const jumpTabs = (tab) => {
         navigation.dispatch(TabActions.jumpTo(tab));
     };
@@ -93,8 +100,8 @@ const DashboardHeader = () => {
                 <NewTransactionButton onPress={() => jumpTabs("New")} />
             </View>
         </View>
-    ) 
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {

@@ -3,6 +3,8 @@ import {View, StyleSheet, Text, Modal} from "react-native";
 import CustomButton from "./CustomButton";
 import GlobalStyle from "./GlobalStyle";
 
+// A reusable modal component with two buttons used to verify dangerous user actions
+
 const TwoButtonToast = (props) => {
 
     return (

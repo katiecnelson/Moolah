@@ -1,6 +1,8 @@
 import React from "react";
 import {StyleSheet, View} from "react-native";
 
+// Reusable checkbox component that toggles looking checked and unchecked
+
 const CustomCheckbox = ({doneStatus}) => {
 
     return (

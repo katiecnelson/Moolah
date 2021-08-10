@@ -3,6 +3,8 @@ import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import Icon from "./Icon";
 import GlobalStyle from "./GlobalStyle";
 
+// The historical data button used as the footer of category pages' FlatLists
+
 const NeedWantGoalFooter = (props) => {
     return (
         <View style={styles.container}>

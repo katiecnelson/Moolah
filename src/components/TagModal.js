@@ -4,6 +4,8 @@ import AddTag from "./AddTag";
 import {Context as TagContext} from "../context/TagContext";
 import GlobalStyle from "./GlobalStyle";
 
+// Modal used to list tags in alphabetical order in New/Edit Transaction screens
+
 const TagModal = (props) => {
     const tags = useContext(TagContext);
 

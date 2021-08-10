@@ -1,4 +1,6 @@
-/**
+/*
+ * Reusable context creator used to create all contexts 'context' folder
+ * 
  * This code comes from Stephen Grider's Udemy course: 
  * The Complete React Native + Hooks Course, 138. More Automatic Context Creation
  * https://www.udemy.com/course/the-complete-react-native-and-redux-course/

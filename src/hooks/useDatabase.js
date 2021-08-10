@@ -1,5 +1,5 @@
-/**
- * This custom hook was inspired by code written by Jake Sparling and can be found here:
+/*
+ * This custom hook was inspired by code written by Jake Sparling that can be found here:
  * https://www.jsparling.com/using-hooks-and-context-with-sqlite-for-expo-in-react-native/
  */
 

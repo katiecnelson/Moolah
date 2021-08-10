@@ -4,11 +4,15 @@ import Icon from "./Icon";
 import { Context as TagContext } from "../context/TagContext";
 import Toast from "./Toast";
 
+// A reusable component that facilitates adding tags
+
 const AddTag = (props) => {
     const tag = useContext(TagContext);
     const [name, setName] = useState("");
     const [showToast, setShowToast] = useState(false);
 
+    // Adds the tag to the state after validating no such tag exists
+    
     const handleOnPress = () => {
         if (name === "" || 
             tag.state.find(e => e["Name"].toLowerCase() === name.toLowerCase())) {

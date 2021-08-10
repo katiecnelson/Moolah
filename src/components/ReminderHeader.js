@@ -7,6 +7,11 @@ import {DateTimePickerModal} from "react-native-modal-datetime-picker";
 import Toast from "../components/Toast";
 import GlobalStyle from "./GlobalStyle";
 
+/*
+ * Component returns JSX that shows new reminder input elements
+ * Component serves as the header for the Reminders FlatList
+ */
+
 const ReminderHeader = () => {
     const {addReminder} = useContext(Context);
     const [newDescription, setNewDescription] = useState("");
@@ -14,11 +19,13 @@ const ReminderHeader = () => {
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showToast, setShowToast] = useState(false);
 
+    // Sets the date put in using the date picker
     const handleOnConfirm = (value) => {
         setDate(formatDate(value));
         setShowDatePicker(false);
       };
 
+    // Sends the details of new reminders to the data store after validating inputs
     const handleOnPress = () => {
         if (newDescription === "" || date === "DD/MM/YY") {
             setShowToast(true);
@@ -109,4 +116,3 @@ const styles = StyleSheet.create({
 });
 
 export default ReminderHeader;
-
