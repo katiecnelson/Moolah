@@ -12,7 +12,7 @@ const setUpDatabase = async () => {
         tx.executeSql("CREATE TABLE IF NOT EXISTS Categories (ID INTEGER PRIMARY KEY, Value TEXT NOT NULL, Label TEXT NOT NULL, Percent INTEGER NOT NULL);");
         tx.executeSql("CREATE TABLE IF NOT EXISTS Income (ID INTEGER PRIMARY KEY, Amount INTEGER NOT NULL);");
         tx.executeSql("CREATE TABLE IF NOT EXISTS Tags (ID INTEGER PRIMARY KEY, Name TEXT NOT NULL);");
-        tx.executeSql("CREATE TABLE IF NOT EXISTS Transactions (ID INTEGER PRIMARY KEY, Amount INTEGER NOT NULL, Date TEXT NOT NULL, Description TEXT, Tag INTEGER, Category INTEGER, CONSTRAINT tag_constraint FOREIGN KEY (Tag) REFERENCES Tags (ID) ON DELETE SET NULL, CONSTRAINT category_constraint FOREIGN KEY (Category) REFERENCES Categories (ID));");
+        tx.executeSql("CREATE TABLE IF NOT EXISTS Transactions (ID INTEGER PRIMARY KEY, Amount INTEGER NOT NULL, Date TEXT NOT NULL, Description TEXT, Tag INTEGER, Category INTEGER NOT NULL, CONSTRAINT tag_constraint FOREIGN KEY (Tag) REFERENCES Tags (ID) ON DELETE SET NULL, CONSTRAINT category_constraint FOREIGN KEY (Category) REFERENCES Categories (ID));");
         },
         (_, error) => {console.log("Error creating tables in the database"); reject(console.log(error));},
         (_, success) => resolve(success)
